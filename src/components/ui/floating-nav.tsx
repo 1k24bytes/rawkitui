@@ -1,0 +1,50 @@
+import * as React from 'react'
+import { cn } from '@/lib/utils'
+
+export interface FloatingNavProps extends React.HTMLAttributes<HTMLDivElement> {
+  activeTab?: string
+  onTabChange?: (tab: string) => void
+  tabs?: { id: string; label: string; icon?: React.ReactNode }[]
+}
+
+export function FloatingNav({
+  className,
+  activeTab = 'home',
+  onTabChange,
+  tabs = [
+    { id: 'home', label: 'Home' },
+    { id: 'components', label: 'Components' },
+    { id: 'tokens', label: 'Tokens' },
+    { id: 'docs', label: 'Docs' },
+  ],
+  ...props
+}: FloatingNavProps) {
+  return (
+    <div
+      className={cn(
+        'inline-flex items-center gap-1.5 p-2 rounded-full bg-[#18181B] text-white rk-border rk-shadow-lg z-50 transition-all duration-200',
+        className
+      )}
+      {...props}
+    >
+      {tabs.map((tab) => {
+        const isActive = activeTab === tab.id
+        return (
+          <button
+            key={tab.id}
+            onClick={() => onTabChange?.(tab.id)}
+            className={cn(
+              'flex items-center gap-2 px-5 py-2 rounded-full font-bold text-xs tracking-wide transition-all duration-150',
+              isActive
+                ? 'bg-[#FDE047] text-[#18181B] rk-border-sm font-extrabold shadow-[2px_2px_0_0_#18181b]'
+                : 'text-white/80 hover:text-white hover:bg-white/10'
+            )}
+          >
+            {tab.icon}
+            <span>{tab.label}</span>
+          </button>
+        )
+      })}
+    </div>
+  )
+}

@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Syne', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* RawkitUI Pop-Brutalist Colors */
+  --color-rk-ink: #18181b;
+  --color-rk-canvas: #f4f4f0;
+  --color-rk-surface: #ffffff;
+
+  /* Pop Fills */
+  --color-rk-primary: #fde047; /* Yellow-300 */
+  --color-rk-secondary: #fb923c; /* Orange-400 */
+  --color-rk-accent: #a78bfa; /* Violet-400 */
+  --color-rk-success: #4ade80; /* Green-400 */
+  --color-rk-error: #f87171; /* Red-400 */
+
+  /* Pastel Surface Fills */
+  --color-rk-mint: #bbf7d0;
+  --color-rk-peach: #fed7aa;
+  --color-rk-lavender: #e9d5ff;
+  --color-rk-sky: #bae6fd;
+  --color-rk-pink: #fbcfe8;
+  
+  /* Radii */
+  --radius-rk-3xl: 28px;
+  --radius-rk-2xl: 20px;
+  --radius-rk-xl: 14px;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-rk-canvas);
+    color: var(--color-rk-ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+/* Custom RawkitUI Pop-Brutalist Utility Classes */
+
+/* Hard Black Drop Shadows & Press Interactions */
+.rk-border {
+  border: 3px solid #18181b;
+}
+
+.rk-border-sm {
+  border: 2px solid #18181b;
+}
+
+.rk-shadow {
+  box-shadow: 4px 4px 0 0 #18181b;
+}
+
+.rk-shadow-sm {
+  box-shadow: 2.5px 2.5px 0 0 #18181b;
+}
+
+.rk-shadow-lg {
+  box-shadow: 6px 6px 0 0 #18181b;
+}
+
+.rk-shadow-xl {
+  box-shadow: 8px 8px 0 0 #18181b;
+}
+
+/* Tactile Press Physics */
+.rk-press-btn {
+  transition: all 120ms cubic-bezier(0.2, 0, 0, 1);
+  box-shadow: 4px 4px 0 0 #18181b;
+  border: 3px solid #18181b;
+}
+
+.rk-press-btn:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 6px 6px 0 0 #18181b;
+}
+
+.rk-press-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 0 #18181b;
+}
+
+/* Marker Pill Highlight Effect */
+.rk-highlight {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+
+.rk-highlight::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  right: -6px;
+  top: 50%;
+  bottom: 0px;
+  background-color: #fde047;
+  border-radius: 9999px;
+  z-index: -1;
+  transform: rotate(-1deg);
+}
+
+.rk-highlight-mint::before {
+  background-color: #bbf7d0;
+}
+
+.rk-highlight-pink::before {
+  background-color: #fbcfe8;
+}
+
+.rk-highlight-sky::before {
+  background-color: #bae6fd;
+}
+
+/* Scalloped Starburst Badge Clip Path */
+.rk-scalloped {
+  clip-path: polygon(
+    100% 50%, 93.3% 62.94%, 93.3% 77.06%, 82.14% 85.83%, 68.3% 89.14%, 
+    55.19% 97.55%, 40% 95.11%, 26.19% 89.14%, 15% 80.9%, 9.55% 67.36%, 
+    2.45% 55.19%, 4.89% 40%, 10.86% 26.19%, 19.1% 15%, 32.64% 9.55%, 
+    44.81% 2.45%, 60% 4.89%, 73.81% 10.86%, 85% 19.1%, 90.45% 32.64%
+  );
+}
+
+/* Micro Dot Pattern Overlay */
+.rk-bg-dots {
+  background-image: radial-gradient(#18181b 1.5px, transparent 1.5px);
+  background-size: 16px 16px;
+}
