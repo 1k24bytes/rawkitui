@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bar-chart",
+  "type": "registry:ui",
+  "title": "Bar Chart",
+  "description": "Vertical capsule progress bar chart visualization.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/ui/bar-chart.tsx",
+      "content": "import * as React from 'react'\nimport { cn } from '@/lib/utils'\n\nexport interface BarData {\n  label: string\n  value: number\n  color?: string\n}\n\nexport interface BarChartProps {\n  data: BarData[]\n  height?: number\n  className?: string\n}\n\nexport function BarChart({ data, height = 160, className }: BarChartProps) {\n  const maxValue = Math.max(...data.map((d) => d.value), 100)\n\n  return (\n    <div className={cn('w-full space-y-3', className)}>\n      <div\n        className=\"flex items-end justify-between gap-3 p-4 rounded-2xl bg-white rk-border rk-shadow-sm\"\n        style={{ height: `${height}px` }}\n      >\n        {data.map((item, i) => {\n          const heightPercent = Math.round((item.value / maxValue) * 100)\n          const barColor = item.color || '#18181B'\n\n          return (\n            <div key={i} className=\"flex-1 flex flex-col items-center h-full justify-end group\">\n              <div className=\"text-[10px] font-mono font-bold mb-1 opacity-0 group-hover:opacity-100 transition-opacity\">\n                {item.value}\n              </div>\n              <div className=\"w-full bg-[#F4F4F0] rounded-full h-full p-1 flex items-end rk-border-sm\">\n                <div\n                  className=\"w-full rounded-full transition-all duration-500 ease-out\"\n                  style={{\n                    height: `${heightPercent}%`,\n                    backgroundColor: barColor,\n                  }}\n                />\n              </div>\n              <span className=\"text-[11px] font-mono font-bold mt-2 text-[#18181B]\">\n                {item.label}\n              </span>\n            </div>\n          )\n        })}\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

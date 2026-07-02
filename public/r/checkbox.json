@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox",
+  "type": "registry:ui",
+  "title": "Checkbox",
+  "description": "Tactile checkbox control with yellow check fill.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "content": "import * as React from 'react'\nimport { Check } from 'lucide-react'\nimport { cn } from '@/lib/utils'\n\nexport interface CheckboxProps\n  extends React.InputHTMLAttributes<HTMLInputElement> {\n  onCheckedChange?: (checked: boolean) => void\n  label?: string\n}\n\nconst Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(\n  ({ className, checked, onCheckedChange, label, ...props }, ref) => {\n    const [isChecked, setIsChecked] = React.useState(!!checked)\n\n    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n      setIsChecked(e.target.checked)\n      onCheckedChange?.(e.target.checked)\n    }\n\n    return (\n      <label className=\"inline-flex items-center gap-3 cursor-pointer select-none group\">\n        <div className=\"relative\">\n          <input\n            type=\"checkbox\"\n            ref={ref}\n            checked={isChecked}\n            onChange={handleChange}\n            className=\"sr-only\"\n            {...props}\n          />\n          <div\n            className={cn(\n              'w-6 h-6 rounded-lg rk-border-sm transition-all duration-120 flex items-center justify-center rk-shadow-sm group-hover:-translate-x-0.5 group-hover:-translate-y-0.5',\n              isChecked\n                ? 'bg-[#FDE047] text-[#18181B]'\n                : 'bg-white text-transparent group-hover:bg-[#F4F4F0]'\n            )}\n          >\n            <Check className={cn('w-4 h-4 stroke-[3]', isChecked ? 'opacity-100' : 'opacity-0')} />\n          </div>\n        </div>\n        {label && <span className=\"font-semibold text-sm text-[#18181B]\">{label}</span>}\n      </label>\n    )\n  }\n)\nCheckbox.displayName = 'Checkbox'\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

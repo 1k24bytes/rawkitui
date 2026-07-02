@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tooltip",
+  "type": "registry:ui",
+  "title": "Tooltip",
+  "description": "Pop-Brutalist high-contrast tooltip with hard shadow.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/ui/tooltip.tsx",
+      "content": "import * as React from 'react'\nimport { cn } from '@/lib/utils'\n\nexport interface TooltipProps {\n  content: React.ReactNode\n  children: React.ReactNode\n  position?: 'top' | 'bottom' | 'left' | 'right'\n  className?: string\n}\n\nexport function Tooltip({\n  content,\n  children,\n  position = 'top',\n  className,\n}: TooltipProps) {\n  const [visible, setVisible] = React.useState(false)\n\n  const positionStyles = {\n    top: 'bottom-full left-1/2 -translate-x-1/2 mb-2',\n    bottom: 'top-full left-1/2 -translate-x-1/2 mt-2',\n    left: 'right-full top-1/2 -translate-y-1/2 mr-2',\n    right: 'left-full top-1/2 -translate-y-1/2 ml-2',\n  }\n\n  return (\n    <div\n      className=\"relative inline-block\"\n      onMouseEnter={() => setVisible(true)}\n      onMouseLeave={() => setVisible(false)}\n      onFocus={() => setVisible(true)}\n      onBlur={() => setVisible(false)}\n    >\n      {children}\n      {visible && (\n        <div\n          className={cn(\n            'absolute z-50 whitespace-nowrap bg-[#18181B] text-white text-xs font-mono font-bold px-3 py-1.5 rounded-xl rk-border-sm rk-shadow-md animate-in fade-in zoom-in-95 duration-100',\n            positionStyles[position],\n            className\n          )}\n        >\n          {content}\n        </div>\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

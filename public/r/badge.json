@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "type": "registry:ui",
+  "title": "Badge",
+  "description": "Pill badges and Scalloped Starburst callout tags.",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from 'react'\nimport { cva, type VariantProps } from 'class-variance-authority'\nimport { cn } from '@/lib/utils'\n\nconst badgeVariants = cva(\n  'inline-flex items-center justify-center font-mono font-bold text-xs tracking-wider uppercase transition-colors focus:outline-none rk-border-sm',\n  {\n    variants: {\n      variant: {\n        yellow: 'bg-[#FDE047] text-[#18181B]',\n        orange: 'bg-[#FB923C] text-[#18181B]',\n        violet: 'bg-[#A78BFA] text-[#18181B]',\n        mint: 'bg-[#BBF7D0] text-[#18181B]',\n        peach: 'bg-[#FED7AA] text-[#18181B]',\n        sky: 'bg-[#BAE6FD] text-[#18181B]',\n        pink: 'bg-[#FBCFE8] text-[#18181B]',\n        lavender: 'bg-[#E9D5FF] text-[#18181B]',\n        black: 'bg-[#18181B] text-white',\n        white: 'bg-white text-[#18181B]',\n      },\n      shape: {\n        pill: 'rounded-full px-3 py-1',\n        square: 'rounded-lg px-2.5 py-1',\n        scalloped: 'w-12 h-12 rounded-full p-0 flex items-center justify-center text-center rk-scalloped text-xs font-black rk-shadow-sm',\n      },\n    },\n    defaultVariants: {\n      variant: 'yellow',\n      shape: 'pill',\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, shape, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant, shape }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

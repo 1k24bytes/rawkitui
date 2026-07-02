@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs",
+  "type": "registry:ui",
+  "title": "Tabs",
+  "description": "Capsule pill tabs with pastel active tab highlights.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "import * as React from 'react'\nimport { cn } from '@/lib/utils'\n\nexport interface TabItem {\n  id: string\n  label: string\n  icon?: React.ReactNode\n  badge?: string\n}\n\nexport interface TabsProps {\n  tabs: TabItem[]\n  activeTab?: string\n  defaultTab?: string\n  onTabChange?: (id: string) => void\n  variant?: 'pill' | 'underline' | 'boxed'\n  className?: string\n}\n\nexport function Tabs({\n  tabs,\n  activeTab: controlledActive,\n  defaultTab,\n  onTabChange,\n  variant = 'pill',\n  className,\n}: TabsProps) {\n  const [internalActive, setInternalActive] = React.useState(defaultTab || tabs[0]?.id)\n  const currentTab = controlledActive !== undefined ? controlledActive : internalActive\n\n  const handleSelect = (id: string) => {\n    setInternalActive(id)\n    onTabChange?.(id)\n  }\n\n  if (variant === 'pill') {\n    return (\n      <div\n        className={cn(\n          'inline-flex items-center gap-1.5 p-1.5 rounded-full bg-[#18181B] text-white rk-border rk-shadow-md',\n          className\n        )}\n      >\n        {tabs.map((tab) => {\n          const isActive = currentTab === tab.id\n          return (\n            <button\n              key={tab.id}\n              onClick={() => handleSelect(tab.id)}\n              className={cn(\n                'flex items-center gap-2 px-5 py-2 rounded-full font-bold text-xs tracking-wide transition-all duration-150',\n                isActive\n                  ? 'bg-[#FDE047] text-[#18181B] rk-border-sm font-extrabold shadow-[2px_2px_0_0_#18181b] -translate-y-0.5'\n                  : 'text-white/80 hover:text-white hover:bg-white/10'\n              )}\n            >\n              {tab.icon}\n              <span>{tab.label}</span>\n              {tab.badge && (\n                <span\n                  className={cn(\n                    'text-[10px] font-mono px-1.5 py-0.2 rounded-full font-black',\n                    isActive ? 'bg-black text-white' : 'bg-white/20 text-white'\n                  )}\n                >\n                  {tab.badge}\n                </span>\n              )}\n            </button>\n          )\n        })}\n      </div>\n    )\n  }\n\n  return (\n    <div className={cn('flex items-center gap-2 border-b-3 border-black pb-1', className)}>\n      {tabs.map((tab) => {\n        const isActive = currentTab === tab.id\n        return (\n          <button\n            key={tab.id}\n            onClick={() => handleSelect(tab.id)}\n            className={cn(\n              'flex items-center gap-2 px-4 py-2 font-display font-bold text-sm transition-all rounded-t-xl rk-border-sm border-b-0',\n              isActive\n                ? 'bg-[#FDE047] text-[#18181B] rk-shadow-sm -translate-y-1'\n                : 'bg-white text-[#18181B]/70 hover:bg-[#F4F4F0]'\n            )}\n          >\n            {tab.icon}\n            <span>{tab.label}</span>\n          </button>\n        )\n      })}\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

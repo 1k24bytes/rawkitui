@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button",
+  "type": "registry:ui",
+  "title": "Button",
+  "description": "Tactile Neo-Brutalist button with hard black shadow and press physics.",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "content": "import * as React from 'react'\nimport { cva, type VariantProps } from 'class-variance-authority'\nimport { cn } from '@/lib/utils'\n\nconst buttonVariants = cva(\n  'inline-flex items-center justify-center whitespace-nowrap font-sans font-bold text-sm tracking-wide rk-border focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-all duration-120 rk-shadow active:translate-x-[3px] active:translate-y-[3px] active:shadow-[1px_1px_0_0_#18181b] hover:-translate-x-[1.5px] hover:-translate-y-[1.5px] hover:shadow-[6px_6px_0_0_#18181b]',\n  {\n    variants: {\n      variant: {\n        primary: 'bg-[#FDE047] text-[#18181B] hover:bg-[#FACC15]',\n        yellow: 'bg-[#FDE047] text-[#18181B] hover:bg-[#FACC15]',\n        secondary: 'bg-[#FB923C] text-[#18181B] hover:bg-[#F97316]',\n        accent: 'bg-[#A78BFA] text-[#18181B] hover:bg-[#8B5CF6]',\n        mint: 'bg-[#BBF7D0] text-[#18181B] hover:bg-[#86EFAC]',\n        peach: 'bg-[#FED7AA] text-[#18181B] hover:bg-[#FDBA74]',\n        sky: 'bg-[#BAE6FD] text-[#18181B] hover:bg-[#7DD3FC]',\n        pink: 'bg-[#FBCFE8] text-[#18181B] hover:bg-[#F472B6]',\n        black: 'bg-[#18181B] text-[#FFFFFF] border-black hover:bg-[#27272A]',\n        outline: 'bg-white text-[#18181B] hover:bg-[#F4F4F0]',\n      },\n      shape: {\n        default: 'rounded-2xl',\n        pill: 'rounded-full',\n        fab: 'rounded-full w-12 h-12 p-0 flex items-center justify-center text-lg',\n        square: 'rounded-xl',\n      },\n      size: {\n        sm: 'h-9 px-4 text-xs',\n        md: 'h-11 px-6 text-sm',\n        lg: 'h-13 px-8 text-base font-extrabold',\n        icon: 'h-11 w-11 p-0 flex items-center justify-center',\n      },\n    },\n    defaultVariants: {\n      variant: 'primary',\n      shape: 'pill',\n      size: 'md',\n    },\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, shape, size, ...props }, ref) => {\n    return (\n      <button\n        className={cn(buttonVariants({ variant, shape, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = 'Button'\n\nexport { Button, buttonVariants }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

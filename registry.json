@@ -1,0 +1,136 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "@rawkitui",
+  "homepage": "https://rawkitui.com",
+  "extends": "none",
+  "items": [
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Tactile Neo-Brutalist button with hard black shadow and press physics.",
+      "dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
+      "files": [{ "path": "src/components/ui/button.tsx", "type": "registry:ui", "target": "components/ui/button.tsx" }]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Hyper-rounded superellipse card with pastel surface options.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [{ "path": "src/components/ui/card.tsx", "type": "registry:ui", "target": "components/ui/card.tsx" }]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Pill badges and Scalloped Starburst callout tags.",
+      "dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
+      "files": [{ "path": "src/components/ui/badge.tsx", "type": "registry:ui", "target": "components/ui/badge.tsx" }]
+    },
+    {
+      "name": "floating-nav",
+      "type": "registry:ui",
+      "title": "Floating Nav",
+      "description": "Pinned bottom/top capsule navigation bar.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [{ "path": "src/components/ui/floating-nav.tsx", "type": "registry:ui", "target": "components/ui/floating-nav.tsx" }]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Pop-Brutalist input control with solid 3px focus ring.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [{ "path": "src/components/ui/input.tsx", "type": "registry:ui", "target": "components/ui/input.tsx" }]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Pop-Brutalist multiline text input.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [{ "path": "src/components/ui/textarea.tsx", "type": "registry:ui", "target": "components/ui/textarea.tsx" }]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Custom dropdown select with chevron icon.",
+      "dependencies": ["clsx", "tailwind-merge", "lucide-react"],
+      "files": [{ "path": "src/components/ui/select.tsx", "type": "registry:ui", "target": "components/ui/select.tsx" }]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Tactile capsule toggle switch.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [{ "path": "src/components/ui/switch.tsx", "type": "registry:ui", "target": "components/ui/switch.tsx" }]
+    },
+    {
+      "name": "radio",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "Tactile radio option card system.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [{ "path": "src/components/ui/radio.tsx", "type": "registry:ui", "target": "components/ui/radio.tsx" }]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Capsule pill tabs with pastel active tab highlights.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [{ "path": "src/components/ui/tabs.tsx", "type": "registry:ui", "target": "components/ui/tabs.tsx" }]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Pop-Brutalist high-contrast tooltip with hard shadow.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [{ "path": "src/components/ui/tooltip.tsx", "type": "registry:ui", "target": "components/ui/tooltip.tsx" }]
+    },
+    {
+      "name": "stepper",
+      "type": "registry:ui",
+      "title": "Stepper",
+      "description": "Capsule progress tracker and numbered step pills.",
+      "dependencies": ["clsx", "tailwind-merge", "lucide-react"],
+      "files": [{ "path": "src/components/ui/stepper.tsx", "type": "registry:ui", "target": "components/ui/stepper.tsx" }]
+    },
+    {
+      "name": "bar-chart",
+      "type": "registry:ui",
+      "title": "Bar Chart",
+      "description": "Vertical capsule progress bar chart visualization.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [{ "path": "src/components/ui/bar-chart.tsx", "type": "registry:ui", "target": "components/ui/bar-chart.tsx" }]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Pop-Brutalist modal popover with pastel surface variants.",
+      "dependencies": ["clsx", "tailwind-merge", "lucide-react"],
+      "files": [{ "path": "src/components/ui/dialog.tsx", "type": "registry:ui", "target": "components/ui/dialog.tsx" }]
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "High-contrast pop notification banner.",
+      "dependencies": ["clsx", "tailwind-merge", "lucide-react"],
+      "files": [{ "path": "src/components/ui/alert.tsx", "type": "registry:ui", "target": "components/ui/alert.tsx" }]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Tactile checkbox control with yellow check fill.",
+      "dependencies": ["clsx", "tailwind-merge", "lucide-react"],
+      "files": [{ "path": "src/components/ui/checkbox.tsx", "type": "registry:ui", "target": "components/ui/checkbox.tsx" }]
+    }
+  ]
+}
