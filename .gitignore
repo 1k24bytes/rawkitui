@@ -8,6 +8,9 @@ dist-ssr
 build
 out
 
+# TypeScript build info cache
+*.tsbuildinfo
+
 # Logs
 logs
 *.log
