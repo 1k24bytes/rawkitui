@@ -1,7 +1,7 @@
 import * as React from 'react'
+import { motion, AnimatePresence } from 'motion/react'
 import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { Button } from './button'
 
 export interface DialogProps {
   open: boolean
@@ -20,8 +20,6 @@ export function Dialog({
   children,
   variant = 'lavender',
 }: DialogProps) {
-  if (!open) return null
-
   const bgMap = {
     white: 'bg-white',
     mint: 'bg-[#BBF7D0]',
@@ -33,38 +31,52 @@ export function Dialog({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop */}
-      <div 
-        className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity" 
-        onClick={onClose}
-      />
+    <AnimatePresence>
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs"
+            onClick={onClose}
+          />
 
-      {/* Modal Container */}
-      <div
-        className={cn(
-          'relative w-full max-w-lg rounded-[32px] rk-border rk-shadow-xl p-6 lg:p-8 z-10 animate-in fade-in zoom-in-95 duration-150',
-          bgMap[variant]
-        )}
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white rk-border-sm flex items-center justify-center font-bold rk-shadow-sm hover:bg-[#FDE047] transition-colors"
-        >
-          <X className="w-5 h-5 text-black" />
-        </button>
+          {/* Modal Container */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 10 }}
+            transition={{ type: 'spring', stiffness: 450, damping: 25 }}
+            className={cn(
+              'relative w-full max-w-lg rounded-[32px] rk-border rk-shadow-xl p-6 lg:p-8 z-10 font-sans',
+              bgMap[variant]
+            )}
+          >
+            <motion.button
+              whileHover={{ scale: 1.1, rotate: 90 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={onClose}
+              className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white rk-border-sm flex items-center justify-center font-bold rk-shadow-sm hover:bg-[#FDE047] transition-colors cursor-pointer"
+            >
+              <X className="w-5 h-5 text-black stroke-[2.5]" />
+            </motion.button>
 
-        {title && (
-          <h2 className="font-display text-2xl font-bold tracking-tight text-[#18181B] pr-8 mb-1">
-            {title}
-          </h2>
-        )}
-        {description && (
-          <p className="text-sm font-semibold text-black/70 mb-5">{description}</p>
-        )}
+            {title && (
+              <h2 className="font-display text-2xl sm:text-3xl font-black tracking-tight text-[#18181B] pr-8 mb-1">
+                {title}
+              </h2>
+            )}
+            {description && (
+              <p className="text-sm font-bold text-black/70 mb-5">{description}</p>
+            )}
 
-        <div className="pt-2">{children}</div>
-      </div>
-    </div>
+            <div className="pt-2">{children}</div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
   )
 }

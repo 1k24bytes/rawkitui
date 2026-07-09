@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 
 export interface TabItem {
@@ -37,7 +38,7 @@ export function Tabs({
     return (
       <div
         className={cn(
-          'inline-flex items-center gap-1.5 p-1.5 rounded-full bg-[#18181B] text-white rk-border rk-shadow-md',
+          'inline-flex items-center gap-1.5 p-1.5 rounded-full bg-[#18181B] text-white rk-border rk-shadow-md relative',
           className
         )}
       >
@@ -48,12 +49,17 @@ export function Tabs({
               key={tab.id}
               onClick={() => handleSelect(tab.id)}
               className={cn(
-                'flex items-center gap-2 px-5 py-2 rounded-full font-bold text-xs tracking-wide transition-all duration-150',
-                isActive
-                  ? 'bg-[#FDE047] text-[#18181B] rk-border-sm font-extrabold shadow-[2px_2px_0_0_#18181b] -translate-y-0.5'
-                  : 'text-white/80 hover:text-white hover:bg-white/10'
+                'relative flex items-center gap-2 px-5 py-2 rounded-full font-extrabold text-xs tracking-wide transition-colors z-10 select-none cursor-pointer',
+                isActive ? 'text-[#18181B]' : 'text-white/80 hover:text-white'
               )}
             >
+              {isActive && (
+                <motion.div
+                  layoutId="activeTabPill"
+                  transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                  className="absolute inset-0 bg-[#FDE047] rounded-full rk-border-sm rk-shadow-sm -z-10"
+                />
+              )}
               {tab.icon}
               <span>{tab.label}</span>
               {tab.badge && (
@@ -74,7 +80,7 @@ export function Tabs({
   }
 
   return (
-    <div className={cn('flex items-center gap-2 border-b-3 border-black pb-1', className)}>
+    <div className={cn('flex items-center gap-2 border-b-3 border-black pb-1 relative', className)}>
       {tabs.map((tab) => {
         const isActive = currentTab === tab.id
         return (
@@ -82,7 +88,7 @@ export function Tabs({
             key={tab.id}
             onClick={() => handleSelect(tab.id)}
             className={cn(
-              'flex items-center gap-2 px-4 py-2 font-display font-bold text-sm transition-all rounded-t-xl rk-border-sm border-b-0',
+              'relative flex items-center gap-2 px-4 py-2 font-display font-extrabold text-sm transition-all rounded-t-xl rk-border-sm border-b-0 cursor-pointer',
               isActive
                 ? 'bg-[#FDE047] text-[#18181B] rk-shadow-sm -translate-y-1'
                 : 'bg-white text-[#18181B]/70 hover:bg-[#F4F4F0]'

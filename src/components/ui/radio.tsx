@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 
 export interface RadioOption {
@@ -34,33 +35,41 @@ export function RadioGroup({
   }
 
   return (
-    <div className={cn('space-y-3', className)}>
+    <div className={cn('space-y-3 font-sans', className)}>
       {options.map((opt) => {
         const isSelected = selectedValue === opt.value
         return (
-          <div
+          <motion.div
             key={opt.value}
+            whileHover={{ y: -2, boxShadow: '5px 5px 0 0 #18181b' }}
+            whileTap={{ y: 1, boxShadow: '2px 2px 0 0 #18181b' }}
+            transition={{ type: 'spring', stiffness: 500, damping: 25 }}
             onClick={() => handleSelect(opt.value)}
             className={cn(
-              'p-4 rounded-2xl rk-border rk-shadow-sm cursor-pointer select-none transition-all duration-150 flex items-center justify-between',
-              isSelected
-                ? 'bg-[#FED7AA] shadow-[5px_5px_0_0_#18181b] -translate-x-0.5 -translate-y-0.5'
-                : 'bg-white hover:bg-[#F4F4F0]'
+              'p-4 rounded-2xl rk-border rk-shadow-sm cursor-pointer select-none transition-colors duration-150 flex items-center justify-between',
+              isSelected ? 'bg-[#FED7AA]' : 'bg-white hover:bg-[#F4F4F0]'
             )}
           >
             <div className="flex items-center gap-3.5">
               <div
                 className={cn(
-                  'w-5 h-5 rounded-full rk-border-sm flex items-center justify-center transition-all',
+                  'w-5 h-5 rounded-full rk-border-sm flex items-center justify-center transition-colors',
                   isSelected ? 'bg-[#18181B]' : 'bg-white'
                 )}
               >
-                {isSelected && <div className="w-2 h-2 rounded-full bg-[#FDE047]" />}
+                {isSelected && (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+                    className="w-2 h-2 rounded-full bg-[#FDE047]"
+                  />
+                )}
               </div>
               <div>
-                <div className="font-bold text-sm text-[#18181B]">{opt.label}</div>
+                <div className="font-extrabold text-sm text-[#18181B]">{opt.label}</div>
                 {opt.description && (
-                  <div className="text-xs font-semibold text-black/60">{opt.description}</div>
+                  <div className="text-xs font-bold text-black/60">{opt.description}</div>
                 )}
               </div>
             </div>
@@ -69,7 +78,7 @@ export function RadioGroup({
                 {opt.badge}
               </span>
             )}
-          </div>
+          </motion.div>
         )
       })}
     </div>

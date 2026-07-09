@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { motion, type HTMLMotionProps } from 'motion/react'
 import { cn } from '@/lib/utils'
 
 const badgeVariants = cva(
-  'inline-flex items-center justify-center font-mono font-bold text-xs tracking-wider uppercase transition-colors focus:outline-none rk-border-sm',
+  'inline-flex items-center justify-center font-mono font-bold text-xs tracking-wider uppercase transition-colors focus:outline-none rk-border-sm select-none',
   {
     variants: {
       variant: {
@@ -32,12 +33,18 @@ const badgeVariants = cva(
 )
 
 export interface BadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof HTMLMotionProps<'div'>>,
+    HTMLMotionProps<'div'>,
     VariantProps<typeof badgeVariants> {}
 
 function Badge({ className, variant, shape, ...props }: BadgeProps) {
   return (
-    <div className={cn(badgeVariants({ variant, shape }), className)} {...props} />
+    <motion.div
+      whileHover={{ scale: 1.05, rotate: shape === 'scalloped' ? 8 : 0 }}
+      transition={{ type: 'spring', stiffness: 500, damping: 20 }}
+      className={cn(badgeVariants({ variant, shape }), className)}
+      {...props}
+    />
   )
 }
 

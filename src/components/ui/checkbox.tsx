@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { motion, AnimatePresence } from 'motion/react'
 import { Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -11,6 +12,12 @@ export interface CheckboxProps
 const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   ({ className, checked, onCheckedChange, label, ...props }, ref) => {
     const [isChecked, setIsChecked] = React.useState(!!checked)
+
+    React.useEffect(() => {
+      if (checked !== undefined) {
+        setIsChecked(checked)
+      }
+    }, [checked])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setIsChecked(e.target.checked)
@@ -28,18 +35,32 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             className="sr-only"
             {...props}
           />
-          <div
+          <motion.div
+            whileHover={{ scale: 1.05, x: -1, y: -1 }}
+            whileTap={{ scale: 0.95 }}
             className={cn(
-              'w-6 h-6 rounded-lg rk-border-sm transition-all duration-120 flex items-center justify-center rk-shadow-sm group-hover:-translate-x-0.5 group-hover:-translate-y-0.5',
+              'w-6 h-6 rounded-lg rk-border-sm transition-colors duration-150 flex items-center justify-center rk-shadow-sm',
               isChecked
                 ? 'bg-[#FDE047] text-[#18181B]'
-                : 'bg-white text-transparent group-hover:bg-[#F4F4F0]'
+                : 'bg-white text-transparent group-hover:bg-[#F4F4F0]',
+              className
             )}
           >
-            <Check className={cn('w-4 h-4 stroke-[3]', isChecked ? 'opacity-100' : 'opacity-0')} />
-          </div>
+            <AnimatePresence>
+              {isChecked && (
+                <motion.div
+                  initial={{ scale: 0, rotate: -45 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  exit={{ scale: 0, rotate: 45 }}
+                  transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+                >
+                  <Check className="w-4 h-4 stroke-[3.5] text-[#18181B]" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
         </div>
-        {label && <span className="font-semibold text-sm text-[#18181B]">{label}</span>}
+        {label && <span className="font-extrabold text-sm text-[#18181B]">{label}</span>}
       </label>
     )
   }

@@ -1,9 +1,11 @@
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { motion } from 'motion/react'
+import { Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap font-sans font-bold text-sm tracking-wide rk-border focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-all duration-120 rk-shadow active:translate-x-[3px] active:translate-y-[3px] active:shadow-[1px_1px_0_0_#18181b] hover:-translate-x-[1.5px] hover:-translate-y-[1.5px] hover:shadow-[6px_6px_0_0_#18181b]',
+  'inline-flex items-center justify-center whitespace-nowrap font-sans font-extrabold text-sm tracking-wide rk-border focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-colors select-none cursor-pointer',
   {
     variants: {
       variant: {
@@ -40,19 +42,47 @@ const buttonVariants = cva(
 )
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onAnimationStart' | 'onDrag' | 'onDragStart' | 'onDragEnd'>,
     VariantProps<typeof buttonVariants> {
-  asChild?: boolean
+  isLoading?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, shape, size, ...props }, ref) => {
+  ({ className, variant, shape, size, isLoading = false, children, disabled, ...props }, ref) => {
     return (
-      <button
-        className={cn(buttonVariants({ variant, shape, size, className }))}
+      <motion.button
         ref={ref}
-        {...props}
-      />
+        disabled={disabled || isLoading}
+        whileHover={{
+          x: -2,
+          y: -2,
+          boxShadow: '6px 6px 0 0 #18181b',
+        }}
+        whileTap={{
+          x: 2,
+          y: 2,
+          boxShadow: '1px 1px 0 0 #18181b',
+        }}
+        initial={{
+          boxShadow: '4px 4px 0 0 #18181b',
+        }}
+        transition={{
+          type: 'spring',
+          stiffness: 500,
+          damping: 25,
+        }}
+        className={cn(buttonVariants({ variant, shape, size, className }))}
+        {...(props as any)}
+      >
+        {isLoading ? (
+          <span className="flex items-center gap-2">
+            <Loader2 className="w-4 h-4 animate-spin stroke-[3]" />
+            {children}
+          </span>
+        ) : (
+          children
+        )}
+      </motion.button>
     )
   }
 )

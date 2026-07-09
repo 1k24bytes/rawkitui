@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { motion, type HTMLMotionProps } from 'motion/react'
 import { cn } from '@/lib/utils'
 
 const cardVariants = {
@@ -11,18 +12,30 @@ const cardVariants = {
   yellow: 'bg-[#FDE047]',
 }
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CardProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof HTMLMotionProps<'div'>>,
+    HTMLMotionProps<'div'> {
   variant?: keyof typeof cardVariants
   hasShadow?: boolean
+  isInteractive?: boolean
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant = 'white', hasShadow = true, ...props }, ref) => {
+  ({ className, variant = 'white', hasShadow = true, isInteractive = false, ...props }, ref) => {
     return (
-      <div
+      <motion.div
         ref={ref}
+        whileHover={
+          isInteractive
+            ? {
+                y: -4,
+                boxShadow: '10px 10px 0 0 #18181b',
+              }
+            : undefined
+        }
+        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
         className={cn(
-          'rounded-[28px] rk-border p-6 font-sans relative overflow-hidden transition-all duration-150',
+          'rounded-[28px] rk-border p-6 font-sans relative overflow-hidden transition-colors',
           cardVariants[variant],
           hasShadow && 'rk-shadow',
           className
@@ -52,7 +65,7 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn('font-display text-xl font-bold tracking-tight text-[#18181B]', className)}
+    className={cn('font-display text-xl font-black tracking-tight text-[#18181B]', className)}
     {...props}
   />
 ))
@@ -64,7 +77,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn('text-sm font-semibold text-[#18181B]/70', className)}
+    className={cn('text-xs font-bold text-[#18181B]/70', className)}
     {...props}
   />
 ))

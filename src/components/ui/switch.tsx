@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 
 export interface SwitchProps {
@@ -37,20 +38,27 @@ export function Switch({
         className
       )}
     >
-      <div
+      <motion.div
+        whileTap={{ scale: 0.95 }}
         className={cn(
-          'w-14 h-8 rounded-full rk-border-sm rk-shadow-sm p-1 transition-all duration-200 relative flex items-center',
+          'w-14 h-8 rounded-full rk-border-sm rk-shadow-sm p-1 transition-colors duration-200 relative flex items-center',
           isChecked ? 'bg-[#FDE047]' : 'bg-[#E5E7EB]'
         )}
       >
-        <div
+        <motion.div
+          layout
+          transition={{
+            type: 'spring',
+            stiffness: 500,
+            damping: 30,
+          }}
           className={cn(
-            'w-5 h-5 rounded-full bg-[#18181B] rk-shadow-sm transition-transform duration-200',
-            isChecked ? 'translate-x-6' : 'translate-x-0'
+            'w-5 h-5 rounded-full bg-[#18181B] rk-shadow-sm',
+            isChecked ? 'ml-auto' : 'ml-0'
           )}
         />
-      </div>
-      {label && <span className="font-semibold text-sm text-[#18181B]">{label}</span>}
+      </motion.div>
+      {label && <span className="font-extrabold text-sm text-[#18181B]">{label}</span>}
     </label>
   )
 }

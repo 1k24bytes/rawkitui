@@ -1,4 +1,14 @@
 import * as React from 'react'
+import {
+  ResponsiveContainer,
+  BarChart as RechartsBarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip as RechartsTooltip,
+  Cell,
+  CartesianGrid,
+} from 'recharts'
 import { cn } from '@/lib/utils'
 
 export interface BarData {
@@ -11,41 +21,84 @@ export interface BarChartProps {
   data: BarData[]
   height?: number
   className?: string
+  showGrid?: boolean
+  showValues?: boolean
 }
 
-export function BarChart({ data, height = 160, className }: BarChartProps) {
-  const maxValue = Math.max(...data.map((d) => d.value), 100)
+// Custom Pop-Brutalist Tooltip for Recharts
+function CustomTooltip({ active, payload, label }: any) {
+  if (active && payload && payload.length) {
+    const data = payload[0]
+    return (
+      <div className="bg-white border-2 border-black rounded-xl p-3 rk-shadow-sm font-mono">
+        <p className="text-xs font-black uppercase text-[#18181B]">{label}</p>
+        <p className="text-sm font-black text-[#FB923C] mt-0.5">
+          {data.value.toLocaleString()}
+        </p>
+      </div>
+    )
+  }
+  return null
+}
+
+export function BarChart({
+  data,
+  height = 200,
+  className,
+  showGrid = true,
+}: BarChartProps) {
+  const defaultColors = [
+    '#FB923C',
+    '#FDE047',
+    '#BBF7D0',
+    '#A78BFA',
+    '#BAE6FD',
+    '#FBCFE8',
+  ]
 
   return (
-    <div className={cn('w-full space-y-3', className)}>
-      <div
-        className="flex items-end justify-between gap-3 p-4 rounded-2xl bg-white rk-border rk-shadow-sm"
-        style={{ height: `${height}px` }}
-      >
-        {data.map((item, i) => {
-          const heightPercent = Math.round((item.value / maxValue) * 100)
-          const barColor = item.color || '#18181B'
-
-          return (
-            <div key={i} className="flex-1 flex flex-col items-center h-full justify-end group">
-              <div className="text-[10px] font-mono font-bold mb-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                {item.value}
-              </div>
-              <div className="w-full bg-[#F4F4F0] rounded-full h-full p-1 flex items-end rk-border-sm">
-                <div
-                  className="w-full rounded-full transition-all duration-500 ease-out"
-                  style={{
-                    height: `${heightPercent}%`,
-                    backgroundColor: barColor,
-                  }}
+    <div
+      className={cn(
+        'w-full bg-white rounded-2xl rk-border p-4 rk-shadow-sm font-sans',
+        className
+      )}
+    >
+      <div style={{ width: '100%', height: `${height}px` }}>
+        <ResponsiveContainer width="100%" height="100%">
+          <RechartsBarChart
+            data={data}
+            margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
+          >
+            {showGrid && (
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="#18181b"
+                strokeOpacity={0.15}
+                vertical={false}
+              />
+            )}
+            <XAxis
+              dataKey="label"
+              tickLine={false}
+              axisLine={{ stroke: '#18181b', strokeWidth: 2 }}
+              tick={{ fill: '#18181b', fontSize: 11, fontWeight: 700, fontFamily: 'monospace' }}
+            />
+            <YAxis
+              tickLine={false}
+              axisLine={{ stroke: '#18181b', strokeWidth: 2 }}
+              tick={{ fill: '#18181b', fontSize: 10, fontWeight: 700, fontFamily: 'monospace' }}
+            />
+            <RechartsTooltip content={<CustomTooltip />} />
+            <Bar dataKey="value" radius={[8, 8, 0, 0]} stroke="#18181b" strokeWidth={2}>
+              {data.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={entry.color || defaultColors[index % defaultColors.length]}
                 />
-              </div>
-              <span className="text-[11px] font-mono font-bold mt-2 text-[#18181B]">
-                {item.label}
-              </span>
-            </div>
-          )
-        })}
+              ))}
+            </Bar>
+          </RechartsBarChart>
+        </ResponsiveContainer>
       </div>
     </div>
   )
