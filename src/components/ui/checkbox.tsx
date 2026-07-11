@@ -26,7 +26,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <label className="inline-flex items-center gap-3 cursor-pointer select-none group">
-        <div className="relative">
+        <div className="relative shrink-0">
           <input
             type="checkbox"
             ref={ref}
@@ -39,7 +39,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             whileHover={{ scale: 1.05, x: -1, y: -1 }}
             whileTap={{ scale: 0.95 }}
             className={cn(
-              'w-6 h-6 rounded-lg rk-border-sm transition-colors duration-150 flex items-center justify-center rk-shadow-sm',
+              'w-6 h-6 rounded-lg rk-border-sm transition-colors duration-150 flex items-center justify-center rk-shadow-sm shrink-0 aspect-square p-0',
               isChecked
                 ? 'bg-[#FDE047] text-[#18181B]'
                 : 'bg-white text-transparent group-hover:bg-[#F4F4F0]',

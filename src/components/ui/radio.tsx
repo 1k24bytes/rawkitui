@@ -53,7 +53,7 @@ export function RadioGroup({
             <div className="flex items-center gap-3.5">
               <div
                 className={cn(
-                  'w-5 h-5 rounded-full rk-border-sm flex items-center justify-center transition-colors',
+                  'w-5 h-5 rounded-full rk-border-sm flex items-center justify-center transition-colors shrink-0 aspect-square p-0',
                   isSelected ? 'bg-[#18181B]' : 'bg-white'
                 )}
               >
@@ -62,7 +62,7 @@ export function RadioGroup({
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring', stiffness: 500, damping: 25 }}
-                    className="w-2 h-2 rounded-full bg-[#FDE047]"
+                    className="w-2 h-2 rounded-full bg-[#FDE047] shrink-0 aspect-square"
                   />
                 )}
               </div>
@@ -74,7 +74,7 @@ export function RadioGroup({
               </div>
             </div>
             {opt.badge && (
-              <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#FDE047] rk-border-sm">
+              <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#FDE047] rk-border-sm shrink-0">
                 {opt.badge}
               </span>
             )}

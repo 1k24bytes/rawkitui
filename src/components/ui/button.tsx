@@ -23,14 +23,14 @@ const buttonVariants = cva(
       shape: {
         default: 'rounded-2xl',
         pill: 'rounded-full',
-        fab: 'rounded-full w-12 h-12 p-0 flex items-center justify-center text-lg',
+        fab: 'rounded-full !w-12 !h-12 !p-0 shrink-0 aspect-square flex items-center justify-center text-lg',
         square: 'rounded-xl',
       },
       size: {
         sm: 'h-9 px-4 text-xs',
         md: 'h-11 px-6 text-sm',
         lg: 'h-13 px-8 text-base font-extrabold',
-        icon: 'h-11 w-11 p-0 flex items-center justify-center',
+        icon: 'h-11 w-11 !p-0 shrink-0 aspect-square flex items-center justify-center',
       },
     },
     defaultVariants: {
@@ -49,6 +49,9 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, shape, size, isLoading = false, children, disabled, ...props }, ref) => {
+    // If shape is 'fab', force p-0 and aspect-square so default size px-6 can never distort it into an oval
+    const isSquareOrFab = shape === 'fab' || size === 'icon'
+
     return (
       <motion.button
         ref={ref}
@@ -71,13 +74,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           stiffness: 500,
           damping: 25,
         }}
-        className={cn(buttonVariants({ variant, shape, size, className }))}
+        className={cn(
+          buttonVariants({ variant, shape, size, className }),
+          isSquareOrFab && '!p-0 !px-0 !py-0 shrink-0 aspect-square'
+        )}
         {...(props as any)}
       >
         {isLoading ? (
-          <span className="flex items-center gap-2">
+          <span className="flex items-center justify-center gap-2">
             <Loader2 className="w-4 h-4 animate-spin stroke-[3]" />
-            {children}
+            {!isSquareOrFab && children}
           </span>
         ) : (
           children

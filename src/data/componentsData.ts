@@ -5,6 +5,13 @@ export interface ComponentPropSpec {
   description: string
 }
 
+export interface ComponentExample {
+  id: string
+  title: string
+  description?: string
+  codeSnippet: string
+}
+
 export interface ComponentData {
   id: string
   name: string
@@ -12,6 +19,7 @@ export interface ComponentData {
   description: string
   cliCommand: string
   codeSnippet: string
+  examples?: ComponentExample[]
   props: ComponentPropSpec[]
 }
 
@@ -23,25 +31,103 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
     description: 'Tactile Pop-Brutalist action button with hard zero-blur offset shadow and physical press physics.',
     cliCommand: 'npx shadcn add @rawkitui/button',
     codeSnippet: `import { Button } from "@/components/ui/button"
-import { Plus } from "lucide-react"
 
 export default function ButtonDemo() {
-  return (
-    <div className="flex flex-wrap gap-4">
-      <Button variant="primary" size="md">Primary CTA</Button>
-      <Button variant="secondary" size="md">Secondary</Button>
-      <Button variant="mint" size="md">Pastel Mint</Button>
-      <Button variant="peach" shape="pill" size="md">Peach Capsule</Button>
-      <Button variant="yellow" shape="fab">
-        <Plus className="w-5 h-5 text-black" />
-      </Button>
-    </div>
-  )
+  return <Button variant="primary">Primary CTA</Button>
 }`,
+    examples: [
+      {
+        id: 'primary',
+        title: 'Primary',
+        description: 'The standard primary call-to-action button with signature yellow fill (#FDE047) and 4px zero-blur black shadow.',
+        codeSnippet: `<Button variant="primary">Primary CTA</Button>`,
+      },
+      {
+        id: 'secondary',
+        title: 'Secondary & Pop Accents',
+        description: 'Curated Pop-Brutalist color variants including secondary orange, accent violet, ink black, outline, and soft pastel fills.',
+        codeSnippet: `<div className="flex flex-wrap gap-4">
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="accent">Accent</Button>
+  <Button variant="mint">Pastel Mint</Button>
+  <Button variant="peach">Pastel Peach</Button>
+  <Button variant="sky">Pastel Sky</Button>
+  <Button variant="pink">Pastel Pink</Button>
+  <Button variant="black">Ink Solid</Button>
+  <Button variant="outline">Outline</Button>
+</div>`,
+      },
+      {
+        id: 'icon',
+        title: 'With Icon',
+        description: 'Buttons paired with leading or trailing Lucide React vector icons.',
+        codeSnippet: `<div className="flex flex-wrap gap-4">
+  <Button variant="primary">
+    <Mail className="w-4 h-4 mr-2 stroke-[2.5]" /> Login with Email
+  </Button>
+  <Button variant="black">
+    Next Step <ArrowRight className="w-4 h-4 ml-2 stroke-[2.5]" />
+  </Button>
+</div>`,
+      },
+      {
+        id: 'fab',
+        title: 'Icon Only & FAB',
+        description: 'Circular floating action buttons and compact square icon triggers.',
+        codeSnippet: `<div className="flex items-center gap-4">
+  <Button variant="yellow" shape="fab">
+    <Plus className="w-5 h-5 text-black stroke-[2.5]" />
+  </Button>
+  <Button variant="peach" shape="square" size="icon">
+    <Sparkles className="w-5 h-5 text-black stroke-[2.5]" />
+  </Button>
+  <Button variant="black" shape="pill" size="icon">
+    <Star className="w-4 h-4 text-[#FDE047] stroke-[2.5]" />
+  </Button>
+</div>`,
+      },
+      {
+        id: 'loading',
+        title: 'Loading State',
+        description: 'Displays an animated Lucide spinner and disables pointer interactions.',
+        codeSnippet: `<div className="flex flex-wrap gap-4">
+  <Button variant="primary" isLoading>Please wait</Button>
+  <Button variant="black" isLoading>Deploying</Button>
+</div>`,
+      },
+      {
+        id: 'shapes',
+        title: 'Shapes & Stances',
+        description: 'Supports capsule pill (rounded-full), standard superellipse (rounded-2xl), and square corners.',
+        codeSnippet: `<div className="flex flex-wrap gap-4">
+  <Button variant="primary" shape="pill">Capsule Pill</Button>
+  <Button variant="mint" shape="default">Superellipse</Button>
+  <Button variant="peach" shape="square">Square</Button>
+</div>`,
+      },
+      {
+        id: 'sizes',
+        title: 'Sizes',
+        description: 'Small (sm), Medium (md), and Large (lg) button scaling options.',
+        codeSnippet: `<div className="flex items-center gap-4">
+  <Button size="sm">Small</Button>
+  <Button size="md">Medium</Button>
+  <Button size="lg">Large CTA</Button>
+</div>`,
+      },
+      {
+        id: 'disabled',
+        title: 'Disabled State',
+        description: 'Disabled button styling with reduced opacity and muted interaction physics.',
+        codeSnippet: `<Button variant="primary" disabled>Disabled Action</Button>`,
+      },
+    ],
     props: [
       { name: 'variant', type: "'primary' | 'secondary' | 'accent' | 'mint' | 'peach' | 'sky' | 'pink' | 'black' | 'outline'", default: "'primary'", description: 'Sets the fill background color token' },
       { name: 'shape', type: "'default' | 'pill' | 'fab' | 'square'", default: "'pill'", description: 'Controls corner radius stance (28px superellipse or rounded-full capsule)' },
       { name: 'size', type: "'sm' | 'md' | 'lg' | 'icon'", default: "'md'", description: 'Button dimensions and font sizing' },
+      { name: 'isLoading', type: 'boolean', default: 'false', description: 'Shows loading spinner and disables button' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables button interactions' },
     ],
   },
   card: {

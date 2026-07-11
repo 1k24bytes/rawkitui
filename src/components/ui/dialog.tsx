@@ -59,7 +59,7 @@ export function Dialog({
               whileHover={{ scale: 1.1, rotate: 90 }}
               whileTap={{ scale: 0.9 }}
               onClick={onClose}
-              className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white rk-border-sm flex items-center justify-center font-bold rk-shadow-sm hover:bg-[#FDE047] transition-colors cursor-pointer"
+              className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white rk-border-sm flex items-center justify-center font-bold rk-shadow-sm hover:bg-[#FDE047] transition-colors cursor-pointer shrink-0 p-0 aspect-square"
             >
               <X className="w-5 h-5 text-black stroke-[2.5]" />
             </motion.button>
