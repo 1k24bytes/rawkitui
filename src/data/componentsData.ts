@@ -121,11 +121,26 @@ export default function ButtonDemo() {
         description: 'Disabled button styling with reduced opacity and muted interaction physics.',
         codeSnippet: `<Button variant="primary" disabled>Disabled Action</Button>`,
       },
+      {
+        id: 'shadows',
+        title: 'Shadow Options & Pop Colors',
+        description: 'Customize shadows with pop color offset shadows (orange, violet, mint, pink, sky), soft elevated shadows, or flat outline mode.',
+        codeSnippet: `<div className="flex flex-wrap gap-4">
+  <Button variant="outline" shadowColor="orange">Orange Shadow</Button>
+  <Button variant="outline" shadowColor="violet">Violet Shadow</Button>
+  <Button variant="outline" shadowColor="mint">Mint Shadow</Button>
+  <Button variant="outline" shadowColor="pink">Pink Shadow</Button>
+  <Button variant="primary" shadowStyle="soft">Soft Elevated</Button>
+  <Button variant="secondary" shadowStyle="none">Flat Outline</Button>
+</div>`,
+      },
     ],
     props: [
       { name: 'variant', type: "'primary' | 'secondary' | 'accent' | 'mint' | 'peach' | 'sky' | 'pink' | 'black' | 'outline'", default: "'primary'", description: 'Sets the fill background color token' },
       { name: 'shape', type: "'default' | 'pill' | 'fab' | 'square'", default: "'pill'", description: 'Controls corner radius stance (28px superellipse or rounded-full capsule)' },
       { name: 'size', type: "'sm' | 'md' | 'lg' | 'icon'", default: "'md'", description: 'Button dimensions and font sizing' },
+      { name: 'shadowColor', type: "'ink' | 'yellow' | 'orange' | 'violet' | 'mint' | 'pink' | 'sky'", default: "'ink'", description: 'Custom offset shadow color' },
+      { name: 'shadowStyle', type: "'hard' | 'soft' | 'none'", default: "'hard'", description: 'Shadow style (classic zero-blur offset, soft elevated, or flat)' },
       { name: 'isLoading', type: 'boolean', default: 'false', description: 'Shows loading spinner and disables button' },
       { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables button interactions' },
     ],

@@ -4,6 +4,16 @@ import { motion } from 'motion/react'
 import { Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
+const shadowColorHexMap = {
+  ink: 'var(--rk-shadow-color, #18181b)',
+  yellow: '#FACC15',
+  orange: '#FB923C',
+  violet: '#A78BFA',
+  mint: '#4ADE80',
+  pink: '#F472B6',
+  sky: '#38BDF8',
+}
+
 const buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap font-sans font-extrabold text-sm tracking-wide rk-border focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-colors select-none cursor-pointer',
   {
@@ -45,29 +55,62 @@ export interface ButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onAnimationStart' | 'onDrag' | 'onDragStart' | 'onDragEnd'>,
     VariantProps<typeof buttonVariants> {
   isLoading?: boolean
+  shadowColor?: keyof typeof shadowColorHexMap
+  shadowStyle?: 'hard' | 'soft' | 'none'
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, shape, size, isLoading = false, children, disabled, ...props }, ref) => {
-    // If shape is 'fab', force p-0 and aspect-square so default size px-6 can never distort it into an oval
+  (
+    {
+      className,
+      variant,
+      shape,
+      size,
+      isLoading = false,
+      shadowColor = 'ink',
+      shadowStyle = 'hard',
+      children,
+      disabled,
+      ...props
+    },
+    ref
+  ) => {
     const isSquareOrFab = shape === 'fab' || size === 'icon'
+
+    // Compute dynamic motion shadows based on shadowStyle & shadowColor
+    let initialShadow = '4px 4px 0 0 var(--rk-shadow-color, #18181b)'
+    let hoverShadow = '6px 6px 0 0 var(--rk-shadow-color, #18181b)'
+    let tapShadow = '1px 1px 0 0 var(--rk-shadow-color, #18181b)'
+
+    if (shadowStyle === 'none') {
+      initialShadow = '0px 0px 0 0 transparent'
+      hoverShadow = '0px 0px 0 0 transparent'
+      tapShadow = '0px 0px 0 0 transparent'
+    } else if (shadowStyle === 'soft') {
+      initialShadow = '0 8px 20px -4px rgba(24, 24, 27, 0.15), 2px 2px 0 0 var(--rk-shadow-color, #18181b)'
+      hoverShadow = '0 12px 28px -4px rgba(24, 24, 27, 0.25), 4px 4px 0 0 var(--rk-shadow-color, #18181b)'
+      tapShadow = '0 4px 10px -2px rgba(24, 24, 27, 0.1), 1px 1px 0 0 var(--rk-shadow-color, #18181b)'
+    } else if (shadowColor !== 'ink') {
+      const colorHex = shadowColorHexMap[shadowColor] || '#18181b'
+      initialShadow = `4px 4px 0 0 ${colorHex}`
+      hoverShadow = `6px 6px 0 0 ${colorHex}`
+      tapShadow = `1px 1px 0 0 ${colorHex}`
+    }
 
     return (
       <motion.button
         ref={ref}
         disabled={disabled || isLoading}
+        initial={{ boxShadow: initialShadow }}
         whileHover={{
-          x: -2,
-          y: -2,
-          boxShadow: '6px 6px 0 0 #18181b',
+          x: shadowStyle === 'none' ? 0 : -2,
+          y: shadowStyle === 'none' ? 0 : -2,
+          boxShadow: hoverShadow,
         }}
         whileTap={{
-          x: 2,
-          y: 2,
-          boxShadow: '1px 1px 0 0 #18181b',
-        }}
-        initial={{
-          boxShadow: '4px 4px 0 0 #18181b',
+          x: shadowStyle === 'none' ? 0 : 2,
+          y: shadowStyle === 'none' ? 0 : 2,
+          boxShadow: tapShadow,
         }}
         transition={{
           type: 'spring',

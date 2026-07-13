@@ -28,17 +28,24 @@ import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { BarChart } from '@/components/ui/bar-chart'
+import { Select } from '@/components/ui/select'
 import { motion } from 'motion/react'
 
 export function Home() {
   const [copied, setCopied] = useState(false)
   const [clickCount, setClickCount] = useState(0)
   const [activeTheme, setActiveTheme] = useState<'yellow' | 'mint' | 'peach' | 'lavender' | 'sky' | 'pink'>('yellow')
+  const [shadowMode, setShadowMode] = useState('ink')
 
   const copyCommand = () => {
     navigator.clipboard.writeText('npx shadcn add @rawkitui/button')
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
+  }
+
+  const handleShadowChange = (mode: string) => {
+    setShadowMode(mode)
+    document.documentElement.setAttribute('data-shadow', mode)
   }
 
   const themeBgMap = {
@@ -187,15 +194,15 @@ export function Home() {
             />
           </Card>
 
-          {/* Card 2: Dynamic Theme Accent Picker Card */}
+          {/* Card 2: Dynamic Theme Accent & Shadow Picker Card */}
           <Card variant={activeTheme} isInteractive className="space-y-4">
             <div className="flex items-center justify-between">
-              <Badge variant="black" shape="pill">Theme Matrix</Badge>
+              <Badge variant="black" shape="pill">Theme & Shadow</Badge>
               <Sparkles className="w-5 h-5 text-black stroke-[2.5]" />
             </div>
             <div className="space-y-1">
-              <h3 className="font-display text-2xl font-black">Swap Palette Accent</h3>
-              <p className="text-xs font-extrabold text-black/70">Click swatches to swap color live</p>
+              <h3 className="font-display text-2xl font-black">Swap Surface & Shadow</h3>
+              <p className="text-xs font-extrabold text-black/70">Pick palette swatches & page shadow theme</p>
             </div>
 
             <div className="bg-white/90 p-4 rounded-2xl border-2 border-black space-y-3">
@@ -210,8 +217,23 @@ export function Home() {
                   />
                 ))}
               </div>
-              <div className="text-center font-mono font-bold text-xs">
-                Active: <span className="uppercase text-purple-700">{activeTheme}</span>
+
+              <div className="pt-1">
+                <Select
+                  value={shadowMode}
+                  onValueChange={handleShadowChange}
+                  options={[
+                    { value: 'ink', label: 'Ink Black Shadow' },
+                    { value: 'yellow', label: 'Pop Yellow Shadow' },
+                    { value: 'orange', label: 'Pop Orange Shadow' },
+                    { value: 'violet', label: 'Pop Violet Shadow' },
+                    { value: 'mint', label: 'Pop Mint Shadow' },
+                    { value: 'pink', label: 'Pop Pink Shadow' },
+                    { value: 'sky', label: 'Pop Sky Shadow' },
+                    { value: 'soft', label: 'Soft Elevated' },
+                    { value: 'none', label: 'Flat (No Shadow)' },
+                  ]}
+                />
               </div>
             </div>
           </Card>

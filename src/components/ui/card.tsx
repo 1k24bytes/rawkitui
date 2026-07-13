@@ -12,24 +12,53 @@ const cardVariants = {
   yellow: 'bg-[#FDE047]',
 }
 
+const shadowColorMap = {
+  ink: 'rk-shadow-ink',
+  yellow: 'rk-shadow-yellow',
+  orange: 'rk-shadow-orange',
+  violet: 'rk-shadow-violet',
+  mint: 'rk-shadow-mint',
+  pink: 'rk-shadow-pink',
+  sky: 'rk-shadow-sky',
+}
+
 export interface CardProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof HTMLMotionProps<'div'>>,
     HTMLMotionProps<'div'> {
   variant?: keyof typeof cardVariants
   hasShadow?: boolean
   isInteractive?: boolean
+  shadowColor?: keyof typeof shadowColorMap
+  shadowStyle?: 'hard' | 'soft' | 'none'
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant = 'white', hasShadow = true, isInteractive = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant = 'white',
+      hasShadow = true,
+      isInteractive = false,
+      shadowColor = 'ink',
+      shadowStyle = 'hard',
+      ...props
+    },
+    ref
+  ) => {
+    const shadowClass =
+      !hasShadow || shadowStyle === 'none'
+        ? 'rk-shadow-none'
+        : shadowStyle === 'soft'
+        ? 'rk-shadow-soft'
+        : shadowColorMap[shadowColor] || 'rk-shadow'
+
     return (
       <motion.div
         ref={ref}
         whileHover={
-          isInteractive
+          isInteractive && shadowStyle !== 'none'
             ? {
                 y: -4,
-                boxShadow: '10px 10px 0 0 #18181b',
               }
             : undefined
         }
@@ -37,7 +66,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         className={cn(
           'rounded-[28px] rk-border p-6 font-sans relative overflow-hidden transition-colors',
           cardVariants[variant],
-          hasShadow && 'rk-shadow',
+          shadowClass,
           className
         )}
         {...props}

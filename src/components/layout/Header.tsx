@@ -17,7 +17,7 @@ export function Header() {
   const isDocs = location.pathname.startsWith('/docs')
 
   return (
-    <header className="sticky top-0 z-40 bg-[#F4F4F0]/90 backdrop-blur-md border-b-3 border-black px-4 lg:px-12 py-3.5 flex items-center justify-between">
+    <header className="sticky top-0 z-40 bg-[#F4F4F0]/90 backdrop-blur-md border-b-3 border-black px-4 lg:px-12 py-3.5 flex items-center justify-between font-sans">
       <div className="flex items-center gap-6">
         <RouterLink to="/" className="flex items-center gap-3 group">
           <div className="w-10 h-10 rounded-2xl bg-[#FDE047] rk-border rk-shadow-sm flex items-center justify-center font-display font-extrabold text-xl group-hover:scale-105 transition-transform">
@@ -53,7 +53,7 @@ export function Header() {
                 : 'text-[#18181B] hover:bg-black/5'
             }`}
           >
-            <BookOpen className="w-3.5 h-3.5" /> Components Docs
+            <BookOpen className="w-3.5 h-3.5 stroke-[2.5]" /> Components Docs
           </RouterLink>
         </nav>
       </div>
@@ -64,12 +64,13 @@ export function Header() {
           size="sm"
           shape="pill"
           onClick={() => window.open('https://github.com', '_blank')}
+          className="hidden sm:inline-flex"
         >
-          <Star className="w-4 h-4 mr-1.5 fill-[#FDE047]" /> Star on GitHub
+          <Star className="w-4 h-4 mr-1.5 fill-[#FDE047] stroke-[2.5]" /> Star
         </Button>
 
         <Button variant="primary" size="sm" shape="pill" onClick={copyCommand}>
-          <Terminal className="w-4 h-4 mr-1.5" /> {copied ? 'Copied!' : 'Registry CLI'}
+          <Terminal className="w-4 h-4 mr-1.5 stroke-[2.5]" /> {copied ? 'Copied!' : 'Registry CLI'}
         </Button>
       </div>
     </header>

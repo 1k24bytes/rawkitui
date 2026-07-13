@@ -54,21 +54,47 @@
   border: 2px solid #18181b;
 }
 
+:root {
+  --rk-shadow-color: #18181b;
+  --rk-shadow-custom: 4px 4px 0 0 var(--rk-shadow-color);
+}
+
+[data-shadow="ink"] { --rk-shadow-color: #18181b; --rk-shadow-custom: 4px 4px 0 0 #18181b; }
+[data-shadow="yellow"] { --rk-shadow-color: #FACC15; --rk-shadow-custom: 4px 4px 0 0 #FACC15; }
+[data-shadow="orange"] { --rk-shadow-color: #FB923C; --rk-shadow-custom: 4px 4px 0 0 #FB923C; }
+[data-shadow="violet"] { --rk-shadow-color: #A78BFA; --rk-shadow-custom: 4px 4px 0 0 #A78BFA; }
+[data-shadow="mint"] { --rk-shadow-color: #4ADE80; --rk-shadow-custom: 4px 4px 0 0 #4ADE80; }
+[data-shadow="pink"] { --rk-shadow-color: #F472B6; --rk-shadow-custom: 4px 4px 0 0 #F472B6; }
+[data-shadow="sky"] { --rk-shadow-color: #38BDF8; --rk-shadow-custom: 4px 4px 0 0 #38BDF8; }
+[data-shadow="soft"] { --rk-shadow-color: #18181b; --rk-shadow-custom: 0 10px 25px -5px rgba(24, 24, 27, 0.15), 3px 3px 0 0 #18181b; }
+[data-shadow="none"] { --rk-shadow-color: transparent; --rk-shadow-custom: none; }
+
 .rk-shadow {
-  box-shadow: 4px 4px 0 0 #18181b;
+  box-shadow: var(--rk-shadow-custom, 4px 4px 0 0 var(--rk-shadow-color));
 }
 
 .rk-shadow-sm {
-  box-shadow: 2.5px 2.5px 0 0 #18181b;
+  box-shadow: 2.5px 2.5px 0 0 var(--rk-shadow-color);
 }
 
 .rk-shadow-lg {
-  box-shadow: 6px 6px 0 0 #18181b;
+  box-shadow: 6px 6px 0 0 var(--rk-shadow-color);
 }
 
 .rk-shadow-xl {
-  box-shadow: 8px 8px 0 0 #18181b;
+  box-shadow: 8px 8px 0 0 var(--rk-shadow-color);
 }
+
+/* Colored Pop & Soft Shadow Options */
+.rk-shadow-ink { box-shadow: 4px 4px 0 0 #18181b; }
+.rk-shadow-yellow { box-shadow: 4px 4px 0 0 #FACC15; }
+.rk-shadow-orange { box-shadow: 4px 4px 0 0 #FB923C; }
+.rk-shadow-violet { box-shadow: 4px 4px 0 0 #A78BFA; }
+.rk-shadow-mint { box-shadow: 4px 4px 0 0 #4ADE80; }
+.rk-shadow-pink { box-shadow: 4px 4px 0 0 #F472B6; }
+.rk-shadow-sky { box-shadow: 4px 4px 0 0 #38BDF8; }
+.rk-shadow-soft { box-shadow: 0 10px 25px -5px rgba(24, 24, 27, 0.15), 3px 3px 0 0 #18181b; }
+.rk-shadow-none { box-shadow: none !important; }
 
 /* Tactile Press Physics */
 .rk-press-btn {

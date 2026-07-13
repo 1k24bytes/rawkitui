@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { COMPONENTS_DATA } from '@/data/componentsData'
 import { 
@@ -13,7 +13,8 @@ import {
   Star,
   CheckCircle2,
   Mail,
-  ArrowRight
+  ArrowRight,
+  Layers
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
@@ -53,7 +54,7 @@ function ExampleBlock({
   }
 
   return (
-    <div className="space-y-3 pt-4 border-t-2 border-black/10 first:border-t-0 first:pt-0">
+    <div className="space-y-3 pt-4 border-t-2 border-black/10 first:border-t-0 first:pt-0 font-sans">
       <div className="space-y-1">
         <h3 className="font-display text-xl font-black text-[#18181B]">{title}</h3>
         {description && (
@@ -114,8 +115,19 @@ export function ComponentDocPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [switchVal, setSwitchVal] = useState(true)
   const [checkboxVal, setCheckboxVal] = useState(true)
+  const [shadowMode, setShadowMode] = useState('ink')
 
   const component = (id && COMPONENTS_DATA[id]) || COMPONENTS_DATA['button']
+
+  useEffect(() => {
+    const currentMode = document.documentElement.getAttribute('data-shadow') || 'ink'
+    setShadowMode(currentMode)
+  }, [id])
+
+  const handleShadowChange = (mode: string) => {
+    setShadowMode(mode)
+    document.documentElement.setAttribute('data-shadow', mode)
+  }
 
   const copyCli = () => {
     navigator.clipboard.writeText(component.cliCommand)
@@ -199,6 +211,18 @@ export function ComponentDocPage() {
       case 'disabled':
         return <Button variant="primary" disabled>Disabled Action</Button>
 
+      case 'shadows':
+        return (
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Button variant="outline" shadowColor="orange">Orange Shadow</Button>
+            <Button variant="outline" shadowColor="violet">Violet Shadow</Button>
+            <Button variant="outline" shadowColor="mint">Mint Shadow</Button>
+            <Button variant="outline" shadowColor="pink">Pink Shadow</Button>
+            <Button variant="primary" shadowStyle="soft">Soft Elevated</Button>
+            <Button variant="secondary" shadowStyle="none">Flat Outline</Button>
+          </div>
+        )
+
       default:
         return <Button>Preview</Button>
     }
@@ -252,6 +276,7 @@ export function ComponentDocPage() {
         return (
           <div className="max-w-xs mx-auto w-full">
             <Select
+              defaultValue="mint"
               options={[
                 { value: 'mint', label: 'Theme: Pastel Mint' },
                 { value: 'peach', label: 'Theme: Soft Peach' },
@@ -388,14 +413,38 @@ export function ComponentDocPage() {
 
   return (
     <div className="max-w-4xl space-y-10 font-sans pb-16">
-      {/* Component Title Header */}
-      <div className="space-y-3 border-b-3 border-black pb-6">
-        <div className="flex items-center gap-3">
-          <Badge variant="yellow" shape="pill">{component.category}</Badge>
-          <span className="text-xs font-mono font-bold text-black/50">@{component.id}</span>
+      {/* Component Title Header with Custom Select Shadow Switcher */}
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b-3 border-black pb-6">
+        <div className="space-y-2">
+          <div className="flex items-center gap-3">
+            <Badge variant="yellow" shape="pill">{component.category}</Badge>
+            <span className="text-xs font-mono font-bold text-black/50">@{component.id}</span>
+          </div>
+          <h1 className="font-display text-4xl sm:text-5xl font-extrabold">{component.name}</h1>
+          <p className="text-base font-extrabold text-black/70 max-w-2xl">{component.description}</p>
         </div>
-        <h1 className="font-display text-4xl sm:text-5xl font-extrabold">{component.name}</h1>
-        <p className="text-base font-extrabold text-black/70 max-w-2xl">{component.description}</p>
+
+        {/* Custom Pop-Brutalist Select Shadow Switcher Control */}
+        <div className="w-full sm:w-60 shrink-0">
+          <label className="text-[11px] font-mono font-black text-[#FB923C] uppercase tracking-wider block mb-1.5 flex items-center gap-1.5">
+            <Layers className="w-3.5 h-3.5 stroke-[2.5]" /> Page Shadow Theme
+          </label>
+          <Select
+            value={shadowMode}
+            onValueChange={handleShadowChange}
+            options={[
+              { value: 'ink', label: 'Ink Black Shadow' },
+              { value: 'yellow', label: 'Pop Yellow Shadow' },
+              { value: 'orange', label: 'Pop Orange Shadow' },
+              { value: 'violet', label: 'Pop Violet Shadow' },
+              { value: 'mint', label: 'Pop Mint Shadow' },
+              { value: 'pink', label: 'Pop Pink Shadow' },
+              { value: 'sky', label: 'Pop Sky Shadow' },
+              { value: 'soft', label: 'Soft Elevated' },
+              { value: 'none', label: 'Flat (No Shadow)' },
+            ]}
+          />
+        </div>
       </div>
 
       {/* CLI Installation Box */}
@@ -415,7 +464,7 @@ export function ComponentDocPage() {
         </div>
       </div>
 
-      {/* Structured Examples Section (Shadcn Style with Pop-Brutalist design) */}
+      {/* Structured Examples Section */}
       {component.examples && component.examples.length > 0 ? (
         <div className="space-y-8">
           <div className="border-b-2 border-black/10 pb-2">
@@ -423,7 +472,7 @@ export function ComponentDocPage() {
               Component Variants & Examples
             </h2>
             <p className="text-xs font-extrabold text-black/60">
-              Interactive live previews and copyable code snippets for every button style.
+              Interactive live previews and copyable code snippets for every component style.
             </p>
           </div>
 
