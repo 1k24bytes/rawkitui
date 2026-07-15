@@ -37,11 +37,13 @@ function ExampleBlock({
   title,
   description,
   codeSnippet,
+  isTallPreview = false,
   children,
 }: {
   title: string
   description?: string
   codeSnippet: string
+  isTallPreview?: boolean
   children: React.ReactNode
 }) {
   const [activeTab, setActiveTab] = useState<'preview' | 'code'>('preview')
@@ -96,7 +98,9 @@ function ExampleBlock({
 
         {/* Content Preview / Code */}
         {activeTab === 'preview' ? (
-          <div className="bg-white p-8 sm:p-10 rounded-[28px] rk-border rk-shadow-md min-h-[140px] flex items-center justify-center overflow-x-auto">
+          <div className={`bg-white p-8 sm:p-10 rounded-[28px] rk-border rk-shadow-md flex items-center justify-center overflow-x-auto relative ${
+            isTallPreview ? 'min-h-[260px] sm:min-h-[300px]' : 'min-h-[140px]'
+          }`}>
             {children}
           </div>
         ) : (
@@ -287,9 +291,9 @@ export function ComponentDocPage() {
         )
       case 'switch':
         return (
-          <div className="bg-white p-4 rounded-2xl rk-border flex items-center justify-between max-w-sm mx-auto">
-            <span className="font-bold text-sm">Automated CLI Sync</span>
-            <Switch checked={switchVal} onCheckedChange={setSwitchVal} />
+          <div className="bg-white p-5 px-6 rounded-2xl rk-border rk-shadow-sm flex items-center justify-between gap-6 max-w-md mx-auto w-full">
+            <span className="font-extrabold text-sm text-[#18181B] truncate">Automated CLI Sync</span>
+            <Switch checked={switchVal} onCheckedChange={setSwitchVal} className="shrink-0" />
           </div>
         )
       case 'radio':
@@ -306,7 +310,7 @@ export function ComponentDocPage() {
         )
       case 'tabs':
         return (
-          <div className="flex justify-center">
+          <div className="flex justify-center w-full py-2">
             <Tabs
               tabs={[
                 { id: 'overview', label: 'Overview', badge: 'NEW' },
@@ -318,7 +322,7 @@ export function ComponentDocPage() {
         )
       case 'tooltip':
         return (
-          <div className="flex justify-center">
+          <div className="flex justify-center w-full py-2">
             <Tooltip content="Pop-Brutalist Tooltip (#FDE047)">
               <Button variant="primary">Hover For Tooltip</Button>
             </Tooltip>
@@ -353,7 +357,7 @@ export function ComponentDocPage() {
         )
       case 'dialog':
         return (
-          <div className="text-center">
+          <div className="text-center w-full">
             <Button variant="primary" onClick={() => setIsDialogOpen(true)}>
               Launch Pop Dialog Modal
             </Button>
@@ -385,7 +389,7 @@ export function ComponentDocPage() {
         )
       case 'checkbox':
         return (
-          <div className="flex justify-center">
+          <div className="bg-white p-5 px-6 rounded-2xl rk-border rk-shadow-sm flex items-center justify-center max-w-md mx-auto w-full">
             <Checkbox
               label="Enable automated updates"
               checked={checkboxVal}
@@ -483,6 +487,7 @@ export function ComponentDocPage() {
                 title={example.title}
                 description={example.description}
                 codeSnippet={example.codeSnippet}
+                isTallPreview={component.id === 'select'}
               >
                 {renderExamplePreview(example.id)}
               </ExampleBlock>
@@ -495,6 +500,7 @@ export function ComponentDocPage() {
           title="Component Preview"
           description={component.description}
           codeSnippet={component.codeSnippet}
+          isTallPreview={component.id === 'select'}
         >
           {renderFallbackLivePreview()}
         </ExampleBlock>

@@ -160,3 +160,26 @@
   background-image: radial-gradient(#18181b 1.5px, transparent 1.5px);
   background-size: 16px 16px;
 }
+
+/* Custom Pop-Brutalist Scrollbar Theme */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f4f4f0;
+  border-left: 2px solid #18181b;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fde047;
+  border: 2px solid #18181b;
+  border-radius: 9999px;
+  box-shadow: 1px 1px 0 0 #18181b;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #fb923c;
+}
