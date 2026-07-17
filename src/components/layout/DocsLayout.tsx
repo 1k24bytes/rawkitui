@@ -39,16 +39,16 @@ export function DocsLayout() {
               Overview
             </div>
             <NavLink
-              to="/docs/quickstart"
+              to="/components/quickstart"
               className={({ isActive }) =>
                 `flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
                   isActive
-                    ? 'bg-[#FDE047] text-[#18181B] rk-border-sm rk-shadow-sm font-extrabold'
+                    ? 'bg-[#FB923C] text-[#18181B] rk-border-sm rk-shadow-sm font-black -translate-x-0.5'
                     : 'text-[#18181B]/80 hover:bg-[#F4F4F0]'
                 }`
               }
             >
-              <Terminal className="w-4 h-4" /> Quickstart & CLI
+              <Terminal className="w-4 h-4 stroke-[2.5]" /> Quickstart & CLI
             </NavLink>
           </div>
 
@@ -67,17 +67,29 @@ export function DocsLayout() {
                   {comps.map((comp) => (
                     <NavLink
                       key={comp.id}
-                      to={`/docs/${comp.id}`}
+                      to={`/components/${comp.id}`}
                       className={({ isActive }) =>
                         `flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition-all ${
                           isActive
-                            ? 'bg-[#18181B] text-[#FDE047] rk-border-sm rk-shadow-sm font-extrabold -translate-x-0.5'
+                            ? 'bg-[#FDE047] text-[#18181B] rk-border-sm rk-shadow-sm font-black -translate-x-0.5'
                             : 'text-[#18181B]/80 hover:bg-[#F4F4F0] hover:text-[#18181B]'
                         }`
                       }
                     >
-                      <span>{comp.name}</span>
-                      <span className="text-[10px] font-mono opacity-50">@{comp.id}</span>
+                      {({ isActive }) => (
+                        <>
+                          <span className="font-extrabold">{comp.name}</span>
+                          <span
+                            className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded-md transition-colors ${
+                              isActive
+                                ? 'bg-[#18181B] text-[#FDE047]'
+                                : 'text-black/50 bg-black/5'
+                            }`}
+                          >
+                            @{comp.id}
+                          </span>
+                        </>
+                      )}
                     </NavLink>
                   ))}
                 </div>

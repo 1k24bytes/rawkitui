@@ -103,7 +103,7 @@ export default function App() {
       </div>
 
       <div className="pt-4 flex items-center justify-between">
-        <Link to="/docs/button">
+        <Link to="/components/button">
           <Button variant="primary" size="lg">
             Explore All Components <ArrowRight className="w-5 h-5 ml-2" />
           </Button>

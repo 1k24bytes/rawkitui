@@ -103,7 +103,7 @@ export function Home() {
 
           {/* Hero Action Buttons */}
           <div className="flex flex-wrap items-center justify-center gap-5 pt-2">
-            <Link to="/docs/button">
+            <Link to="/components/button">
               <Button 
                 variant="primary" 
                 size="lg" 
@@ -113,7 +113,7 @@ export function Home() {
                 <BookOpen className="w-5 h-5 mr-2 stroke-[2.5]" /> Component Library
               </Button>
             </Link>
-            <Link to="/docs/quickstart">
+            <Link to="/components/quickstart">
               <Button 
                 variant="black" 
                 size="lg" 
@@ -278,7 +278,7 @@ export function Home() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Link to="/docs/button" className="group">
+          <Link to="/components/button" className="group">
             <Card isInteractive className="bg-white space-y-4 h-full flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="w-12 h-12 rounded-2xl bg-[#FDE047] border-2 border-black flex items-center justify-center font-bold shadow-[3px_3px_0_0_#18181b]">
@@ -295,7 +295,7 @@ export function Home() {
             </Card>
           </Link>
 
-          <Link to="/docs/input" className="group">
+          <Link to="/components/input" className="group">
             <Card isInteractive variant="peach" className="space-y-4 h-full flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="w-12 h-12 rounded-2xl bg-white border-2 border-black flex items-center justify-center font-bold shadow-[3px_3px_0_0_#18181b]">
@@ -312,7 +312,7 @@ export function Home() {
             </Card>
           </Link>
 
-          <Link to="/docs/dialog" className="group">
+          <Link to="/components/dialog" className="group">
             <Card isInteractive variant="lavender" className="space-y-4 h-full flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="w-12 h-12 rounded-2xl bg-white border-2 border-black flex items-center justify-center font-bold shadow-[3px_3px_0_0_#18181b]">
@@ -329,7 +329,7 @@ export function Home() {
             </Card>
           </Link>
 
-          <Link to="/docs/floating-nav" className="group">
+          <Link to="/components/floating-nav" className="group">
             <Card isInteractive variant="mint" className="space-y-4 h-full flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="w-12 h-12 rounded-2xl bg-white border-2 border-black flex items-center justify-center font-bold shadow-[3px_3px_0_0_#18181b]">
@@ -402,10 +402,10 @@ export function Home() {
           </div>
 
           <div className="flex items-center gap-4">
-            <Link to="/docs/quickstart">
+            <Link to="/components/quickstart">
               <Button variant="outline" size="sm" shape="pill" className="text-xs">Quickstart</Button>
             </Link>
-            <Link to="/docs/button">
+            <Link to="/components/button">
               <Button variant="primary" size="sm" shape="pill" className="text-xs">Components</Button>
             </Link>
           </div>

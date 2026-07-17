@@ -14,7 +14,7 @@ export function Header() {
     setTimeout(() => setCopied(false), 2000)
   }
 
-  const isDocs = location.pathname.startsWith('/docs')
+  const isDocs = location.pathname.startsWith('/components')
 
   return (
     <header className="sticky top-0 z-40 bg-[#F4F4F0]/90 backdrop-blur-md border-b-3 border-black px-4 lg:px-12 py-3.5 flex items-center justify-between font-sans">
@@ -46,7 +46,7 @@ export function Header() {
             Home
           </RouterLink>
           <RouterLink
-            to="/docs/button"
+            to="/components/button"
             className={`px-4 py-1.5 rounded-full font-display font-bold text-xs tracking-wide transition-all flex items-center gap-1.5 ${
               isDocs
                 ? 'bg-[#18181B] text-[#FDE047] rk-border-sm rk-shadow-sm'
