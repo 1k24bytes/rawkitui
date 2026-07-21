@@ -22,7 +22,6 @@ const badgeVariants = cva(
       shape: {
         pill: 'rounded-full px-3 py-1',
         square: 'rounded-lg px-2.5 py-1',
-        scalloped: '!w-12 !h-12 rounded-full !p-0 shrink-0 aspect-square flex items-center justify-center text-center rk-scalloped text-xs font-black rk-shadow-sm leading-none',
       },
     },
     defaultVariants: {
@@ -40,7 +39,7 @@ export interface BadgeProps
 function Badge({ className, variant, shape, ...props }: BadgeProps) {
   return (
     <motion.div
-      whileHover={{ scale: 1.05, rotate: shape === 'scalloped' ? 8 : 0 }}
+      whileHover={{ scale: 1.05 }}
       transition={{ type: 'spring', stiffness: 500, damping: 20 }}
       className={cn(badgeVariants({ variant, shape }), className)}
       {...props}

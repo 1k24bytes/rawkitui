@@ -175,9 +175,9 @@ export default function CardDemo() {
   },
   badge: {
     id: 'badge',
-    name: 'Badge & Starburst',
+    name: 'Badge',
     category: 'Primitives',
-    description: 'Capsule tags, hexagon tags, and signature wave scalloped starburst badges for highlights.',
+    description: 'Capsule pill tags and square tags for labels, statuses, and highlights.',
     cliCommand: 'npx shadcn add @rawkitui/badge',
     codeSnippet: `import { Badge } from "@/components/ui/badge"
 
@@ -186,17 +186,13 @@ export default function BadgeDemo() {
     <div className="flex items-center gap-4">
       <Badge variant="yellow" shape="pill">Pill Tag</Badge>
       <Badge variant="violet" shape="pill">Violet Tag</Badge>
-      
-      {/* Scalloped Starburst Badge */}
-      <div className="rk-scalloped bg-[#FDE047] w-14 h-14 border-2 border-black flex items-center justify-center text-xs font-black rk-shadow-sm">
-        56%
-      </div>
+      <Badge variant="black" shape="square">Square</Badge>
     </div>
   )
 }`,
     props: [
       { name: 'variant', type: "'yellow' | 'orange' | 'violet' | 'mint' | 'peach' | 'sky' | 'pink' | 'lavender' | 'black' | 'white'", default: "'yellow'", description: 'Fill color token' },
-      { name: 'shape', type: "'pill' | 'square' | 'scalloped'", default: "'pill'", description: 'Shape geometry including scalloped starburst clip-path' },
+      { name: 'shape', type: "'pill' | 'square'", default: "'pill'", description: 'Shape geometry — pill capsule or rounded square' },
     ],
   },
   input: {

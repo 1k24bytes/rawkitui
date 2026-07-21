@@ -256,11 +256,13 @@ export function ComponentDocPage() {
         )
       case 'badge':
         return (
-          <div className="flex flex-wrap items-center justify-center gap-6">
-            <Badge variant="yellow" shape="pill">Yellow Tag</Badge>
-            <Badge variant="mint" shape="pill">Mint Tag</Badge>
-            <Badge variant="violet" shape="pill">Violet Tag</Badge>
-            <Badge variant="yellow" shape="scalloped">56%</Badge>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Badge variant="yellow" shape="pill">Yellow Pill</Badge>
+            <Badge variant="mint" shape="pill">Mint Pill</Badge>
+            <Badge variant="violet" shape="pill">Violet Pill</Badge>
+            <Badge variant="orange" shape="square">Orange Square</Badge>
+            <Badge variant="black" shape="square">Black Square</Badge>
+            <Badge variant="pink" shape="square">Pink Square</Badge>
           </div>
         )
       case 'input':

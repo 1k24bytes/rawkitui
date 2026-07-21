@@ -223,8 +223,8 @@ export function Home() {
             <Card variant="mint" isInteractive className="space-y-3 h-full">
               <div className="flex items-center justify-between">
                 <Badge variant="white" shape="pill" className="border-2 border-black font-bold text-[11px]">Recharts Card</Badge>
-                <Badge variant="yellow" shape="scalloped" className="text-[11px]">
-                  +56%
+                <Badge variant="yellow" shape="pill" className="text-[11px] font-black border-2 border-black">
+                  <ArrowRight className="w-3 h-3 mr-1 -rotate-45 stroke-[3]" /> +56%
                 </Badge>
               </div>
               <div className="space-y-0.5">
@@ -441,7 +441,7 @@ export function Home() {
               bg: '#BBF7D0',
               title: 'Hyper-Rounded Shapes',
               titleColor: '#BBF7D0',
-              desc: '28px superellipse corners, capsule controls, and scalloped starburst badges.',
+              desc: '28px superellipse corners, capsule pill controls, and hyper-rounded card surfaces.',
             },
             {
               num: 3,
