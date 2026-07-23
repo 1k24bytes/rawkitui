@@ -68,18 +68,22 @@ export function Home() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="bg-[#18181B] text-[#FDE047] py-2 px-4 rounded-full border-3 border-black shadow-[4px_4px_0_0_#18181b] overflow-hidden whitespace-nowrap font-mono text-[11px] font-black tracking-widest uppercase flex items-center justify-between"
+        className="bg-[#18181B] text-[#FDE047] py-2 rounded-full border-3 border-black shadow-[4px_4px_0_0_#18181b] overflow-hidden font-mono text-[11px] font-black tracking-widest uppercase"
       >
-        <div className="flex items-center gap-5 animate-pulse">
-          <span>✦ POP-BRUTALISM UI</span>
-          <span className="hidden sm:inline">✦ 16 PRIMITIVES</span>
-          <span className="hidden md:inline">✦ TAILWIND V4</span>
-          <span className="hidden lg:inline">✦ RECHARTS</span>
-          <span className="hidden lg:inline">✦ FRAMER MOTION</span>
+        <div className="flex animate-[marquee_20s_linear_infinite] whitespace-nowrap">
+          {[0, 1].map((i) => (
+            <div key={i} className="flex items-center gap-8 shrink-0 px-4">
+              <span>✦ POP-BRUTALISM UI</span>
+              <span>✦ 16 PRIMITIVES</span>
+              <span>✦ TAILWIND V4</span>
+              <span>✦ RECHARTS</span>
+              <span>✦ FRAMER MOTION</span>
+              <span>✦ ZERO-BLUR SHADOWS</span>
+              <span>✦ SPRING PHYSICS</span>
+              <span>✦ LUCIDE ICONS</span>
+            </div>
+          ))}
         </div>
-        <Badge variant="yellow" shape="pill" className="hidden sm:inline-flex text-[10px]">
-          v1.0
-        </Badge>
       </motion.div>
 
       {/* ═══════════════════════════════════════════════ */}
@@ -120,7 +124,7 @@ export function Home() {
               <br />
               UI's With
               <br />
-              <span className="text-[#FB923C]">Raw Energy</span>
+              <span className="text-[#EC4899]">Raw Energy</span>
             </motion.h1>
 
             {/* Subtitle — concise, benefit-driven */}
@@ -432,23 +436,23 @@ export function Home() {
             {
               num: 1,
               bg: '#FDE047',
-              title: 'Zero-Blur Shadows',
+              title: 'Shadows That Respond',
               titleColor: '#FDE047',
-              desc: 'Solid 4–6px drop shadows as physical interactive feedback, not decoration.',
+              desc: 'Every shadow is a signal. Press a button and watch it sink. Hover a card and see it lift. No blur, no glow — just raw, physical depth.',
             },
             {
               num: 2,
               bg: '#BBF7D0',
-              title: 'Hyper-Rounded Shapes',
+              title: 'Soft Edges, Sharp Identity',
               titleColor: '#BBF7D0',
-              desc: '28px superellipse corners, capsule pill controls, and hyper-rounded card surfaces.',
+              desc: 'Generous rounded corners and capsule-shaped controls give your interface a friendly, toy-like confidence that users want to touch.',
             },
             {
               num: 3,
               bg: '#E9D5FF',
-              title: 'Motion & Recharts',
+              title: 'Alive Out of the Box',
               titleColor: '#E9D5FF',
-              desc: 'Framer Motion spring physics and interactive data charts out of the box.',
+              desc: 'Spring-loaded animations and interactive charts come built in. Every component feels responsive from the first render — no config needed.',
             },
           ].map((p) => (
             <div key={p.num} className="bg-white/10 p-5 rounded-2xl border-2 border-white/15 space-y-2">
@@ -470,8 +474,8 @@ export function Home() {
       <footer className="border-4 border-black bg-white rounded-[28px] p-6 shadow-[6px_6px_0_0_#18181b]">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-[#FDE047] text-black border-2 border-black font-display font-extrabold text-lg flex items-center justify-center shadow-[2px_2px_0_0_#18181b]">
-              R
+            <div className="w-9 h-9 rounded-lg overflow-hidden border-2 border-black shadow-[2px_2px_0_0_#18181b]">
+              <img src="/logo.png" alt="RawkitUI" className="w-full h-full object-cover" />
             </div>
             <div>
               <span className="font-display font-black text-lg tracking-tight">RAWKIT<span className="text-[#FB923C]">UI</span></span>

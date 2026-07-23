@@ -20,12 +20,12 @@ export function Header() {
     <header className="sticky top-0 z-40 bg-[#F4F4F0]/90 backdrop-blur-md border-b-3 border-black px-4 lg:px-12 py-3.5 flex items-center justify-between font-sans">
       <div className="flex items-center gap-6">
         <RouterLink to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-2xl bg-[#FDE047] rk-border rk-shadow-sm flex items-center justify-center font-display font-extrabold text-xl group-hover:scale-105 transition-transform">
-            R
+          <div className="w-10 h-10 rounded-xl overflow-hidden border-2 border-black shadow-[2px_2px_0_0_#18181b] group-hover:scale-105 transition-transform">
+            <img src="/logo.png" alt="RawkitUI" className="w-full h-full object-cover" />
           </div>
           <div>
             <span className="font-display font-black text-xl tracking-tight">
-              RAWKIT<span className="text-[#FB923C]">UI</span>
+              RAWKIT<span className="text-[#EC4899]">UI</span>
             </span>
             <Badge variant="yellow" shape="pill" className="ml-2.5 text-[10px] py-0.5">
               v1.0
