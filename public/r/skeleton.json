@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "type": "registry:ui",
+  "title": "Skeleton",
+  "description": "Motion-aware loading placeholder for text, avatars, and content blocks.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "content": "import * as React from 'react'\nimport { cn } from '@/lib/utils'\n\nexport interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {\n  variant?: 'text' | 'circle' | 'rect'\n}\n\nexport const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(({ className, variant = 'rect', ...props }, ref) => (\n  <div ref={ref} aria-hidden=\"true\" className={cn('animate-pulse bg-[#E5E7EB] rk-border-sm', variant === 'text' && 'h-4 rounded-full', variant === 'circle' && 'aspect-square rounded-full', variant === 'rect' && 'rounded-2xl', className)} {...props} />\n))\nSkeleton.displayName = 'Skeleton'\n",
+      "type": "registry:ui"
+    }
+  ]
+}

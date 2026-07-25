@@ -32,6 +32,20 @@ import { FloatingNav } from '@/components/ui/floating-nav'
 import { Dialog } from '@/components/ui/dialog'
 import { Alert } from '@/components/ui/alert'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Accordion } from '@/components/ui/accordion'
+import { Avatar } from '@/components/ui/avatar'
+import { Breadcrumb } from '@/components/ui/breadcrumb'
+import { Calendar } from '@/components/ui/calendar'
+import { Command } from '@/components/ui/command'
+import { DropdownMenu } from '@/components/ui/dropdown-menu'
+import { EmptyState } from '@/components/ui/empty-state'
+import { Pagination } from '@/components/ui/pagination'
+import { Progress } from '@/components/ui/progress'
+import { Skeleton } from '@/components/ui/skeleton'
+import { ToastProvider, useToast } from '@/components/ui/sonner'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { Slider } from '@/components/ui/slider'
+import { ToggleGroup } from '@/components/ui/toggle-group'
 
 function ExampleBlock({
   title,
@@ -110,6 +124,16 @@ function ExampleBlock({
         )}
       </div>
     </div>
+  )
+}
+
+function ToastPreview() {
+  const { toast } = useToast()
+
+  return (
+    <Button variant="primary" onClick={() => toast({ title: 'Theme saved', description: 'Your RawkitUI theme is ready to use.', variant: 'success' })}>
+      Show success toast
+    </Button>
   )
 }
 
@@ -411,7 +435,63 @@ export function ComponentDocPage() {
               ]}
             />
           </div>
+          )
+      case 'accordion':
+        return (
+          <div className="w-full max-w-xl">
+            <Accordion items={[
+              { id: 'tokens', title: 'Why the thick borders?', content: 'RawkitUI uses strong ink outlines to keep structure visible across every surface.' },
+              { id: 'motion', title: 'How does press physics work?', content: 'Controls lift on hover and depress on press with a short mechanical transition.' },
+            ]} />
+          </div>
         )
+      case 'avatar':
+        return (
+          <div className="flex items-end gap-5">
+            <Avatar alt="Ada Lovelace" fallback="AL" size="sm" status="online" />
+            <Avatar alt="Grace Hopper" fallback="GH" size="md" status="busy" />
+            <Avatar alt="Katherine Johnson" fallback="KJ" size="lg" status="offline" />
+          </div>
+        )
+      case 'breadcrumb':
+        return <Breadcrumb items={[{ label: 'Docs', href: '#' }, { label: 'Navigation', href: '#' }, { label: 'Breadcrumb', current: true }]} />
+      case 'calendar':
+        return <Calendar defaultValue={new Date()} />
+      case 'command':
+        return (
+          <Command items={[
+            { value: 'button', label: 'Add Button', group: 'Components', icon: <Layers className="h-4 w-4" /> },
+            { value: 'card', label: 'Add Card', group: 'Components', icon: <Layers className="h-4 w-4" /> },
+            { value: 'quickstart', label: 'Open Quickstart', group: 'Navigation', icon: <Terminal className="h-4 w-4" /> },
+          ]} />
+        )
+      case 'dropdown-menu':
+        return <DropdownMenu items={[{ label: 'Edit component', shortcut: 'E', onSelect: () => {} }, { separator: true, label: '' }, { label: 'Duplicate', onSelect: () => {} }, { label: 'Delete', onSelect: () => {} }]} />
+      case 'empty-state':
+        return <div className="w-full max-w-lg"><EmptyState variant="sky" title="No saved themes" description="Create a theme to make it appear here." action={<Button variant="primary" size="sm">Create theme</Button>} /></div>
+      case 'pagination':
+        return <Pagination currentPage={3} totalPages={8} onPageChange={() => {}} />
+      case 'progress':
+        return <div className="w-full max-w-lg"><Progress value={72} label="Upload progress" showValue variant="orange" /></div>
+      case 'skeleton':
+        return <div className="flex w-full max-w-md items-center gap-3"><Skeleton variant="circle" className="h-12 w-12" /><div className="flex-1 space-y-2"><Skeleton variant="text" className="w-2/3" /><Skeleton variant="text" className="w-full" /></div></div>
+      case 'sonner':
+        return (
+          <ToastProvider duration={0}>
+            <ToastPreview />
+          </ToastProvider>
+        )
+      case 'table':
+        return (
+          <Table>
+            <TableHeader><TableRow><TableHead>Component</TableHead><TableHead>Status</TableHead><TableHead>Added</TableHead></TableRow></TableHeader>
+            <TableBody><TableRow><TableCell className="font-black">Button</TableCell><TableCell>Stable</TableCell><TableCell>Today</TableCell></TableRow><TableRow><TableCell className="font-black">Calendar</TableCell><TableCell>New</TableCell><TableCell>Today</TableCell></TableRow></TableBody>
+          </Table>
+        )
+      case 'slider':
+        return <div className="w-full max-w-md"><Slider label="Motion intensity" defaultValue={64} showValue /></div>
+      case 'toggle-group':
+        return <ToggleGroup variant="outline" defaultValue="grid" items={[{ value: 'grid', label: 'Grid' }, { value: 'list', label: 'List' }, { value: 'compact', label: 'Compact' }]} />
       default:
         return <Button>Default Preview</Button>
     }

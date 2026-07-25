@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "slider",
+  "type": "registry:ui",
+  "title": "Slider",
+  "description": "Native accessible range control with RawkitUI label and value treatment.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "content": "import * as React from 'react'\nimport { cn } from '@/lib/utils'\n\nexport interface SliderProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'defaultValue' | 'onChange' | 'type'> {\n  value?: number\n  defaultValue?: number\n  onValueChange?: (value: number) => void\n  label?: string\n  showValue?: boolean\n}\n\nexport const Slider = React.forwardRef<HTMLInputElement, SliderProps>(({ value: controlledValue, defaultValue = 0, onValueChange, label, showValue = false, min = 0, max = 100, step = 1, className, ...props }, ref) => {\n  const [internalValue, setInternalValue] = React.useState(defaultValue)\n  const currentValue = controlledValue ?? internalValue\n  return (\n    <label className=\"block w-full space-y-2 font-sans\">\n      {(label || showValue) && <span className=\"flex items-center justify-between gap-3 text-xs font-black\"><span>{label}</span>{showValue && <span className=\"font-mono\">{currentValue}</span>}</span>}\n      <input\n        ref={ref}\n        type=\"range\"\n        min={min}\n        max={max}\n        step={step}\n        value={currentValue}\n        onChange={(event) => { const nextValue = Number(event.target.value); setInternalValue(nextValue); onValueChange?.(nextValue) }}\n        className={cn('h-6 w-full cursor-pointer accent-[#FB923C] focus:outline-none focus:ring-4 focus:ring-black focus:ring-offset-2', className)}\n        {...props}\n      />\n    </label>\n  )\n})\nSlider.displayName = 'Slider'\n",
+      "type": "registry:ui"
+    }
+  ]
+}

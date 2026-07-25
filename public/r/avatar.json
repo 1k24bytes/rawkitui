@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "type": "registry:ui",
+  "title": "Avatar",
+  "description": "Rounded profile image with resilient initials fallback and status dot.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/ui/avatar.tsx",
+      "content": "import * as React from 'react'\nimport { cn } from '@/lib/utils'\n\nexport interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {\n  src?: string\n  alt?: string\n  fallback?: React.ReactNode\n  size?: 'sm' | 'md' | 'lg' | 'xl'\n  status?: 'online' | 'busy' | 'offline'\n}\n\nconst sizeClasses = {\n  sm: 'h-8 w-8 text-xs',\n  md: 'h-10 w-10 text-sm',\n  lg: 'h-14 w-14 text-lg',\n  xl: 'h-20 w-20 text-2xl',\n}\n\nconst statusClasses = {\n  online: 'bg-[#4ADE80]',\n  busy: 'bg-[#F87171]',\n  offline: 'bg-[#9CA3AF]',\n}\n\nexport const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(\n  ({ src, alt = '', fallback, size = 'md', status, className, ...props }, ref) => {\n    const [hasError, setHasError] = React.useState(false)\n\n    return (\n      <div ref={ref} className={cn('relative inline-flex shrink-0', className)} {...props}>\n        <div className={cn('flex items-center justify-center overflow-hidden rounded-full bg-[#E9D5FF] font-display font-black text-[#18181B] rk-border rk-shadow-sm', sizeClasses[size])}>\n          {src && !hasError ? (\n            <img src={src} alt={alt} onError={() => setHasError(true)} className=\"h-full w-full object-cover\" />\n          ) : (\n            <span aria-hidden={Boolean(alt)}>{fallback ?? alt.slice(0, 2).toUpperCase()}</span>\n          )}\n        </div>\n        {status && (\n          <span\n            aria-label={status}\n            className={cn('absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-[#18181B]', statusClasses[status])}\n          />\n        )}\n      </div>\n    )\n  }\n)\nAvatar.displayName = 'Avatar'\n",
+      "type": "registry:ui"
+    }
+  ]
+}

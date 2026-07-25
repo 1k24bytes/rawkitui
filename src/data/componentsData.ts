@@ -24,6 +24,192 @@ export interface ComponentData {
 }
 
 export const COMPONENTS_DATA: Record<string, ComponentData> = {
+  accordion: {
+    id: 'accordion', name: 'Accordion', category: 'Navigation',
+    description: 'Accessible collapsible content sections with tactile pastel headers and single or multiple open modes.',
+    cliCommand: 'npx shadcn add @rawkitui/accordion',
+    codeSnippet: `import { Accordion } from "@/components/ui/accordion"
+
+<Accordion items={[{ id: "faq", title: "What is RawkitUI?", content: "A playful component library." }]} />`,
+    props: [
+      { name: 'items', type: 'Array<AccordionItem>', default: '[]', description: 'Sections with id, title, content, and optional disabled state' },
+      { name: 'type', type: "'single' | 'multiple'", default: "'single'", description: 'Allows one or several sections to remain open' },
+      { name: 'collapsible', type: 'boolean', default: 'true', description: 'Allows the active single section to close' },
+    ],
+  },
+  avatar: {
+    id: 'avatar', name: 'Avatar', category: 'Primitives',
+    description: 'Rounded profile image with resilient initials fallback and optional presence status.',
+    cliCommand: 'npx shadcn add @rawkitui/avatar',
+    codeSnippet: `import { Avatar } from "@/components/ui/avatar"
+
+<Avatar alt="Ada Lovelace" fallback="AL" status="online" />`,
+    props: [
+      { name: 'src', type: 'string', default: 'undefined', description: 'Image source URL' },
+      { name: 'fallback', type: 'ReactNode', default: 'alt initials', description: 'Content shown when no image is available' },
+      { name: 'size', type: "'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Avatar diameter and type scale' },
+      { name: 'status', type: "'online' | 'busy' | 'offline'", default: 'undefined', description: 'Optional accessible presence indicator' },
+    ],
+  },
+  breadcrumb: {
+    id: 'breadcrumb', name: 'Breadcrumb', category: 'Navigation',
+    description: 'Responsive semantic breadcrumb trail with optional collapsed items for deep navigation.',
+    cliCommand: 'npx shadcn add @rawkitui/breadcrumb',
+    codeSnippet: `import { Breadcrumb } from "@/components/ui/breadcrumb"
+
+<Breadcrumb items={[{ label: "Docs", href: "/docs" }, { label: "Button", current: true }]} />`,
+    props: [
+      { name: 'items', type: 'Array<BreadcrumbItem>', default: '[]', description: 'Labels, optional links, and current page state' },
+      { name: 'maxItems', type: 'number', default: 'undefined', description: 'Collapses the middle of long trails' },
+    ],
+  },
+  calendar: {
+    id: 'calendar', name: 'Calendar', category: 'Form Controls',
+    description: 'Keyboard-friendly month calendar with selection, navigation, and date constraints.',
+    cliCommand: 'npx shadcn add @rawkitui/calendar',
+    codeSnippet: `import { Calendar } from "@/components/ui/calendar"
+
+<Calendar onValueChange={(date) => console.log(date)} />`,
+    props: [
+      { name: 'value', type: 'Date', default: 'undefined', description: 'Controlled selected date' },
+      { name: 'onValueChange', type: '(date?: Date) => void', default: 'undefined', description: 'Called when a day is selected or cleared' },
+      { name: 'minDate / maxDate', type: 'Date', default: 'undefined', description: 'Optional date boundaries' },
+      { name: 'disabled', type: '(date: Date) => boolean', default: 'undefined', description: 'Predicate for unavailable days' },
+    ],
+  },
+  command: {
+    id: 'command', name: 'Command', category: 'Navigation',
+    description: 'Searchable command list with grouped results, keyboard navigation, and selection state.',
+    cliCommand: 'npx shadcn add @rawkitui/command',
+    codeSnippet: `import { Command } from "@/components/ui/command"
+
+<Command items={[{ value: "button", label: "Add Button", group: "Components" }]} />`,
+    props: [
+      { name: 'items', type: 'Array<CommandItem>', default: '[]', description: 'Searchable commands with labels, groups, icons, and keywords' },
+      { name: 'onSelect', type: '(item: CommandItem) => void', default: 'undefined', description: 'Called after a command is selected' },
+      { name: 'placeholder', type: 'string', default: "'Search commands...'", description: 'Search input placeholder' },
+    ],
+  },
+  'dropdown-menu': {
+    id: 'dropdown-menu', name: 'Dropdown Menu', category: 'Navigation',
+    description: 'Compact action menu with separators, shortcuts, and keyboard controls.',
+    cliCommand: 'npx shadcn add @rawkitui/dropdown-menu',
+    codeSnippet: `import { DropdownMenu } from "@/components/ui/dropdown-menu"
+
+<DropdownMenu items={[{ label: "Edit", onSelect: () => {} }]} />`,
+    props: [
+      { name: 'items', type: 'Array<DropdownMenuItem>', default: '[]', description: 'Menu actions, separators, icons, shortcuts, and disabled states' },
+      { name: 'trigger', type: 'ReactNode', default: 'Menu', description: 'Custom trigger content' },
+      { name: 'align', type: "'start' | 'end'", default: "'start'", description: 'Menu edge alignment' },
+    ],
+  },
+  'empty-state': {
+    id: 'empty-state', name: 'Empty State', category: 'Feedback & Data',
+    description: 'Friendly, action-ready placeholder for empty lists and first-run screens.',
+    cliCommand: 'npx shadcn add @rawkitui/empty-state',
+    codeSnippet: `import { EmptyState } from "@/components/ui/empty-state"
+
+<EmptyState title="No projects yet" description="Create your first project to get started." />`,
+    props: [
+      { name: 'title', type: 'ReactNode', default: 'required', description: 'Primary empty state message' },
+      { name: 'description', type: 'ReactNode', default: 'undefined', description: 'Supporting context' },
+      { name: 'action', type: 'ReactNode', default: 'undefined', description: 'Optional call to action' },
+      { name: 'variant', type: "'white' | 'mint' | 'peach' | 'lavender' | 'sky'", default: "'white'", description: 'Pastel surface variant' },
+    ],
+  },
+  pagination: {
+    id: 'pagination', name: 'Pagination', category: 'Navigation',
+    description: 'Responsive page navigation with ellipsis compression and disabled edge controls.',
+    cliCommand: 'npx shadcn add @rawkitui/pagination',
+    codeSnippet: `import { Pagination } from "@/components/ui/pagination"
+
+<Pagination currentPage={2} totalPages={8} onPageChange={setPage} />`,
+    props: [
+      { name: 'currentPage', type: 'number', default: 'required', description: 'One-indexed current page' },
+      { name: 'totalPages', type: 'number', default: 'required', description: 'Total number of pages' },
+      { name: 'onPageChange', type: '(page: number) => void', default: 'required', description: 'Page selection callback' },
+      { name: 'siblingCount', type: 'number', default: '1', description: 'Number of pages shown around the current page' },
+    ],
+  },
+  progress: {
+    id: 'progress', name: 'Progress', category: 'Feedback & Data',
+    description: 'Accessible capsule progress bar with labeled percentage states and pop color variants.',
+    cliCommand: 'npx shadcn add @rawkitui/progress',
+    codeSnippet: `import { Progress } from "@/components/ui/progress"
+
+<Progress value={72} label="Upload progress" showValue />`,
+    props: [
+      { name: 'value', type: 'number', default: '0', description: 'Current progress amount' },
+      { name: 'max', type: 'number', default: '100', description: 'Maximum progress amount' },
+      { name: 'label', type: 'string', default: 'undefined', description: 'Accessible and visible label' },
+      { name: 'variant', type: "'yellow' | 'orange' | 'mint' | 'violet' | 'pink' | 'sky'", default: "'yellow'", description: 'Fill color token' },
+    ],
+  },
+  skeleton: {
+    id: 'skeleton', name: 'Skeleton', category: 'Feedback & Data',
+    description: 'Motion-aware loading placeholder for text, avatars, and content blocks.',
+    cliCommand: 'npx shadcn add @rawkitui/skeleton',
+    codeSnippet: `import { Skeleton } from "@/components/ui/skeleton"
+
+<Skeleton variant="text" className="w-48" />`,
+    props: [
+      { name: 'variant', type: "'text' | 'circle' | 'rect'", default: "'rect'", description: 'Shape preset for common loading layouts' },
+      { name: 'className', type: 'string', default: 'undefined', description: 'Tailwind sizing and layout overrides' },
+    ],
+  },
+  sonner: {
+    id: 'sonner', name: 'Toast', category: 'Feedback & Data',
+    description: 'Provider-based tactile notifications with status semantics, auto-dismiss, and manual dismissal.',
+    cliCommand: 'npx shadcn add @rawkitui/sonner',
+    codeSnippet: `import { ToastProvider, useToast } from "@/components/ui/sonner"
+
+const { toast } = useToast()
+toast({ title: "Saved", variant: "success" })`,
+    props: [
+      { name: 'ToastProvider', type: 'component', default: 'required', description: 'Provides the toast API and live region' },
+      { name: 'duration', type: 'number', default: '4000', description: 'Auto-dismiss delay in milliseconds; 0 disables it' },
+      { name: 'toast', type: '(options: ToastOptions) => string', default: 'provided by hook', description: 'Creates a notification and returns its id' },
+    ],
+  },
+  table: {
+    id: 'table', name: 'Table', category: 'Feedback & Data',
+    description: 'Composable responsive data table primitives with readable row states and horizontal overflow.',
+    cliCommand: 'npx shadcn add @rawkitui/table',
+    codeSnippet: `import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+
+<Table><TableHeader><TableRow><TableHead>Name</TableHead></TableRow></TableHeader></Table>`,
+    props: [
+      { name: 'Table', type: 'HTMLTableElement props', default: 'undefined', description: 'Responsive table wrapper and table element' },
+      { name: 'TableHeader / TableBody / TableFooter', type: 'HTML section props', default: 'undefined', description: 'Semantic table sections' },
+      { name: 'TableRow / TableHead / TableCell', type: 'HTML row and cell props', default: 'undefined', description: 'Composable row and cell primitives' },
+    ],
+  },
+  slider: {
+    id: 'slider', name: 'Slider', category: 'Form Controls',
+    description: 'Native accessible range control with RawkitUI label, focus ring, and value treatment.',
+    cliCommand: 'npx shadcn add @rawkitui/slider',
+    codeSnippet: `import { Slider } from "@/components/ui/slider"
+
+<Slider label="Volume" defaultValue={60} showValue />`,
+    props: [
+      { name: 'value / defaultValue', type: 'number', default: '0', description: 'Controlled or initial slider value' },
+      { name: 'onValueChange', type: '(value: number) => void', default: 'undefined', description: 'Called when the range changes' },
+      { name: 'min / max / step', type: 'number', default: '0 / 100 / 1', description: 'Native range boundaries and increment' },
+    ],
+  },
+  'toggle-group': {
+    id: 'toggle-group', name: 'Toggle Group', category: 'Form Controls',
+    description: 'Single or multi-select toggle controls for compact modes, filters, and view switches.',
+    cliCommand: 'npx shadcn add @rawkitui/toggle-group',
+    codeSnippet: `import { ToggleGroup } from "@/components/ui/toggle-group"
+
+<ToggleGroup items={[{ value: "grid", label: "Grid" }, { value: "list", label: "List" }]} />`,
+    props: [
+      { name: 'items', type: 'Array<ToggleItem>', default: '[]', description: 'Toggle labels, icons, values, and disabled states' },
+      { name: 'type', type: "'single' | 'multiple'", default: "'single'", description: 'Selection mode' },
+      { name: 'variant', type: "'default' | 'outline'", default: "'default'", description: 'Unselected control styling' },
+    ],
+  },
   button: {
     id: 'button',
     name: 'Button',

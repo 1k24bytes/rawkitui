@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-state",
+  "type": "registry:ui",
+  "title": "Empty State",
+  "description": "Friendly, action-ready placeholder for empty lists and first-run screens.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "content": "import * as React from 'react'\nimport { Inbox } from 'lucide-react'\nimport { cn } from '@/lib/utils'\n\nexport interface EmptyStateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {\n  icon?: React.ReactNode\n  title: React.ReactNode\n  description?: React.ReactNode\n  action?: React.ReactNode\n  variant?: 'white' | 'mint' | 'peach' | 'lavender' | 'sky'\n}\n\nconst variants = {\n  white: 'bg-white',\n  mint: 'bg-[#BBF7D0]',\n  peach: 'bg-[#FED7AA]',\n  lavender: 'bg-[#E9D5FF]',\n  sky: 'bg-[#BAE6FD]',\n}\n\nexport function EmptyState({ icon, title, description, action, variant = 'white', className, ...props }: EmptyStateProps) {\n  return (\n    <div className={cn('flex min-h-56 flex-col items-center justify-center rounded-2xl p-8 text-center font-sans rk-border rk-shadow-sm', variants[variant], className)} {...props}>\n      <div className=\"mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white rk-border-sm rk-shadow-sm\">\n        {icon ?? <Inbox className=\"h-7 w-7 stroke-[2.5]\" aria-hidden=\"true\" />}\n      </div>\n      <h2 className=\"font-display text-xl font-black\">{title}</h2>\n      {description && <p className=\"mt-2 max-w-sm text-sm font-semibold leading-relaxed text-black/65\">{description}</p>}\n      {action && <div className=\"mt-5\">{action}</div>}\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

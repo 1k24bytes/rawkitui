@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress",
+  "type": "registry:ui",
+  "title": "Progress",
+  "description": "Accessible capsule progress bar with labeled percentage states.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "content": "import * as React from 'react'\nimport { cn } from '@/lib/utils'\n\nexport interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {\n  value?: number\n  max?: number\n  label?: string\n  showValue?: boolean\n  variant?: 'yellow' | 'orange' | 'mint' | 'violet' | 'pink' | 'sky'\n}\n\nconst fills = {\n  yellow: 'bg-[#FDE047]',\n  orange: 'bg-[#FB923C]',\n  mint: 'bg-[#4ADE80]',\n  violet: 'bg-[#A78BFA]',\n  pink: 'bg-[#F472B6]',\n  sky: 'bg-[#38BDF8]',\n}\n\nexport function Progress({ value = 0, max = 100, label, showValue = false, variant = 'yellow', className, ...props }: ProgressProps) {\n  const safeMax = max > 0 ? max : 100\n  const percentage = Math.min(100, Math.max(0, (value / safeMax) * 100))\n  return (\n    <div className={cn('w-full space-y-2 font-sans', className)} {...props}>\n      {(label || showValue) && <div className=\"flex items-center justify-between gap-3 text-xs font-black\"><span>{label}</span>{showValue && <span className=\"font-mono\">{Math.round(percentage)}%</span>}</div>}\n      <div className=\"h-5 w-full overflow-hidden rounded-full bg-white p-0.5 rk-border-sm\" role=\"progressbar\" aria-label={label} aria-valuemin={0} aria-valuemax={safeMax} aria-valuenow={value}>\n        <div className={cn('h-full rounded-full transition-[width] duration-200', fills[variant])} style={{ width: `${percentage}%` }} />\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}
