@@ -39,16 +39,90 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
   },
   avatar: {
     id: 'avatar', name: 'Avatar', category: 'Primitives',
-    description: 'Rounded profile image with resilient initials fallback and optional presence status.',
+    description: 'Pop-Brutalist profile avatar with Lucide icon fallbacks, text labels, status badges, shapes, and group stacking.',
     cliCommand: 'npx shadcn add @rawkitui/avatar',
-    codeSnippet: `import { Avatar } from "@/components/ui/avatar"
+    codeSnippet: `import { Avatar, AvatarGroup } from "@/components/ui/avatar"
+import { User, Bot, Shield } from "lucide-react"
 
-<Avatar alt="Ada Lovelace" fallback="AL" status="online" />`,
+<Avatar
+  name="Ada Lovelace"
+  description="Lead Architect"
+  variant="purple"
+  status="online"
+  icon={<User />}
+/>`,
+    examples: [
+      {
+        id: 'avatar-user',
+        title: 'User Profile Avatar with Text',
+        description: 'Avatar paired with user name and role description typography.',
+        codeSnippet: `<Avatar
+  name="Ada Lovelace"
+  description="Lead Architect"
+  variant="purple"
+  status="online"
+  icon={<User />}
+/>`,
+      },
+      {
+        id: 'avatar-bot',
+        title: 'AI Assistant & Bot Avatar',
+        description: 'Vibrant pop yellow avatar with Lucide Bot icon and custom status badge.',
+        codeSnippet: `<Avatar
+  name="Rawkit Bot"
+  description="AI Assistant"
+  variant="yellow"
+  status="busy"
+  badge="AI"
+  icon={<Bot />}
+/>`,
+      },
+      {
+        id: 'avatar-system',
+        title: 'System Operator Avatar',
+        description: 'Pop pink avatar with Zap icon and away presence status.',
+        codeSnippet: `<Avatar
+  name="Zap⚡ Admin"
+  description="System Operator"
+  variant="pink"
+  status="away"
+  icon={<Zap />}
+/>`,
+      },
+      {
+        id: 'avatar-shapes',
+        title: 'Brutalist Shapes & Badges',
+        description: 'Circular and superellipse square avatars with status badges.',
+        codeSnippet: `<div className="flex flex-wrap items-center gap-6">
+  <Avatar variant="cyan" shape="square" size="lg" icon={<Shield />} status="online" />
+  <Avatar variant="lime" shape="circle" size="lg" fallback="AL" badge={3} />
+  <Avatar variant="orange" shape="square" size="lg" fallback="GH" status="busy" />
+</div>`,
+      },
+      {
+        id: 'avatar-group',
+        title: 'Stacked Avatar Group',
+        description: 'Overlapping avatar collection with hover physics and +N overflow counter.',
+        codeSnippet: `<AvatarGroup max={3}>
+  <Avatar variant="purple" fallback="AB" />
+  <Avatar variant="yellow" fallback="CD" />
+  <Avatar variant="pink" fallback="EF" />
+  <Avatar variant="cyan" fallback="GH" />
+  <Avatar variant="lime" fallback="IJ" />
+</AvatarGroup>`,
+      },
+    ],
     props: [
       { name: 'src', type: 'string', default: 'undefined', description: 'Image source URL' },
-      { name: 'fallback', type: 'ReactNode', default: 'alt initials', description: 'Content shown when no image is available' },
-      { name: 'size', type: "'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Avatar diameter and type scale' },
-      { name: 'status', type: "'online' | 'busy' | 'offline'", default: 'undefined', description: 'Optional accessible presence indicator' },
+      { name: 'icon', type: 'ReactNode', default: '<User />', description: 'Lucide icon element displayed as graphic fallback' },
+      { name: 'fallback', type: 'ReactNode', default: 'alt initials', description: 'Text initials or custom fallback node' },
+      { name: 'name', type: 'ReactNode', default: 'undefined', description: 'Primary label text beside avatar' },
+      { name: 'description', type: 'ReactNode', default: 'undefined', description: 'Secondary description or role text beside avatar' },
+      { name: 'variant', type: "'purple' | 'yellow' | 'pink' | 'orange' | 'cyan' | 'lime' | 'mint' | 'zinc'", default: "'purple'", description: 'Pop-Brutalist color theme' },
+      { name: 'shape', type: "'circle' | 'square'", default: "'circle'", description: 'Circular or rounded brutalist square container' },
+      { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'", default: "'md'", description: 'Avatar diameter and icon size' },
+      { name: 'status', type: "'online' | 'busy' | 'offline' | 'away'", default: 'undefined', description: 'Presence indicator badge' },
+      { name: 'badge', type: 'string | number', default: 'undefined', description: 'Notification badge content on top-right' },
     ],
   },
   breadcrumb: {
@@ -133,16 +207,90 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
   },
   progress: {
     id: 'progress', name: 'Progress', category: 'Feedback & Data',
-    description: 'Accessible capsule progress bar with labeled percentage states and pop color variants.',
+    description: 'Pop-Brutalist progress bar featuring barber-pole stripes, floating percentage pins, arcade segment notches, and fiery red pop gradients.',
     cliCommand: 'npx shadcn add @rawkitui/progress',
     codeSnippet: `import { Progress } from "@/components/ui/progress"
 
-<Progress value={72} label="Upload progress" showValue />`,
+<Progress
+  value={78}
+  label="System Deployment"
+  description="Processing assets and compiling registry"
+  variant="yellow"
+  striped
+  animated
+  showPin
+  size="lg"
+/>`,
+    examples: [
+      {
+        id: 'progress-pin',
+        title: 'Barber Stripes & Floating Pin',
+        description: 'Animated Pop-Brutalist barber-pole stripes with a floating percentage pin tag.',
+        codeSnippet: `<Progress
+  value={78}
+  label="System Deployment"
+  description="Processing assets and compiling registry"
+  variant="yellow"
+  striped
+  animated
+  showPin
+  size="lg"
+/>`,
+      },
+      {
+        id: 'progress-arcade',
+        title: 'Arcade HP Gauge',
+        description: 'Segmented notch dividers giving an arcade HP/mana bar appearance.',
+        codeSnippet: `<Progress
+  value={60}
+  label="Arcade HP Gauge"
+  description="Segmented notch dividers"
+  variant="mint"
+  segments={5}
+  showValue
+  size="md"
+/>`,
+      },
+      {
+        id: 'progress-gradient',
+        title: 'Red Pop Gradient Fill',
+        description: 'Fiery red pop gradient fill with extra-large track height.',
+        codeSnippet: `<Progress
+  value={90}
+  label="Level 42 EXP"
+  description="Fiery red pop gradient fill"
+  variant="gradient"
+  showValue
+  size="xl"
+/>`,
+      },
+      {
+        id: 'progress-indeterminate',
+        title: 'Indeterminate Loading State',
+        description: 'Pulsing marquee animation for unknown loading duration.',
+        codeSnippet: `<Progress
+  indeterminate
+  label="Syncing Workspace"
+  description="Connecting to remote repository..."
+  variant="sky"
+  size="sm"
+/>`,
+      },
+    ],
     props: [
       { name: 'value', type: 'number', default: '0', description: 'Current progress amount' },
       { name: 'max', type: 'number', default: '100', description: 'Maximum progress amount' },
-      { name: 'label', type: 'string', default: 'undefined', description: 'Accessible and visible label' },
-      { name: 'variant', type: "'yellow' | 'orange' | 'mint' | 'violet' | 'pink' | 'sky'", default: "'yellow'", description: 'Fill color token' },
+      { name: 'label', type: 'ReactNode', default: 'undefined', description: 'Primary header title' },
+      { name: 'description', type: 'ReactNode', default: 'undefined', description: 'Secondary header subtitle' },
+      { name: 'showValue', type: 'boolean', default: 'false', description: 'Displays percentage badge in header or inside bar' },
+      { name: 'showPin', type: 'boolean', default: 'false', description: 'Renders a floating percentage pin tag over leading edge' },
+      { name: 'striped', type: 'boolean', default: 'false', description: 'Adds diagonal Pop-Brutalist barber-pole stripes' },
+      { name: 'animated', type: 'boolean', default: 'false', description: 'Animates stripe background movement' },
+      { name: 'indeterminate', type: 'boolean', default: 'false', description: 'Displays pulsing marquee loader for unknown progress' },
+      { name: 'segments', type: 'number', default: 'undefined', description: 'Renders arcade notch dividers across track' },
+      { name: 'size', type: "'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Track thickness scale' },
+      { name: 'shape', type: "'pill' | 'rounded'", default: "'pill'", description: 'Capsule or rounded rectangular track outline' },
+      { name: 'variant', type: "'yellow' | 'orange' | 'mint' | 'violet' | 'pink' | 'sky' | 'lime' | 'gradient' | 'sunset' | 'neon'", default: "'yellow'", description: 'Candy pop color fill theme' },
     ],
   },
   skeleton: {

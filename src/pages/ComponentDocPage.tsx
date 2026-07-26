@@ -14,7 +14,11 @@ import {
   CheckCircle2,
   Mail,
   ArrowRight,
-  Layers
+  Layers,
+  User,
+  Bot,
+  Zap,
+  Shield
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
@@ -33,7 +37,7 @@ import { Dialog } from '@/components/ui/dialog'
 import { Alert } from '@/components/ui/alert'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Accordion } from '@/components/ui/accordion'
-import { Avatar } from '@/components/ui/avatar'
+import { Avatar, AvatarGroup } from '@/components/ui/avatar'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { Calendar } from '@/components/ui/calendar'
 import { Command } from '@/components/ui/command'
@@ -251,6 +255,118 @@ export function ComponentDocPage() {
           </div>
         )
 
+      case 'avatar-user':
+        return (
+          <Avatar
+            name="Ada Lovelace"
+            description="Lead Architect"
+            variant="purple"
+            status="online"
+            icon={<User />}
+          />
+        )
+
+      case 'avatar-bot':
+        return (
+          <Avatar
+            name="Rawkit Bot"
+            description="AI Assistant"
+            variant="yellow"
+            status="busy"
+            badge="AI"
+            icon={<Bot />}
+          />
+        )
+
+      case 'avatar-system':
+        return (
+          <Avatar
+            name="Zap⚡ Admin"
+            description="System Operator"
+            variant="pink"
+            status="away"
+            icon={<Zap />}
+          />
+        )
+
+      case 'avatar-shapes':
+        return (
+          <div className="flex flex-wrap items-center justify-center gap-6">
+            <Avatar variant="cyan" shape="square" size="lg" icon={<Shield />} status="online" />
+            <Avatar variant="lime" shape="circle" size="lg" fallback="AL" badge={3} />
+            <Avatar variant="orange" shape="square" size="lg" fallback="GH" status="busy" />
+          </div>
+        )
+
+      case 'avatar-group':
+        return (
+          <AvatarGroup max={3}>
+            <Avatar variant="purple" fallback="AB" />
+            <Avatar variant="yellow" fallback="CD" />
+            <Avatar variant="pink" fallback="EF" />
+            <Avatar variant="cyan" fallback="GH" />
+            <Avatar variant="lime" fallback="IJ" />
+          </AvatarGroup>
+        )
+
+      case 'progress-pin':
+        return (
+          <div className="w-full max-w-xl">
+            <Progress
+              value={78}
+              label="System Deployment"
+              description="Processing assets and compiling registry"
+              variant="yellow"
+              striped
+              animated
+              showPin
+              size="lg"
+            />
+          </div>
+        )
+
+      case 'progress-arcade':
+        return (
+          <div className="w-full max-w-xl">
+            <Progress
+              value={60}
+              label="Arcade HP Gauge"
+              description="Segmented notch dividers"
+              variant="mint"
+              segments={5}
+              showValue
+              size="md"
+            />
+          </div>
+        )
+
+      case 'progress-gradient':
+        return (
+          <div className="w-full max-w-xl">
+            <Progress
+              value={90}
+              label="Level 42 EXP"
+              description="Fiery red pop gradient fill"
+              variant="gradient"
+              showValue
+              size="xl"
+            />
+          </div>
+        )
+
+      case 'progress-indeterminate':
+        return (
+          <div className="w-full max-w-xl">
+            <Progress
+              indeterminate
+              label="Syncing Workspace"
+              description="Connecting to remote repository..."
+              variant="sky"
+              size="md"
+            />
+          </div>
+        )
+
       default:
         return <Button>Preview</Button>
     }
@@ -447,10 +563,46 @@ export function ComponentDocPage() {
         )
       case 'avatar':
         return (
-          <div className="flex items-end gap-5">
-            <Avatar alt="Ada Lovelace" fallback="AL" size="sm" status="online" />
-            <Avatar alt="Grace Hopper" fallback="GH" size="md" status="busy" />
-            <Avatar alt="Katherine Johnson" fallback="KJ" size="lg" status="offline" />
+          <div className="flex flex-col gap-6 items-center">
+            {/* Avatars with Lucide Icons + Text Labels */}
+            <div className="flex flex-wrap items-center justify-center gap-6">
+              <Avatar
+                name="Ada Lovelace"
+                description="Lead Architect"
+                variant="purple"
+                status="online"
+                icon={<User />}
+              />
+              <Avatar
+                name="Rawkit Bot"
+                description="AI Assistant"
+                variant="yellow"
+                status="busy"
+                badge="AI"
+                icon={<Bot />}
+              />
+              <Avatar
+                name="Zap⚡ Admin"
+                description="System Operator"
+                variant="pink"
+                status="away"
+                icon={<Zap />}
+              />
+            </div>
+
+            {/* Shapes, Sizes & Avatar Group */}
+            <div className="flex flex-wrap items-center justify-center gap-5 pt-2">
+              <Avatar variant="cyan" shape="square" size="lg" icon={<Shield />} status="online" />
+              <Avatar variant="lime" shape="circle" size="lg" fallback="AL" badge={3} />
+              <Avatar variant="orange" shape="square" size="lg" fallback="GH" status="busy" />
+              <AvatarGroup max={3}>
+                <Avatar variant="purple" fallback="AB" />
+                <Avatar variant="yellow" fallback="CD" />
+                <Avatar variant="pink" fallback="EF" />
+                <Avatar variant="cyan" fallback="GH" />
+                <Avatar variant="lime" fallback="IJ" />
+              </AvatarGroup>
+            </div>
           </div>
         )
       case 'breadcrumb':
@@ -472,7 +624,44 @@ export function ComponentDocPage() {
       case 'pagination':
         return <Pagination currentPage={3} totalPages={8} onPageChange={() => {}} />
       case 'progress':
-        return <div className="w-full max-w-lg"><Progress value={72} label="Upload progress" showValue variant="orange" /></div>
+        return (
+          <div className="w-full max-w-xl flex flex-col gap-6">
+            <Progress
+              value={78}
+              label="System Deployment"
+              description="Processing assets and compiling registry"
+              variant="yellow"
+              striped
+              animated
+              showPin
+              size="lg"
+            />
+            <Progress
+              value={60}
+              label="Arcade HP Gauge"
+              description="Segmented notch dividers"
+              variant="mint"
+              segments={5}
+              showValue
+              size="md"
+            />
+            <Progress
+              value={90}
+              label="Level 42 EXP"
+              description="Pop-Brutalist rainbow gradient fill"
+              variant="gradient"
+              showValue
+              size="xl"
+            />
+            <Progress
+              indeterminate
+              label="Syncing Workspace"
+              description="Connecting to remote repository..."
+              variant="sky"
+              size="sm"
+            />
+          </div>
+        )
       case 'skeleton':
         return <div className="flex w-full max-w-md items-center gap-3"><Skeleton variant="circle" className="h-12 w-12" /><div className="flex-1 space-y-2"><Skeleton variant="text" className="w-2/3" /><Skeleton variant="text" className="w-full" /></div></div>
       case 'sonner':

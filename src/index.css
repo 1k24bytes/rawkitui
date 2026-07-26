@@ -64,6 +64,17 @@
   100% { transform: translateX(-50%); }
 }
 
+@keyframes progress-stripes {
+  0% { background-position: 1rem 0; }
+  100% { background-position: 0 0; }
+}
+
+@keyframes progress-indeterminate {
+  0% { left: 0%; width: 25%; }
+  50% { left: 75%; width: 25%; }
+  100% { left: 0%; width: 25%; }
+}
+
 /* Custom RawkitUI Pop-Brutalist Utility Classes */
 
 /* Hard Black Drop Shadows & Press Interactions */
