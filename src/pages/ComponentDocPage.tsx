@@ -367,6 +367,59 @@ export function ComponentDocPage() {
           </div>
         )
 
+      case 'slider-basic':
+        return (
+          <div className="w-full max-w-xl">
+            <Slider
+              label="Motion Intensity"
+              description="Adjust transition speed"
+              defaultValue={72}
+              variant="orange"
+              showPin
+              showValue
+            />
+          </div>
+        )
+
+      case 'slider-variants':
+        return (
+          <div className="w-full max-w-xl space-y-6">
+            <Slider label="Audio Volume" defaultValue={85} variant="gradient" showValue />
+            <Slider label="Brightness" defaultValue={40} variant="yellow" showValue />
+            <Slider label="Eco Speed" defaultValue={60} variant="mint" showValue />
+          </div>
+        )
+
+      case 'slider-ticks':
+        return (
+          <div className="w-full max-w-xl">
+            <Slider
+              label="Grid Columns"
+              description="Select between 1 to 10 columns"
+              min={1}
+              max={10}
+              step={1}
+              defaultValue={4}
+              variant="sky"
+              showTicks
+              showValue
+            />
+          </div>
+        )
+
+      case 'slider-shapes':
+        return (
+          <div className="w-full max-w-xl">
+            <Slider
+              label="Shadow Offset"
+              defaultValue={65}
+              variant="pink"
+              thumbShape="square"
+              showPin
+            />
+          </div>
+        )
+
       default:
         return <Button>Preview</Button>
     }

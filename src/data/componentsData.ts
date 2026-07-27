@@ -334,15 +334,83 @@ toast({ title: "Saved", variant: "success" })`,
   },
   slider: {
     id: 'slider', name: 'Slider', category: 'Form Controls',
-    description: 'Native accessible range control with RawkitUI label, focus ring, and value treatment.',
+    description: 'Pop-Brutalist range slider featuring custom track fills, tactile brutalist thumbs, floating tooltip pins, and step tick marks.',
     cliCommand: 'npx shadcn add @rawkitui/slider',
     codeSnippet: `import { Slider } from "@/components/ui/slider"
 
-<Slider label="Volume" defaultValue={60} showValue />`,
+// Slider with Floating Tooltip Pin
+<Slider
+  label="Motion Intensity"
+  description="Adjust transition speed"
+  defaultValue={72}
+  variant="orange"
+  showPin
+  showValue
+/>`,
+    examples: [
+      {
+        id: 'slider-basic',
+        title: 'Floating Tooltip Pin',
+        description: 'Tactile Pop Orange slider with a floating value pin that tracks the thumb during drag.',
+        codeSnippet: `<Slider
+  label="Motion Intensity"
+  description="Adjust transition speed"
+  defaultValue={72}
+  variant="orange"
+  showPin
+  showValue
+/>`,
+      },
+      {
+        id: 'slider-variants',
+        title: 'Pop Color & Red Gradient Fills',
+        description: 'Curated Pop-Brutalist color variants including Red Pop Gradient, Mint Green, and Pop Yellow.',
+        codeSnippet: `<div className="space-y-6">
+  <Slider label="Audio Volume" defaultValue={85} variant="gradient" showValue />
+  <Slider label="Brightness" defaultValue={40} variant="yellow" showValue />
+  <Slider label="Eco Speed" defaultValue={60} variant="mint" showValue />
+</div>`,
+      },
+      {
+        id: 'slider-ticks',
+        title: 'Step Ticks & Discrete Marks',
+        description: 'Slider with discrete step tick marks along the track container.',
+        codeSnippet: `<Slider
+  label="Grid Columns"
+  description="Select between 1 to 10 columns"
+  min={1}
+  max={10}
+  step={1}
+  defaultValue={4}
+  variant="sky"
+  showTicks
+  showValue
+/>`,
+      },
+      {
+        id: 'slider-shapes',
+        title: 'Brutalist Square Superellipse Thumb',
+        description: 'Slider with a rounded square brutalist thumb handle.',
+        codeSnippet: `<Slider
+  label="Shadow Offset"
+  defaultValue={65}
+  variant="pink"
+  thumbShape="square"
+  showPin
+/>`,
+      },
+    ],
     props: [
-      { name: 'value / defaultValue', type: 'number', default: '0', description: 'Controlled or initial slider value' },
-      { name: 'onValueChange', type: '(value: number) => void', default: 'undefined', description: 'Called when the range changes' },
-      { name: 'min / max / step', type: 'number', default: '0 / 100 / 1', description: 'Native range boundaries and increment' },
+      { name: 'value / defaultValue', type: 'number', default: '50', description: 'Controlled or initial slider value' },
+      { name: 'onValueChange', type: '(value: number) => void', default: 'undefined', description: 'Called when range changes' },
+      { name: 'label', type: 'ReactNode', default: 'undefined', description: 'Primary header title' },
+      { name: 'description', type: 'ReactNode', default: 'undefined', description: 'Secondary header subtitle' },
+      { name: 'showValue', type: 'boolean', default: 'false', description: 'Displays right-aligned value badge tag in header' },
+      { name: 'showPin', type: 'boolean', default: 'false', description: 'Renders a floating tooltip pin badge over the thumb' },
+      { name: 'showTicks', type: 'boolean', default: 'false', description: 'Renders discrete step tick dots along the track' },
+      { name: 'thumbShape', type: "'circle' | 'square'", default: "'circle'", description: 'Circular or superellipse square thumb handle' },
+      { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Track thickness and thumb size' },
+      { name: 'variant', type: "'yellow' | 'orange' | 'mint' | 'violet' | 'pink' | 'sky' | 'lime' | 'gradient' | 'sunset' | 'neon'", default: "'orange'", description: 'Pop-Brutalist color theme' },
     ],
   },
   'toggle-group': {
