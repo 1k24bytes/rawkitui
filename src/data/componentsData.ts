@@ -551,28 +551,129 @@ export default function ButtonDemo() {
     id: 'card',
     name: 'Card',
     category: 'Primitives',
-    description: 'Hyper-rounded 28px superellipse container with pastel surface fills and thick black border.',
+    description: 'Hyper-rounded 28px superellipse container with pastel surface fills, dark ink variants, top badges, and physical press physics.',
     cliCommand: 'npx shadcn add @rawkitui/card',
-    codeSnippet: `import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
+    codeSnippet: `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 
-export default function CardDemo() {
-  return (
-    <Card variant="mint" className="max-w-sm">
-      <CardHeader>
-        <CardTitle>Pastel Mint Surface</CardTitle>
-        <CardDescription>Hyper-rounded 28px superellipse card</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm font-semibold text-black/80">
-          Clean structural black outlines paired with warm pastel surface tokens.
-        </p>
-      </CardContent>
-    </Card>
-  )
-}`,
+<Card variant="mint" badge="FEATURED" isInteractive className="max-w-md">
+  <CardHeader>
+    <CardTitle>Mint Pastel Surface</CardTitle>
+    <CardDescription>Hyper-rounded 28px superellipse card</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p className="text-sm font-semibold text-black/80">
+      Clean structural black outlines paired with warm pastel surface tokens.
+    </p>
+  </CardContent>
+  <CardFooter>
+    <Button variant="black" size="sm">Explore feature</Button>
+  </CardFooter>
+</Card>`,
+    examples: [
+      {
+        id: 'card-feature',
+        title: 'Feature Highlight Card with Badge',
+        description: 'Interactive 28px superellipse card featuring a top-right badge, icon frame header, body copy, and action button.',
+        codeSnippet: `<Card variant="mint" badge="NEW" isInteractive className="max-w-md">
+  <CardHeader>
+    <CardTitle>Mint Pastel Surface</CardTitle>
+    <CardDescription>Hyper-rounded 28px superellipse container</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p className="text-sm font-semibold text-black/80">
+      Structured 3px black ink borders paired with cheerful pastel surface tokens and snappy hover lift physics.
+    </p>
+  </CardContent>
+  <CardFooter>
+    <span className="text-xs font-mono font-bold text-black/70">v2.4 Ready</span>
+    <Button variant="black" size="sm">Get Started</Button>
+  </CardFooter>
+</Card>`,
+      },
+      {
+        id: 'card-dark',
+        title: 'Dark Ink Brutalist Card',
+        description: 'High-contrast solid ink black card with neon yellow header text, stat pills, and white divider accents.',
+        codeSnippet: `<Card variant="dark" badge="PRO" isInteractive className="max-w-md">
+  <CardHeader>
+    <CardTitle className="text-[#FDE047]">Dark Ink Brutalist</CardTitle>
+    <CardDescription className="text-white/70">Solid ink background with high-contrast neon accents</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p className="text-sm font-medium text-white/90">
+      Built for high-impact dashboards, featured announcement blocks, and dark UI sections.
+    </p>
+  </CardContent>
+  <CardFooter>
+    <div className="flex items-center gap-2">
+      <span className="h-2 w-2 rounded-full bg-[#4ADE80] animate-pulse" />
+      <span className="font-mono text-xs font-bold text-[#4ADE80]">99.9% Uptime</span>
+    </div>
+    <Button variant="primary" size="sm" shadowColor="mint">Launch App</Button>
+  </CardFooter>
+</Card>`,
+      },
+      {
+        id: 'card-pastels',
+        title: 'Pastel Surface Tokens',
+        description: 'Curated soft pastel fills including Mint Green, Peach, Lavender, Soft Sky, and Pop Pink.',
+        codeSnippet: `<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-2xl">
+  <Card variant="peach">
+    <CardHeader>
+      <CardTitle>Peach Surface</CardTitle>
+      <CardDescription>Warm orange pastel token</CardDescription>
+    </CardHeader>
+  </Card>
+  <Card variant="lavender">
+    <CardHeader>
+      <CardTitle>Lavender Surface</CardTitle>
+      <CardDescription>Soft violet container fill</CardDescription>
+    </CardHeader>
+  </Card>
+  <Card variant="sky">
+    <CardHeader>
+      <CardTitle>Soft Sky Surface</CardTitle>
+      <CardDescription>Sky blue metrics card</CardDescription>
+    </CardHeader>
+  </Card>
+  <Card variant="pink">
+    <CardHeader>
+      <CardTitle>Pop Pink Surface</CardTitle>
+      <CardDescription>Special offer container</CardDescription>
+    </CardHeader>
+  </Card>
+</div>`,
+      },
+      {
+        id: 'card-pricing',
+        title: 'Pro Plan / Pricing Card',
+        description: 'Rich pricing tier card with featured badge tag, price hero text, feature checklist, and primary action button.',
+        codeSnippet: `<Card variant="yellow" badge="POPULAR" isInteractive className="max-w-md">
+  <CardHeader>
+    <CardTitle className="text-3xl font-black">$29 / mo</CardTitle>
+    <CardDescription className="text-black/80 font-extrabold">Pro Developer License</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <ul className="space-y-2 text-xs font-bold text-black/90">
+      <li className="flex items-center gap-2">✓ Unlimited Component Downloads</li>
+      <li className="flex items-center gap-2">✓ Figma UI Kit & Token Files</li>
+      <li className="flex items-center gap-2">✓ Priority Discord Support</li>
+    </ul>
+  </CardContent>
+  <CardFooter>
+    <Button variant="black" className="w-full">Upgrade Now</Button>
+  </CardFooter>
+</Card>`,
+      },
+    ],
     props: [
-      { name: 'variant', type: "'white' | 'mint' | 'peach' | 'lavender' | 'sky' | 'pink' | 'yellow'", default: "'white'", description: 'Pastel surface background color' },
+      { name: 'variant', type: "'white' | 'mint' | 'peach' | 'lavender' | 'sky' | 'pink' | 'yellow' | 'orange' | 'dark'", default: "'white'", description: 'Pastel or solid surface fill token' },
+      { name: 'badge', type: 'ReactNode', default: 'undefined', description: 'Top-right Pop-Brutalist badge tag' },
       { name: 'hasShadow', type: 'boolean', default: 'true', description: 'Toggles 4px 4px solid black offset shadow' },
+      { name: 'isInteractive', type: 'boolean', default: 'false', description: 'Enables hover lift physics and cursor pointer' },
+      { name: 'shadowColor', type: "'ink' | 'yellow' | 'orange' | 'violet' | 'mint' | 'pink' | 'sky'", default: "'ink'", description: 'Custom offset shadow color' },
+      { name: 'shadowStyle', type: "'hard' | 'soft' | 'none'", default: "'hard'", description: 'Shadow style preset' },
     ],
   },
   badge: {

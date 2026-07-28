@@ -21,7 +21,7 @@ import {
   Shield
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -418,6 +418,97 @@ export function ComponentDocPage() {
               showPin
             />
           </div>
+        )
+
+      case 'card-feature':
+        return (
+          <Card variant="mint" badge="NEW" isInteractive className="w-full max-w-md">
+            <CardHeader>
+              <CardTitle>Mint Pastel Surface</CardTitle>
+              <CardDescription>Hyper-rounded 28px superellipse container</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm font-semibold text-black/80 leading-relaxed">
+                Structured 3px black ink borders paired with cheerful pastel surface tokens and snappy hover lift physics.
+              </p>
+            </CardContent>
+            <CardFooter>
+              <span className="text-xs font-mono font-bold text-black/70">v2.4 Ready</span>
+              <Button variant="black" size="sm">Get Started</Button>
+            </CardFooter>
+          </Card>
+        )
+
+      case 'card-dark':
+        return (
+          <Card variant="dark" badge="PRO" isInteractive className="w-full max-w-md">
+            <CardHeader>
+              <CardTitle className="text-[#FDE047]">Dark Ink Brutalist</CardTitle>
+              <CardDescription className="text-white/70">Solid ink background with high-contrast neon accents</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm font-medium text-white/90 leading-relaxed">
+                Built for high-impact dashboards, featured announcement blocks, and dark UI sections.
+              </p>
+            </CardContent>
+            <CardFooter>
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-[#4ADE80] animate-pulse" />
+                <span className="font-mono text-xs font-bold text-[#4ADE80]">99.9% Uptime</span>
+              </div>
+              <Button variant="primary" size="sm" shadowColor="mint">Launch App</Button>
+            </CardFooter>
+          </Card>
+        )
+
+      case 'card-pastels':
+        return (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-2xl">
+            <Card variant="peach">
+              <CardHeader>
+                <CardTitle>Peach Surface</CardTitle>
+                <CardDescription>Warm orange pastel token</CardDescription>
+              </CardHeader>
+            </Card>
+            <Card variant="lavender">
+              <CardHeader>
+                <CardTitle>Lavender Surface</CardTitle>
+                <CardDescription>Soft violet container fill</CardDescription>
+              </CardHeader>
+            </Card>
+            <Card variant="sky">
+              <CardHeader>
+                <CardTitle>Soft Sky Surface</CardTitle>
+                <CardDescription>Sky blue metrics card</CardDescription>
+              </CardHeader>
+            </Card>
+            <Card variant="pink">
+              <CardHeader>
+                <CardTitle>Pop Pink Surface</CardTitle>
+                <CardDescription>Special offer container</CardDescription>
+              </CardHeader>
+            </Card>
+          </div>
+        )
+
+      case 'card-pricing':
+        return (
+          <Card variant="yellow" badge="POPULAR" isInteractive className="w-full max-w-md">
+            <CardHeader>
+              <CardTitle className="text-3xl font-black">$29 / mo</CardTitle>
+              <CardDescription className="text-black/80 font-extrabold">Pro Developer License</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2 text-xs font-bold text-black/90">
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-black stroke-[3]" /> Unlimited Component Downloads</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-black stroke-[3]" /> Figma UI Kit & Token Files</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-black stroke-[3]" /> Priority Discord Support</li>
+              </ul>
+            </CardContent>
+            <CardFooter>
+              <Button variant="black" className="w-full">Upgrade Now</Button>
+            </CardFooter>
+          </Card>
         )
 
       default:

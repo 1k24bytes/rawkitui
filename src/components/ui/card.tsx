@@ -3,13 +3,15 @@ import { motion, type HTMLMotionProps } from 'motion/react'
 import { cn } from '@/lib/utils'
 
 const cardVariants = {
-  white: 'bg-white',
-  mint: 'bg-[#BBF7D0]',
-  peach: 'bg-[#FED7AA]',
-  lavender: 'bg-[#E9D5FF]',
-  sky: 'bg-[#BAE6FD]',
-  pink: 'bg-[#FBCFE8]',
-  yellow: 'bg-[#FDE047]',
+  white: 'bg-white text-[#18181B]',
+  mint: 'bg-[#BBF7D0] text-[#18181B]',
+  peach: 'bg-[#FED7AA] text-[#18181B]',
+  lavender: 'bg-[#E9D5FF] text-[#18181B]',
+  sky: 'bg-[#BAE6FD] text-[#18181B]',
+  pink: 'bg-[#FBCFE8] text-[#18181B]',
+  yellow: 'bg-[#FDE047] text-[#18181B]',
+  orange: 'bg-[#FB923C] text-[#18181B]',
+  dark: 'bg-[#18181B] text-white',
 }
 
 const shadowColorMap = {
@@ -24,12 +26,14 @@ const shadowColorMap = {
 
 export interface CardProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof HTMLMotionProps<'div'>>,
-    HTMLMotionProps<'div'> {
+    Omit<HTMLMotionProps<'div'>, 'children'> {
+  children?: React.ReactNode
   variant?: keyof typeof cardVariants
   hasShadow?: boolean
   isInteractive?: boolean
   shadowColor?: keyof typeof shadowColorMap
   shadowStyle?: 'hard' | 'soft' | 'none'
+  badge?: React.ReactNode
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
@@ -41,6 +45,8 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       isInteractive = false,
       shadowColor = 'ink',
       shadowStyle = 'hard',
+      badge,
+      children,
       ...props
     },
     ref
@@ -64,13 +70,27 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         }
         transition={{ type: 'spring', stiffness: 400, damping: 25 }}
         className={cn(
-          'rounded-[28px] rk-border p-6 font-sans relative overflow-hidden transition-colors',
+          'rounded-[28px] rk-border p-6 sm:p-7 font-sans relative overflow-hidden transition-colors',
           cardVariants[variant],
           shadowClass,
+          isInteractive && 'cursor-pointer',
           className
         )}
         {...props}
-      />
+      >
+        {badge && (
+          <div className="absolute top-5 right-5 z-10">
+            {typeof badge === 'string' ? (
+              <span className="inline-flex items-center rounded-full border-2 border-[#18181B] bg-[#FDE047] px-3 py-1 font-mono text-xs font-black text-[#18181B] rk-shadow-xs">
+                {badge}
+              </span>
+            ) : (
+              badge
+            )}
+          </div>
+        )}
+        {children}
+      </motion.div>
     )
   }
 )
@@ -82,7 +102,7 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('flex flex-col space-y-1.5 mb-4', className)}
+    className={cn('flex flex-col space-y-1.5 mb-4 pr-14 sm:pr-16', className)}
     {...props}
   />
 ))
@@ -94,7 +114,7 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn('font-display text-xl font-black tracking-tight text-[#18181B]', className)}
+    className={cn('font-display text-xl sm:text-2xl font-black tracking-tight text-inherit', className)}
     {...props}
   />
 ))
@@ -106,7 +126,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn('text-xs font-bold text-[#18181B]/70', className)}
+    className={cn('text-xs sm:text-sm font-bold opacity-80', className)}
     {...props}
   />
 ))
@@ -116,7 +136,7 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('pt-0', className)} {...props} />
+  <div ref={ref} className={cn('pt-0 space-y-3', className)} {...props} />
 ))
 CardContent.displayName = 'CardContent'
 
@@ -126,7 +146,7 @@ const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('flex items-center pt-4 mt-4 border-t-2 border-black/10', className)}
+    className={cn('flex items-center justify-between pt-4 mt-5 border-t-2 border-current/15', className)}
     {...props}
   />
 ))
