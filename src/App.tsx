@@ -1,13 +1,25 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { Header } from '@/components/layout/Header'
 import { DocsLayout } from '@/components/layout/DocsLayout'
 import { Home } from '@/pages/Home'
 import { ComponentDocPage } from '@/pages/ComponentDocPage'
 import { QuickstartPage } from '@/pages/QuickstartPage'
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
+
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-[#F4F4F0] text-[#18181B] font-sans antialiased">
         <Header />
         <Routes>

@@ -152,6 +152,7 @@ export function ComponentDocPage() {
   const component = (id && COMPONENTS_DATA[id]) || COMPONENTS_DATA['button']
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     const currentMode = document.documentElement.getAttribute('data-shadow') || 'ink'
     setShadowMode(currentMode)
   }, [id])
@@ -898,7 +899,7 @@ export function ComponentDocPage() {
           <div className="space-y-10">
             {component.examples.map((example) => (
               <ExampleBlock
-                key={example.id}
+                key={`${component.id}-${example.id}`}
                 title={example.title}
                 description={example.description}
                 codeSnippet={example.codeSnippet}
@@ -912,6 +913,7 @@ export function ComponentDocPage() {
       ) : (
         /* Fallback single preview for components without examples array */
         <ExampleBlock
+          key={`fallback-${component.id}`}
           title="Component Preview"
           description={component.description}
           codeSnippet={component.codeSnippet}
