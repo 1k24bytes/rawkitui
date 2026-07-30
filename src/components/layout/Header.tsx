@@ -1,12 +1,18 @@
 import { useState } from 'react'
 import { useLocation, Link as RouterLink } from 'react-router-dom'
-import { Star, Terminal, BookOpen } from 'lucide-react'
+import { Star, Terminal, BookOpen, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 
-export function Header() {
+export interface HeaderProps {
+  onOpenSearch?: () => void
+}
+
+export function Header({ onOpenSearch }: HeaderProps) {
   const location = useLocation()
   const [copied, setCopied] = useState(false)
+
+  const isMac = typeof window !== 'undefined' && navigator.platform.toUpperCase().indexOf('MAC') >= 0
 
   const copyCommand = () => {
     navigator.clipboard.writeText('npx shadcn add @rawkitui/button')
@@ -58,13 +64,27 @@ export function Header() {
         </nav>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2.5">
+        {/* Global Cmd + K / Ctrl + K Search Trigger Button */}
+        {onOpenSearch && (
+          <button
+            onClick={onOpenSearch}
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full border-2 border-[#18181B] bg-white hover:bg-[#FDE047]/30 rk-shadow-xs text-xs font-bold text-[#18181B] transition-all cursor-pointer"
+          >
+            <Search className="w-3.5 h-3.5 stroke-[2.5]" />
+            <span className="hidden sm:inline">Search components...</span>
+            <kbd className="font-mono text-[10px] font-black bg-[#18181B] text-[#FDE047] px-1.5 py-0.5 rounded border border-[#18181B]">
+              {isMac ? '⌘K' : 'Ctrl+K'}
+            </kbd>
+          </button>
+        )}
+
         <Button
           variant="outline"
           size="sm"
           shape="pill"
           onClick={() => window.open('https://github.com', '_blank')}
-          className="hidden sm:inline-flex"
+          className="hidden md:inline-flex"
         >
           <Star className="w-4 h-4 mr-1.5 fill-[#FDE047] stroke-[2.5]" /> Star
         </Button>
