@@ -112,7 +112,7 @@ $ npm install motion lucide-react clsx tailwind-merge`}
               variant="primary"
               size="sm"
               shape="pill"
-              onClick={() => copyText(`{\n  "registries": {\n    "@rawkitui": "https://rawkitui.com/r/{name}.json"\n  }\n}`, 'step2')}
+              onClick={() => copyText(`{\n  "registries": {\n    "@rawkitui": "https://rawkitui.zerodegree.tech/r/{name}.json"\n  }\n}`, 'step2')}
               className="text-xs font-bold"
             >
               {copiedCmd === 'step2' ? <Check className="w-3.5 h-3.5 stroke-[3]" /> : <Copy className="w-3.5 h-3.5 stroke-[2.5]" />}
@@ -122,7 +122,7 @@ $ npm install motion lucide-react clsx tailwind-merge`}
           <pre className="text-[#FBCFE8] leading-relaxed overflow-x-auto">
 {`{
   "registries": {
-    "@rawkitui": "https://rawkitui.com/r/{name}.json"
+    "@rawkitui": "https://rawkitui.zerodegree.tech/r/{name}.json"
   }
 }`}
           </pre>

@@ -41,7 +41,7 @@ export function Home() {
   const [shadowMode, setShadowMode] = useState('ink')
 
   const copyCommand = () => {
-    navigator.clipboard.writeText('npx shadcn add @rawkitui/button')
+    navigator.clipboard.writeText('npx shadcn add @rawkitui')
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -175,7 +175,7 @@ export function Home() {
             >
               <div className="flex items-center gap-2.5 text-xs sm:text-sm text-[#FDE047] truncate font-bold">
                 <span>$</span>
-                <span className="text-white truncate">npx shadcn add @rawkitui/button</span>
+                <span className="text-white truncate">npx shadcn add @rawkitui</span>
               </div>
               <Button variant="primary" size="sm" shape="pill" onClick={copyCommand} className="text-[11px] shrink-0 font-extrabold px-3 py-1.5">
                 {copied ? <Check className="w-3.5 h-3.5 stroke-[3]" /> : <Copy className="w-3.5 h-3.5 stroke-[2.5]" />}

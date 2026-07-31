@@ -15,7 +15,7 @@ export function Header({ onOpenSearch }: HeaderProps) {
   const isMac = typeof window !== 'undefined' && navigator.platform.toUpperCase().indexOf('MAC') >= 0
 
   const copyCommand = () => {
-    navigator.clipboard.writeText('npx shadcn add @rawkitui/button')
+    navigator.clipboard.writeText('npx shadcn add @rawkitui')
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }

@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "@rawkitui",
-  "homepage": "https://rawkitui.com",
+  "homepage": "https://rawkitui.zerodegree.tech",
   "extends": "none",
   "items": [
     {
