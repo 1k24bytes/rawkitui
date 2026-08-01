@@ -48,3 +48,11 @@ Thumbs.db
 # Turborepo / Cache
 .turbo
 .cache
+
+# Internal AI / Specification files
+PRD.md
+phase.md
+plan.md
+design.md
+stack.md
+
