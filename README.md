@@ -1,5 +1,10 @@
 <div align="center">
 
+<img src="./public/logo.png" alt="RawkitUI Logo" width="160" style="border-radius: 28px; border: 3px solid #18181b; box-shadow: 5px 5px 0px #18181b;" />
+
+<br />
+<br />
+
 # RAWKITUI
 
 Pop-Brutalist UI Primitives and Custom Shadcn Registry for React
