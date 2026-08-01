@@ -1,35 +1,64 @@
-# ⚡ RawkitUI — Pop-Brutalist Component Library & Shadcn Registry
+<div align="center">
 
-> High-contrast, tactile Pop-Brutalist UI primitives built with React 19, Tailwind CSS, Motion spring physics, and Lucide icons. Operates as an open-source custom `shadcn` CLI registry.
+# RAWKITUI
 
----
+Pop-Brutalist UI Primitives and Custom Shadcn Registry for React
 
-## ✨ Features
+[![](https://img.shields.io/badge/License-MIT-FDE047?style=for-the-badge&logoColor=18181B&labelColor=18181B)](LICENSE)
+[![](https://img.shields.io/badge/Registry-Shadcn-BBF7D0?style=for-the-badge&logoColor=18181B&labelColor=18181B)](https://rawkitui.zerodegree.tech/r/index.json)
+[![](https://img.shields.io/badge/Tailwind-v4-BAE6FD?style=for-the-badge&logoColor=18181B&labelColor=18181B)](https://tailwindcss.com)
+[![](https://img.shields.io/badge/React-19-FBCFE8?style=for-the-badge&logoColor=18181B&labelColor=18181B)](https://react.dev)
 
-- 🎨 **30 Pop-Brutalist Components**: Buttons, Cards, Sliders, Avatars, Modals, Tables, Toast notifications, Navigation, Form Controls, and more.
-- 📦 **Shadcn CLI Registry Compatible**: Add components directly to any React project using `npx shadcn add @rawkitui/component-name`.
-- ⚡ **Zero Setup Friction**: Operates with standard React 19, Tailwind CSS v3/v4, `motion`, and `lucide-react`.
-- 🔍 **Global Command Palette (`Cmd + K` / `Ctrl + K`)**: Built-in instant component search and command navigation.
-- ♿ **Fully Accessible**: Accessible keyboard controls, screen-reader semantics, and focus ring treatments.
-- 📄 **MIT Licensed**: 100% free and open-source for personal and commercial projects.
-
----
-
-## 🚀 Quickstart & Installation
-
-### Step 1: Initialize Shadcn & Install Prerequisites
+<br />
 
 ```bash
-# 1. Initialize shadcn CLI in your React / Next / Vite project
-npx shadcn@latest init
+npx shadcn add @rawkitui
+```
 
-# 2. Install essential animation, icon, and utility packages
+</div>
+
+<br />
+
+## About
+
+RawkitUI is an open-source, high-contrast Pop-Brutalist component library built with React 19, Tailwind CSS, Motion spring physics, and Lucide icons. It operates natively as a custom shadcn CLI registry, allowing developers to add tactile primitives directly into their projects without external runtime bloat.
+
+<br />
+
+## Features
+
+- **30 Pop-Brutalist Primitives**: Buttons, Cards, Sliders, Avatars, Modals, Tables, Toast notifications, Navigation, and Form Controls.
+- **Shadcn CLI Compatible**: Install components directly using standard `npx shadcn add` commands.
+- **Command Palette Search**: Global search modal accessible via `Cmd + K` or `Ctrl + K`.
+- **Zero Lock-In**: Complete source code added straight into your project folder.
+- **Tactile Micro-Interactions**: Hard drop shadows, high-contrast borders, and spring physics.
+
+<br />
+
+## Tech Stack
+
+**Core** — React 19 · TypeScript · Vite · Tailwind CSS v4
+
+**Animation & Icons** — Motion (Framer Motion) · Lucide Icons
+
+**Architecture** — Shadcn CLI Registry · Node.js Registry Compiler
+
+**Deployment** — Cloudflare Pages · CORS Headers · SPA Fallback Routing
+
+<br />
+
+## Quickstart & Installation
+
+### Step 1: Initialize Shadcn & Install Dependencies
+
+```bash
+npx shadcn@latest init
 npm install motion lucide-react clsx tailwind-merge
 ```
 
-### Step 2: Register RawkitUI in `components.json`
+### Step 2: Register RawkitUI in components.json
 
-Open your project's `components.json` and register RawkitUI as a custom registry:
+Open your project's `components.json` and register RawkitUI:
 
 ```json
 {
@@ -56,7 +85,7 @@ export default function App() {
   return (
     <Card variant="mint" badge="NEW" isInteractive>
       <CardHeader>
-        <CardTitle>Hello RawkitUI!</CardTitle>
+        <CardTitle>Hello RawkitUI</CardTitle>
       </CardHeader>
       <Button variant="primary" shape="pill">
         <User className="w-4 h-4 mr-2" /> Launch App
@@ -66,23 +95,38 @@ export default function App() {
 }
 ```
 
----
+<br />
 
-## 🛠️ Local Development
+## Component Catalog
 
-```bash
-# Install dependencies
-npm install
+| Category | Components |
+| :--- | :--- |
+| **Actions** | Button, ToggleGroup |
+| **Containers** | Card, Accordion, Dialog |
+| **Data Display** | Avatar, Badge, Table, Skeleton, Progress, BarChart |
+| **Navigation** | FloatingNav, Breadcrumb, Pagination, Stepper |
+| **Overlay & Feedback** | CommandPalette, DropdownMenu, Tooltip, Sonner Toast, Alert, EmptyState |
+| **Form Controls** | Input, Textarea, Select, Switch, RadioGroup, Calendar, Slider, Checkbox |
 
-# Run Vite dev server locally
-npm run dev
+<br />
 
-# Generate JSON registry files & build production bundle
-npm run build
-```
+## Maintainer & Connect
 
----
+<div align="center">
 
-## 📄 License
+### Built by Tawqeer (`1k24bytes`)
+
+Building on the web, working with AI
+
+[![](https://img.shields.io/badge/GitHub-1k24bytes-18181B?style=for-the-badge&logo=github&logoColor=FDE047)](https://github.com/1k24bytes)
+[![](https://img.shields.io/badge/Email-tawqeerdar21@gmail.com-FED7AA?style=for-the-badge&logo=gmail&logoColor=18181B)](mailto:tawqeerdar21@gmail.com)
+[![](https://img.shields.io/badge/Instagram-@tawqee___er-E9D5FF?style=for-the-badge&logo=instagram&logoColor=18181B)](https://instagram.com/tawqee___er)
+[![](https://img.shields.io/badge/Discord-Join_Server-BAE6FD?style=for-the-badge&logo=discord&logoColor=18181B)](https://discord.gg/liizwiiz)
+
+</div>
+
+<br />
+
+## License
 
 Distributed under the MIT License. See `LICENSE` for details.

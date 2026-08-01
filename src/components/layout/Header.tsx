@@ -83,7 +83,7 @@ export function Header({ onOpenSearch }: HeaderProps) {
           variant="outline"
           size="sm"
           shape="pill"
-          onClick={() => window.open('https://github.com', '_blank')}
+          onClick={() => window.open('https://github.com/1k24bytes/rawkitui', '_blank')}
           className="hidden md:inline-flex"
         >
           <Star className="w-4 h-4 mr-1.5 fill-[#FDE047] stroke-[2.5]" /> Star
