@@ -26,13 +26,38 @@ export interface ComponentData {
 export const COMPONENTS_DATA: Record<string, ComponentData> = {
   accordion: {
     id: 'accordion', name: 'Accordion', category: 'Navigation',
-    description: 'Accessible collapsible content sections with tactile pastel headers and single or multiple open modes.',
+    description: 'Accessible collapsible content sections with tactile pop-yellow active headers, numbered FAQ index options, and single or multiple open modes.',
     cliCommand: 'npx shadcn add @rawkitui/accordion',
     codeSnippet: `import { Accordion } from "@/components/ui/accordion"
 
-<Accordion items={[{ id: "faq", title: "What is RawkitUI?", content: "A playful component library." }]} />`,
+<Accordion
+  showNumbers
+  variant="numbered"
+  items={[
+    { id: "1", title: "What is RawkitUI?", content: "A pop-brutalist component library for modern web apps." },
+    { id: "2", title: "Is it customizable?", content: "Yes! Fully styled with Tailwind tokens and standard React props." }
+  ]}
+/>`,
+    examples: [
+      {
+        id: 'accordion-numbered',
+        title: 'Numbered FAQ Accordion',
+        description: 'Accordion list with mono index numbers and Plus/Minus toggle icons.',
+        codeSnippet: `<Accordion
+  variant="numbered"
+  defaultValue="1"
+  items={[
+    { id: "1", title: "How do I install RawkitUI?", content: "Run npx shadcn add @rawkitui/accordion in your Terminal." },
+    { id: "2", title: "Is it free and open-source?", content: "Yes, RawkitUI is completely MIT-licensed and free forever." },
+    { id: "3", title: "Does it support Server Components?", content: "Yes, fully compatible with Next.js App Router and RSC." }
+  ]}
+/>`,
+      },
+    ],
     props: [
       { name: 'items', type: 'Array<AccordionItem>', default: '[]', description: 'Sections with id, title, content, and optional disabled state' },
+      { name: 'variant', type: "'default' | 'yellow' | 'numbered' | 'plus-minus'", default: "'default'", description: 'Accordion styling and toggle icon variant' },
+      { name: 'showNumbers', type: 'boolean', default: 'false', description: 'Displays mono index numbers (01, 02...) before title' },
       { name: 'type', type: "'single' | 'multiple'", default: "'single'", description: 'Allows one or several sections to remain open' },
       { name: 'collapsible', type: 'boolean', default: 'true', description: 'Allows the active single section to close' },
     ],

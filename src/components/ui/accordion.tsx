@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Plus, Minus } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export interface AccordionItem {
@@ -16,6 +16,8 @@ export interface AccordionProps {
   defaultValue?: string | string[]
   onValueChange?: (value: string | string[]) => void
   collapsible?: boolean
+  showNumbers?: boolean
+  variant?: 'default' | 'yellow' | 'numbered' | 'plus-minus'
   className?: string
 }
 
@@ -26,6 +28,8 @@ export function Accordion({
   defaultValue,
   onValueChange,
   collapsible = true,
+  showNumbers = false,
+  variant = 'default',
   className,
 }: AccordionProps) {
   const initialValue = defaultValue ?? (type === 'multiple' ? [] : '')
@@ -47,14 +51,26 @@ export function Accordion({
     onValueChange?.(nextValue)
   }
 
+  const isNumbered = showNumbers || variant === 'numbered'
+  const isPlusMinus = variant === 'plus-minus' || variant === 'numbered'
+
   return (
-    <div className={cn('w-full space-y-2 font-sans', className)}>
-      {items.map((item) => {
+    <div className={cn('w-full space-y-3 font-sans', className)}>
+      {items.map((item, index) => {
         const isOpen = openItems.includes(item.id)
         const contentId = `accordion-content-${item.id}`
+        const numStr = String(index + 1).padStart(2, '0')
 
         return (
-          <div key={item.id} className="overflow-hidden rounded-2xl bg-white rk-border rk-shadow-sm">
+          <div
+            key={item.id}
+            className={cn(
+              'overflow-hidden rounded-[20px] border-3 border-[#18181B] transition-all',
+              isOpen
+                ? 'bg-[#FDE047] rk-shadow-md'
+                : 'bg-white rk-shadow-sm hover:rk-shadow-md'
+            )}
+          >
             <h3>
               <button
                 type="button"
@@ -63,19 +79,40 @@ export function Accordion({
                 disabled={item.disabled}
                 onClick={() => toggleItem(item.id)}
                 className={cn(
-                  'flex min-h-14 w-full items-center justify-between gap-4 px-5 py-4 text-left font-display text-sm font-black transition-colors focus:outline-none focus:ring-4 focus:ring-black focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50',
-                  isOpen ? 'bg-[#FDE047]' : 'bg-white hover:bg-[#F4F4F0]'
+                  'flex min-h-14 w-full items-center justify-between gap-4 px-5 py-4 text-left font-display text-base font-black text-[#18181B] transition-colors focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer'
                 )}
               >
-                <span>{item.title}</span>
-                <ChevronDown className={cn('h-5 w-5 shrink-0 stroke-[3] transition-transform', isOpen && 'rotate-180')} aria-hidden="true" />
+                <span className="flex items-center gap-3">
+                  {isNumbered && (
+                    <span className="font-mono text-xs font-black opacity-60">
+                      {numStr}
+                    </span>
+                  )}
+                  <span>{item.title}</span>
+                </span>
+
+                {isPlusMinus ? (
+                  isOpen ? (
+                    <Minus className="h-5 w-5 shrink-0 stroke-[3] text-[#18181B]" aria-hidden="true" />
+                  ) : (
+                    <Plus className="h-5 w-5 shrink-0 stroke-[3] text-[#18181B]" aria-hidden="true" />
+                  )
+                ) : (
+                  <ChevronDown
+                    className={cn(
+                      'h-5 w-5 shrink-0 stroke-[3] text-[#18181B] transition-transform duration-200',
+                      isOpen && 'rotate-180'
+                    )}
+                    aria-hidden="true"
+                  />
+                )}
               </button>
             </h3>
             <div
               id={contentId}
               role="region"
               hidden={!isOpen}
-              className="border-t-2 border-black/10 px-5 py-4 text-sm font-semibold leading-relaxed text-black/75"
+              className="border-t-2 border-[#18181B]/15 px-5 py-4 text-sm font-extrabold leading-relaxed text-[#18181B]/80"
             >
               {item.content}
             </div>
