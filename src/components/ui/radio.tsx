@@ -41,20 +41,20 @@ export function RadioGroup({
         return (
           <motion.div
             key={opt.value}
-            whileHover={{ y: -2, boxShadow: '5px 5px 0 0 #18181b' }}
-            whileTap={{ y: 1, boxShadow: '2px 2px 0 0 #18181b' }}
+            whileHover={{ y: -2, boxShadow: '5px 5px 0 0 var(--rk-shadow-color)' }}
+            whileTap={{ y: 1, boxShadow: '2px 2px 0 0 var(--rk-shadow-color)' }}
             transition={{ type: 'spring', stiffness: 500, damping: 25 }}
             onClick={() => handleSelect(opt.value)}
             className={cn(
               'p-4 rounded-2xl rk-border rk-shadow-sm cursor-pointer select-none transition-colors duration-150 flex items-center justify-between',
-              isSelected ? 'bg-[#FED7AA]' : 'bg-white hover:bg-[#F4F4F0]'
+              isSelected ? 'bg-rk-peach' : 'bg-rk-surface hover:bg-rk-canvas'
             )}
           >
             <div className="flex items-center gap-3.5">
               <div
                 className={cn(
                   'w-5 h-5 rounded-full rk-border-sm flex items-center justify-center transition-colors shrink-0 aspect-square p-0',
-                  isSelected ? 'bg-[#18181B]' : 'bg-white'
+                  isSelected ? 'bg-rk-ink' : 'bg-rk-surface'
                 )}
               >
                 {isSelected && (
@@ -62,19 +62,19 @@ export function RadioGroup({
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring', stiffness: 500, damping: 25 }}
-                    className="w-2 h-2 rounded-full bg-[#FDE047] shrink-0 aspect-square"
+                    className="w-2 h-2 rounded-full bg-rk-primary shrink-0 aspect-square"
                   />
                 )}
               </div>
               <div>
-                <div className="font-extrabold text-sm text-[#18181B]">{opt.label}</div>
+                <div className="font-extrabold text-sm text-rk-ink">{opt.label}</div>
                 {opt.description && (
                   <div className="text-xs font-bold text-black/60">{opt.description}</div>
                 )}
               </div>
             </div>
             {opt.badge && (
-              <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#FDE047] rk-border-sm shrink-0">
+              <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-rk-primary rk-border-sm shrink-0">
                 {opt.badge}
               </span>
             )}

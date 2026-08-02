@@ -41,8 +41,8 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             className={cn(
               'w-6 h-6 rounded-lg rk-border-sm transition-colors duration-150 flex items-center justify-center rk-shadow-sm shrink-0 aspect-square p-0',
               isChecked
-                ? 'bg-[#FDE047] text-[#18181B]'
-                : 'bg-white text-transparent group-hover:bg-[#F4F4F0]',
+                ? 'bg-rk-primary text-rk-ink'
+                : 'bg-rk-surface text-transparent group-hover:bg-rk-canvas',
               className
             )}
           >
@@ -54,13 +54,13 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
                   exit={{ scale: 0, rotate: 45 }}
                   transition={{ type: 'spring', stiffness: 500, damping: 25 }}
                 >
-                  <Check className="w-4 h-4 stroke-[3.5] text-[#18181B]" />
+                  <Check className="w-4 h-4 stroke-[3.5] text-rk-ink" />
                 </motion.div>
               )}
             </AnimatePresence>
           </motion.div>
         </div>
-        {label && <span className="font-extrabold text-sm text-[#18181B]">{label}</span>}
+        {label && <span className="font-extrabold text-sm text-rk-ink">{label}</span>}
       </label>
     )
   }

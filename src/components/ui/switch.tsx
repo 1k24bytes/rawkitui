@@ -42,7 +42,7 @@ export function Switch({
         whileTap={{ scale: 0.95 }}
         className={cn(
           'w-14 h-8 rounded-full rk-border-sm rk-shadow-sm p-1 transition-colors duration-200 relative flex items-center shrink-0',
-          isChecked ? 'bg-[#FDE047]' : 'bg-[#E5E7EB]'
+          isChecked ? 'bg-rk-primary' : 'bg-rk-canvas'
         )}
       >
         <motion.div
@@ -53,12 +53,12 @@ export function Switch({
             damping: 30,
           }}
           className={cn(
-            'w-5 h-5 rounded-full bg-[#18181B] rk-shadow-sm shrink-0 aspect-square p-0',
+            'w-5 h-5 rounded-full bg-rk-ink rk-shadow-sm shrink-0 aspect-square p-0',
             isChecked ? 'ml-auto' : 'ml-0'
           )}
         />
       </motion.div>
-      {label && <span className="font-extrabold text-sm text-[#18181B]">{label}</span>}
+      {label && <span className="font-extrabold text-sm text-rk-ink">{label}</span>}
     </label>
   )
 }

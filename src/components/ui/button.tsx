@@ -1,6 +1,8 @@
+'use client'
+
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { motion } from 'motion/react'
+import { Slot } from '@radix-ui/react-slot'
 import { Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -15,20 +17,20 @@ const shadowColorHexMap = {
 }
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap font-sans font-extrabold text-sm tracking-wide rk-border focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-colors select-none cursor-pointer',
+  'inline-flex items-center justify-center whitespace-nowrap font-sans font-extrabold text-sm tracking-wide rk-border focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-all select-none cursor-pointer',
   {
     variants: {
       variant: {
-        primary: 'bg-[#FDE047] text-[#18181B] hover:bg-[#FACC15]',
-        yellow: 'bg-[#FDE047] text-[#18181B] hover:bg-[#FACC15]',
-        secondary: 'bg-[#FB923C] text-[#18181B] hover:bg-[#F97316]',
-        accent: 'bg-[#A78BFA] text-[#18181B] hover:bg-[#8B5CF6]',
-        mint: 'bg-[#BBF7D0] text-[#18181B] hover:bg-[#86EFAC]',
-        peach: 'bg-[#FED7AA] text-[#18181B] hover:bg-[#FDBA74]',
-        sky: 'bg-[#BAE6FD] text-[#18181B] hover:bg-[#7DD3FC]',
-        pink: 'bg-[#FBCFE8] text-[#18181B] hover:bg-[#F472B6]',
-        black: 'bg-[#18181B] text-[#FFFFFF] border-black hover:bg-[#27272A]',
-        outline: 'bg-white text-[#18181B] hover:bg-[#F4F4F0]',
+        primary: 'bg-rk-primary text-rk-ink hover:bg-rk-primary-hover',
+        yellow: 'bg-rk-primary text-rk-ink hover:bg-rk-primary-hover',
+        secondary: 'bg-rk-secondary text-rk-ink hover:bg-rk-secondary-hover',
+        accent: 'bg-rk-accent text-rk-ink hover:bg-rk-accent-hover',
+        mint: 'bg-rk-mint text-rk-ink hover:bg-rk-mint-hover',
+        peach: 'bg-rk-peach text-rk-ink hover:bg-rk-peach-hover',
+        sky: 'bg-rk-sky text-rk-ink hover:bg-rk-sky-hover',
+        pink: 'bg-rk-pink text-rk-ink hover:bg-rk-pink-hover',
+        black: 'bg-rk-ink text-rk-canvas hover:bg-rk-ink-hover',
+        outline: 'bg-rk-surface text-rk-ink hover:bg-rk-canvas',
       },
       shape: {
         default: 'rounded-2xl',
@@ -52,9 +54,10 @@ const buttonVariants = cva(
 )
 
 export interface ButtonProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onAnimationStart' | 'onDrag' | 'onDragStart' | 'onDragEnd'>,
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   isLoading?: boolean
+  asChild?: boolean
   shadowColor?: keyof typeof shadowColorHexMap
   shadowStyle?: 'hard' | 'soft' | 'none'
 }
@@ -67,6 +70,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       shape,
       size,
       isLoading = false,
+      asChild = false,
       shadowColor = 'ink',
       shadowStyle = 'hard',
       children,
@@ -75,53 +79,25 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
+    const Comp = asChild ? Slot : 'button'
     const isSquareOrFab = shape === 'fab' || size === 'icon'
 
-    // Compute dynamic motion shadows based on shadowStyle & shadowColor
-    let initialShadow = '4px 4px 0 0 var(--rk-shadow-color, #18181b)'
-    let hoverShadow = '6px 6px 0 0 var(--rk-shadow-color, #18181b)'
-    let tapShadow = '1px 1px 0 0 var(--rk-shadow-color, #18181b)'
-
-    if (shadowStyle === 'none') {
-      initialShadow = '0px 0px 0 0 transparent'
-      hoverShadow = '0px 0px 0 0 transparent'
-      tapShadow = '0px 0px 0 0 transparent'
-    } else if (shadowStyle === 'soft') {
-      initialShadow = '0 8px 20px -4px rgba(24, 24, 27, 0.15), 2px 2px 0 0 var(--rk-shadow-color, #18181b)'
-      hoverShadow = '0 12px 28px -4px rgba(24, 24, 27, 0.25), 4px 4px 0 0 var(--rk-shadow-color, #18181b)'
-      tapShadow = '0 4px 10px -2px rgba(24, 24, 27, 0.1), 1px 1px 0 0 var(--rk-shadow-color, #18181b)'
-    } else if (shadowColor !== 'ink') {
-      const colorHex = shadowColorHexMap[shadowColor] || '#18181b'
-      initialShadow = `4px 4px 0 0 ${colorHex}`
-      hoverShadow = `6px 6px 0 0 ${colorHex}`
-      tapShadow = `1px 1px 0 0 ${colorHex}`
-    }
+    const style = {
+      '--rk-btn-shadow-color': shadowColorHexMap[shadowColor] ?? '#18181b',
+    } as React.CSSProperties
 
     return (
-      <motion.button
+      <Comp
         ref={ref}
         disabled={disabled || isLoading}
-        initial={{ boxShadow: initialShadow }}
-        whileHover={{
-          x: shadowStyle === 'none' ? 0 : -2,
-          y: shadowStyle === 'none' ? 0 : -2,
-          boxShadow: hoverShadow,
-        }}
-        whileTap={{
-          x: shadowStyle === 'none' ? 0 : 2,
-          y: shadowStyle === 'none' ? 0 : 2,
-          boxShadow: tapShadow,
-        }}
-        transition={{
-          type: 'spring',
-          stiffness: 500,
-          damping: 25,
-        }}
+        data-shadow-style={shadowStyle}
+        style={style}
         className={cn(
+          'rk-btn',
           buttonVariants({ variant, shape, size, className }),
           isSquareOrFab && '!p-0 !px-0 !py-0 shrink-0 aspect-square'
         )}
-        {...(props as any)}
+        {...props}
       >
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">
@@ -131,7 +107,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ) : (
           children
         )}
-      </motion.button>
+      </Comp>
     )
   }
 )
