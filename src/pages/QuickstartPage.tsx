@@ -207,7 +207,7 @@ export default function App() {
       <div className="pt-6 flex items-center justify-between border-t-2 border-black/10">
         <Link to="/components/button">
           <Button variant="primary" size="lg" shape="pill">
-            Explore All 30 Components <ArrowRight className="w-5 h-5 ml-2 stroke-[2.5]" />
+            Explore All 37 Components <ArrowRight className="w-5 h-5 ml-2 stroke-[2.5]" />
           </Button>
         </Link>
       </div>

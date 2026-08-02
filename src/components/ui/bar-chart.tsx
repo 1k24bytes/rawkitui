@@ -30,7 +30,7 @@ function CustomTooltip({ active, payload, label }: any) {
   if (active && payload && payload.length) {
     const data = payload[0]
     return (
-      <div className="bg-white border-2 border-black rounded-xl p-3 rk-shadow-sm font-mono">
+      <div className="bg-white rk-border-sm rounded-xl p-3 rk-shadow-sm font-mono">
         <p className="text-xs font-black uppercase text-[#18181B]">{label}</p>
         <p className="text-sm font-black text-[#FB923C] mt-0.5">
           {data.value.toLocaleString()}
@@ -58,6 +58,8 @@ export function BarChart({
 
   return (
     <div
+      role="img"
+      aria-label="Bar chart"
       className={cn(
         'w-full bg-white rounded-2xl rk-border p-4 rk-shadow-sm font-sans',
         className

@@ -15,13 +15,23 @@ const cardVariants = {
 }
 
 const shadowColorMap = {
-  ink: 'rk-shadow-ink',
-  yellow: 'rk-shadow-yellow',
-  orange: 'rk-shadow-orange',
-  violet: 'rk-shadow-violet',
-  mint: 'rk-shadow-mint',
-  pink: 'rk-shadow-pink',
-  sky: 'rk-shadow-sky',
+  ink: 'rk-shadow',
+  yellow: 'rk-shadow',
+  orange: 'rk-shadow',
+  violet: 'rk-shadow',
+  mint: 'rk-shadow',
+  pink: 'rk-shadow',
+  sky: 'rk-shadow',
+}
+
+const shadowColorHexMap: Record<keyof typeof shadowColorMap, string> = {
+  ink: '#18181b',
+  yellow: '#FACC15',
+  orange: '#FB923C',
+  violet: '#A78BFA',
+  mint: '#4ADE80',
+  pink: '#F472B6',
+  sky: '#38BDF8',
 }
 
 export interface CardProps
@@ -56,7 +66,12 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         ? 'rk-shadow-none'
         : shadowStyle === 'soft'
         ? 'rk-shadow-soft'
-        : shadowColorMap[shadowColor] || 'rk-shadow'
+        : 'rk-shadow'
+
+    const shadowVar =
+      shadowStyle === 'hard' && shadowColor !== 'ink'
+        ? ({ '--rk-shadow-color': shadowColorHexMap[shadowColor] } as React.CSSProperties)
+        : undefined
 
     return (
       <motion.div
@@ -69,6 +84,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
             : undefined
         }
         transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+        style={shadowVar}
         className={cn(
           'rounded-[28px] rk-border p-6 sm:p-7 font-sans relative overflow-hidden transition-colors',
           cardVariants[variant],

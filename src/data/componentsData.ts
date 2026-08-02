@@ -214,20 +214,6 @@ import { User, Bot, Shield } from "lucide-react"
       { name: 'align', type: "'start' | 'end'", default: "'start'", description: 'Menu edge alignment' },
     ],
   },
-  'empty-state': {
-    id: 'empty-state', name: 'Empty State', category: 'Feedback & Data',
-    description: 'Friendly, action-ready placeholder for empty lists and first-run screens.',
-    cliCommand: 'npx shadcn add @rawkitui/empty-state',
-    codeSnippet: `import { EmptyState } from "@/components/ui/empty-state"
-
-<EmptyState title="No projects yet" description="Create your first project to get started." />`,
-    props: [
-      { name: 'title', type: 'ReactNode', default: 'required', description: 'Primary empty state message' },
-      { name: 'description', type: 'ReactNode', default: 'undefined', description: 'Supporting context' },
-      { name: 'action', type: 'ReactNode', default: 'undefined', description: 'Optional call to action' },
-      { name: 'variant', type: "'white' | 'mint' | 'peach' | 'lavender' | 'sky'", default: "'white'", description: 'Pastel surface variant' },
-    ],
-  },
   pagination: {
     id: 'pagination', name: 'Pagination', category: 'Navigation',
     description: 'Responsive page navigation with ellipsis compression and disabled edge controls.',
@@ -1067,6 +1053,260 @@ export default function MarqueeDemo() {
       { name: 'items', type: 'string[]', default: '[]', description: 'String labels to repeat in loop' },
       { name: 'duration', type: 'number', default: '20', description: 'Seconds per full cycle' },
       { name: 'reverse', type: 'boolean', default: 'false', description: 'Reverse scrolling direction' },
+    ],
+  },
+  kbd: {
+    id: 'kbd',
+    name: 'Kbd',
+    category: 'Primitives',
+    description: 'Keyboard key primitive with thick 2px ink border, hard offset shadow, monospace label, and subtle press animation.',
+    cliCommand: 'npx shadcn add @rawkitui/kbd',
+    codeSnippet: `import { Kbd } from "@/components/ui/kbd"
+
+export default function KbdDemo() {
+  return (
+    <div className="flex items-center gap-2">
+      <Kbd>⌘</Kbd><Kbd>K</Kbd>
+      <span className="text-xs font-bold text-black/50">+</span>
+      <Kbd size="lg">Ctrl</Kbd><Kbd size="lg">C</Kbd>
+    </div>
+  )
+}`,
+    props: [
+      { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Key scale and font size' },
+      { name: 'className', type: 'string', default: 'undefined', description: 'Tailwind sizing and layout overrides' },
+    ],
+  },
+  sheet: {
+    id: 'sheet',
+    name: 'Sheet',
+    category: 'Navigation',
+    description: 'Slide-out side drawer panel with spring animation, backdrop, ESC and click-outside dismissal.',
+    cliCommand: 'npx shadcn add @rawkitui/sheet',
+    codeSnippet: `import { Sheet } from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
+import { useState } from "react"
+
+export default function SheetDemo() {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open Sheet</Button>
+      <Sheet open={open} onClose={() => setOpen(false)} title="Filters" description="Narrow down the results">
+        <p className="text-sm font-semibold">Sheet content goes here!</p>
+      </Sheet>
+    </>
+  )
+}`,
+    props: [
+      { name: 'open', type: 'boolean', default: 'false', description: 'Drawer visibility state' },
+      { name: 'onClose', type: '() => void', default: 'undefined', description: 'Close handler (ESC, backdrop, X button)' },
+      { name: 'side', type: "'left' | 'right'", default: "'right'", description: 'Slide-out edge' },
+      { name: 'title', type: 'ReactNode', default: 'undefined', description: 'Panel header title' },
+      { name: 'description', type: 'ReactNode', default: 'undefined', description: 'Panel header subtitle' },
+    ],
+  },
+  popover: {
+    id: 'popover',
+    name: 'Popover',
+    category: 'Feedback & Data',
+    description: 'Floating panel anchored to a trigger button with click-outside and ESC dismissal.',
+    cliCommand: 'npx shadcn add @rawkitui/popover',
+    codeSnippet: `import { Popover } from "@/components/ui/popover"
+import { Button } from "@/components/ui/button"
+
+export default function PopoverDemo() {
+  return (
+    <Popover trigger={<Button variant="primary">Open Popover</Button>}>
+      <p className="text-sm font-extrabold text-[#18181B]">Pop-Brutalist Popover</p>
+      <p className="mt-1 text-xs font-bold text-[#18181B]/60">Floating panel anchored to a trigger button.</p>
+    </Popover>
+  )
+}`,
+    examples: [
+      {
+        id: 'popover-default',
+        title: 'User Profile Popover',
+        description: 'Standard popover showing user profile info, status badge, and quick action button.',
+        codeSnippet: `<Popover
+  trigger={
+    <Button variant="primary" className="gap-2">
+      <User className="w-4 h-4 stroke-[2.5]" /> User Profile
+    </Button>
+  }
+>
+  <div className="space-y-3 font-sans">
+    <div className="flex items-center gap-3 border-b-2 border-[#18181B]/15 pb-3">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#18181B] bg-[#FDE047] font-mono text-xs font-black">
+        RK
+      </div>
+      <div className="min-w-0">
+        <p className="font-display text-sm font-black text-[#18181B] truncate">Alex Rivers</p>
+        <p className="font-mono text-[10px] font-bold text-[#18181B]/60 truncate">alex@rawkitui.dev</p>
+      </div>
+    </div>
+    <div className="flex items-center justify-between text-xs font-bold">
+      <span className="text-[#18181B]/70">Plan:</span>
+      <span className="rounded-full border border-[#18181B] bg-[#BBF7D0] px-2 py-0.5 font-mono text-[10px] font-black uppercase text-[#18181B]">Pro Member</span>
+    </div>
+    <Button variant="black" size="sm" className="w-full">Manage Account</Button>
+  </div>
+</Popover>`,
+      },
+      {
+        id: 'popover-form',
+        title: 'Token & Preferences Settings Popover',
+        description: 'Interactive settings card with radio selectors, color swatch tokens, and apply buttons.',
+        codeSnippet: `<Popover
+  trigger={
+    <Button variant="accent" className="gap-2">
+      <Settings className="w-4 h-4 stroke-[2.5]" /> Card Tokens
+    </Button>
+  }
+>
+  <div className="space-y-3 font-sans w-60">
+    <div className="border-b-2 border-[#18181B]/15 pb-2">
+      <p className="font-display text-sm font-black text-[#18181B]">Token Preferences</p>
+      <p className="font-mono text-[10px] font-bold text-[#18181B]/60">Customize shadow & border tokens</p>
+    </div>
+    <div className="space-y-2.5 font-mono text-xs text-[#18181B]">
+      <div>
+        <label className="font-black text-[10px] uppercase block mb-1">Border Width</label>
+        <div className="flex gap-2">
+          <button type="button" className="flex-1 rounded-lg border-2 border-[#18181B] bg-[#FDE047] py-1 font-black text-center text-xs">3px</button>
+          <button type="button" className="flex-1 rounded-lg border-2 border-[#18181B] bg-white py-1 font-bold text-center text-xs">2px</button>
+        </div>
+      </div>
+    </div>
+    <Button variant="black" size="sm" className="w-full mt-1">Apply Tokens</Button>
+  </div>
+</Popover>`,
+      },
+      {
+        id: 'popover-positions',
+        title: 'Position & Alignment Sides (Top, Bottom, Left, Right)',
+        description: 'Directional triggers anchored to Top, Bottom, Left, and Right edges.',
+        codeSnippet: `<div className="flex flex-wrap items-center justify-center gap-3">
+  <Popover side="top" trigger={<Button variant="yellow" size="sm">Top Popover</Button>}>
+    <p className="font-mono text-xs font-black">⬆ Anchored to Top</p>
+  </Popover>
+  <Popover side="bottom" trigger={<Button variant="mint" size="sm">Bottom Popover</Button>}>
+    <p className="font-mono text-xs font-black">⬇ Anchored to Bottom</p>
+  </Popover>
+  <Popover side="left" trigger={<Button variant="peach" size="sm">Left Popover</Button>}>
+    <p className="font-mono text-xs font-black">⬅ Anchored to Left</p>
+  </Popover>
+  <Popover side="right" trigger={<Button variant="sky" size="sm">Right Popover</Button>}>
+    <p className="font-mono text-xs font-black">➡ Anchored to Right</p>
+  </Popover>
+</div>`,
+      },
+    ],
+    props: [
+      { name: 'trigger', type: 'ReactNode', default: 'required', description: 'Element that toggles the popover' },
+      { name: 'side', type: "'top' | 'bottom' | 'left' | 'right'", default: "'bottom'", description: 'Anchor direction' },
+      { name: 'align', type: "'start' | 'center' | 'end'", default: "'center'", description: 'Edge alignment' },
+      { name: 'sideOffset', type: 'number', default: '10', description: 'Gap from the trigger' },
+    ],
+  },
+  'copy-button': {
+    id: 'copy-button',
+    name: 'Copy Button',
+    category: 'Primitives',
+    description: 'Clipboard utility button that accepts a value string, copies it, and animates a pop checkmark.',
+    cliCommand: 'npx shadcn add @rawkitui/copy-button',
+    codeSnippet: `import { CopyButton } from "@/components/ui/copy-button"
+
+export default function CopyButtonDemo() {
+  return <CopyButton value="npx shadcn add @rawkitui/copy-button" />
+}`,
+    props: [
+      { name: 'value', type: 'string', default: 'required', description: 'String copied to the clipboard' },
+      { name: 'label', type: 'ReactNode', default: "'Copy'", description: 'Default button label' },
+      { name: 'copiedLabel', type: 'ReactNode', default: "'Copied!'", description: 'Label after successful copy' },
+      { name: 'resetDelay', type: 'number', default: '2000', description: 'Ms before reverting; 0 disables' },
+    ],
+  },
+  'number-input': {
+    id: 'number-input',
+    name: 'Number Input',
+    category: 'Form Controls',
+    description: 'Quantity stepper with plus/minus buttons surrounding a numeric field, min/max clamping, and keyboard input.',
+    cliCommand: 'npx shadcn add @rawkitui/number-input',
+    codeSnippet: `import { NumberInput } from "@/components/ui/number-input"
+
+export default function NumberInputDemo() {
+  return <NumberInput defaultValue={1} min={1} max={10} label="Quantity" />
+}`,
+    props: [
+      { name: 'value / defaultValue', type: 'number', default: '1', description: 'Controlled or initial value' },
+      { name: 'onChange', type: '(value: number) => void', default: 'undefined', description: 'Called when the value changes' },
+      { name: 'min / max', type: 'number', default: '-Infinity / Infinity', description: 'Clamping boundaries' },
+      { name: 'step', type: 'number', default: '1', description: 'Increment per button press' },
+    ],
+  },
+  'otp-input': {
+    id: 'otp-input',
+    name: 'OTP Input',
+    category: 'Form Controls',
+    description: 'Verification code field with individual digit boxes, auto-focus movement, backspace backtracking, and paste detection.',
+    cliCommand: 'npx shadcn add @rawkitui/otp-input',
+    codeSnippet: `import { OTPInput } from "@/components/ui/otp-input"
+
+export default function OTPInputDemo() {
+  return (
+    <OTPInput
+      length={6}
+      onComplete={(code) => console.log("Verified:", code)}
+    />
+  )
+}`,
+    props: [
+      { name: 'length', type: 'number', default: '4', description: 'Number of digit boxes' },
+      { name: 'value / defaultValue', type: 'string', default: "''", description: 'Controlled or initial code' },
+      { name: 'onChange', type: '(value: string) => void', default: 'undefined', description: 'Called on every digit change' },
+      { name: 'onComplete', type: '(value: string) => void', default: 'undefined', description: 'Called when all digits are filled' },
+    ],
+  },
+  rating: {
+    id: 'rating',
+    name: 'Rating',
+    category: 'Form Controls',
+    description: 'Interactive star rating primitive with hover preview, keyboard radio semantics, and read-only mode.',
+    cliCommand: 'npx shadcn add @rawkitui/rating',
+    codeSnippet: `import { Rating } from "@/components/ui/rating"
+
+export default function RatingDemo() {
+  return <Rating defaultValue={3} count={5} onChange={(v) => console.log(v)} />
+}`,
+    props: [
+      { name: 'value / defaultValue', type: 'number', default: '0', description: 'Controlled or initial rating' },
+      { name: 'onChange', type: '(value: number) => void', default: 'undefined', description: 'Called when a star is selected' },
+      { name: 'count', type: 'number', default: '5', description: 'Number of stars' },
+      { name: 'readOnly', type: 'boolean', default: 'false', description: 'Disables interaction' },
+      { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Star scale' },
+    ],
+  },
+  collapsible: {
+    id: 'collapsible',
+    name: 'Collapsible',
+    category: 'Navigation',
+    description: 'Lightweight show/hide toggle wrapper with spring chevron rotation and ARIA-expanded state.',
+    cliCommand: 'npx shadcn add @rawkitui/collapsible',
+    codeSnippet: `import { Collapsible } from "@/components/ui/collapsible"
+
+export default function CollapsibleDemo() {
+  return (
+    <Collapsible trigger="Show advanced options">
+      <p className="text-sm font-semibold">Hidden content revealed!</p>
+    </Collapsible>
+  )
+}`,
+    props: [
+      { name: 'trigger', type: 'ReactNode', default: 'required', description: 'Header row content' },
+      { name: 'defaultOpen', type: 'boolean', default: 'false', description: 'Initial open state' },
+      { name: 'open', type: 'boolean', default: 'undefined', description: 'Controlled open state' },
+      { name: 'onOpenChange', type: '(open: boolean) => void', default: 'undefined', description: 'Toggle callback' },
     ],
   },
 }

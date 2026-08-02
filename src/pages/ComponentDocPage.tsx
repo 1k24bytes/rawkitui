@@ -16,6 +16,7 @@ import {
   ArrowRight,
   Layers,
   User,
+  Settings,
   Bot,
   Zap,
   Shield
@@ -42,7 +43,6 @@ import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { Calendar } from '@/components/ui/calendar'
 import { Command } from '@/components/ui/command'
 import { DropdownMenu } from '@/components/ui/dropdown-menu'
-import { EmptyState } from '@/components/ui/empty-state'
 import { Pagination } from '@/components/ui/pagination'
 import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -51,6 +51,14 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Slider } from '@/components/ui/slider'
 import { ToggleGroup } from '@/components/ui/toggle-group'
 import { Marquee } from '@/components/ui/marquee'
+import { Kbd } from '@/components/ui/kbd'
+import { Sheet } from '@/components/ui/sheet'
+import { Popover } from '@/components/ui/popover'
+import { CopyButton } from '@/components/ui/copy-button'
+import { NumberInput } from '@/components/ui/number-input'
+import { OTPInput } from '@/components/ui/otp-input'
+import { Rating } from '@/components/ui/rating'
+import { Collapsible } from '@/components/ui/collapsible'
 
 function ExampleBlock({
   title,
@@ -148,6 +156,7 @@ export function ComponentDocPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [switchVal, setSwitchVal] = useState(true)
   const [checkboxVal, setCheckboxVal] = useState(true)
+  const [isSheetOpen, setIsSheetOpen] = useState(false)
   const [shadowMode, setShadowMode] = useState('ink')
 
   const component = (id && COMPONENTS_DATA[id]) || COMPONENTS_DATA['button']
@@ -541,18 +550,108 @@ export function ComponentDocPage() {
           </div>
         )
 
-      default:
+      case 'popover-default':
         return (
-          <div className="w-full max-w-xl">
-            <Accordion
-              defaultValue="1"
-              items={[
-                { id: "1", title: "Why the thick borders?", content: "RawkitUI uses strong ink outlines to keep structure visible across every surface." },
-                { id: "2", title: "How does press physics work?", content: "Controls lift on hover and depress on press with a short mechanical transition." }
-              ]}
-            />
+          <div className="flex justify-center w-full py-4">
+            <Popover
+              trigger={
+                <Button variant="primary" className="gap-2">
+                  <User className="w-4 h-4 stroke-[2.5]" /> User Profile
+                </Button>
+              }
+              align="center"
+            >
+              <div className="space-y-3 font-sans">
+                <div className="flex items-center gap-3 border-b-2 border-[#18181B]/15 pb-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#18181B] bg-[#FDE047] font-mono text-xs font-black">
+                    RK
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-display text-sm font-black text-[#18181B] truncate">Alex Rivers</p>
+                    <p className="font-mono text-[10px] font-bold text-[#18181B]/60 truncate">alex@rawkitui.dev</p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-xs font-bold">
+                  <span className="text-[#18181B]/70">Plan:</span>
+                  <span className="rounded-full border border-[#18181B] bg-[#BBF7D0] px-2 py-0.5 font-mono text-[10px] font-black uppercase text-[#18181B]">Pro Member</span>
+                </div>
+                <Button variant="black" size="sm" className="w-full">Manage Account</Button>
+              </div>
+            </Popover>
           </div>
         )
+
+      case 'popover-form':
+        return (
+          <div className="flex justify-center w-full py-4">
+            <Popover
+              trigger={
+                <Button variant="accent" className="gap-2">
+                  <Settings className="w-4 h-4 stroke-[2.5]" /> Card Tokens
+                </Button>
+              }
+            >
+              <div className="space-y-3 font-sans w-60">
+                <div className="border-b-2 border-[#18181B]/15 pb-2">
+                  <p className="font-display text-sm font-black text-[#18181B]">Token Preferences</p>
+                  <p className="font-mono text-[10px] font-bold text-[#18181B]/60">Customize shadow & border tokens</p>
+                </div>
+                <div className="space-y-2.5 font-mono text-xs text-[#18181B]">
+                  <div>
+                    <label className="font-black text-[10px] uppercase block mb-1">Border Width</label>
+                    <div className="flex gap-2">
+                      <button type="button" className="flex-1 rounded-lg border-2 border-[#18181B] bg-[#FDE047] py-1 font-black text-center text-xs">3px</button>
+                      <button type="button" className="flex-1 rounded-lg border-2 border-[#18181B] bg-white py-1 font-bold text-center text-xs">2px</button>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="font-black text-[10px] uppercase block mb-1">Shadow Tint</label>
+                    <div className="flex gap-1.5">
+                      <span className="h-6 w-6 rounded-full border-2 border-[#18181B] bg-[#18181B] cursor-pointer" />
+                      <span className="h-6 w-6 rounded-full border-2 border-[#18181B] bg-[#FDE047] cursor-pointer" />
+                      <span className="h-6 w-6 rounded-full border-2 border-[#18181B] bg-[#BBF7D0] cursor-pointer" />
+                      <span className="h-6 w-6 rounded-full border-2 border-[#18181B] bg-[#EC4899] cursor-pointer" />
+                    </div>
+                  </div>
+                </div>
+                <Button variant="black" size="sm" className="w-full mt-1">Apply Tokens</Button>
+              </div>
+            </Popover>
+          </div>
+        )
+
+      case 'popover-positions':
+        return (
+          <div className="flex flex-wrap items-center justify-center gap-3 w-full py-6">
+            <Popover side="top" trigger={<Button variant="yellow" size="sm">Top Popover</Button>}>
+              <div className="p-1 text-center">
+                <p className="font-mono text-xs font-black text-[#18181B]">⬆ Anchored to Top</p>
+                <p className="mt-0.5 text-[10px] font-bold text-[#18181B]/70">Floats above trigger</p>
+              </div>
+            </Popover>
+            <Popover side="bottom" trigger={<Button variant="mint" size="sm">Bottom Popover</Button>}>
+              <div className="p-1 text-center">
+                <p className="font-mono text-xs font-black text-[#18181B]">⬇ Anchored to Bottom</p>
+                <p className="mt-0.5 text-[10px] font-bold text-[#18181B]/70">Floats below trigger</p>
+              </div>
+            </Popover>
+            <Popover side="left" trigger={<Button variant="peach" size="sm">Left Popover</Button>}>
+              <div className="p-1 text-center">
+                <p className="font-mono text-xs font-black text-[#18181B]">⬅ Anchored to Left</p>
+                <p className="mt-0.5 text-[10px] font-bold text-[#18181B]/70">Floats on the left</p>
+              </div>
+            </Popover>
+            <Popover side="right" trigger={<Button variant="sky" size="sm">Right Popover</Button>}>
+              <div className="p-1 text-center">
+                <p className="font-mono text-xs font-black text-[#18181B]">➡ Anchored to Right</p>
+                <p className="mt-0.5 text-[10px] font-bold text-[#18181B]/70">Floats on the right</p>
+              </div>
+            </Popover>
+          </div>
+        )
+
+      default:
+        return renderFallbackLivePreview()
     }
   }
 
@@ -665,6 +764,7 @@ export function ComponentDocPage() {
           <div className="max-w-md mx-auto w-full">
             <Stepper
               currentStep={2}
+              onStepClick={(stepId) => console.log('Step clicked:', stepId)}
               steps={[
                 { id: 1, label: 'Install' },
                 { id: 2, label: 'Configure' },
@@ -809,8 +909,6 @@ export function ComponentDocPage() {
         )
       case 'dropdown-menu':
         return <DropdownMenu items={[{ label: 'Edit component', shortcut: 'E', onSelect: () => {} }, { separator: true, label: '' }, { label: 'Duplicate', onSelect: () => {} }, { label: 'Delete', onSelect: () => {} }]} />
-      case 'empty-state':
-        return <div className="w-full max-w-lg"><EmptyState variant="sky" title="No saved themes" description="Create a theme to make it appear here." action={<Button variant="primary" size="sm">Create theme</Button>} /></div>
       case 'pagination':
         return <Pagination currentPage={3} totalPages={8} onPageChange={() => {}} />
       case 'progress':
@@ -853,7 +951,21 @@ export function ComponentDocPage() {
           </div>
         )
       case 'skeleton':
-        return <div className="flex w-full max-w-md items-center gap-3"><Skeleton variant="circle" className="h-12 w-12" /><div className="flex-1 space-y-2"><Skeleton variant="text" className="w-2/3" /><Skeleton variant="text" className="w-full" /></div></div>
+        return (
+          <div className="flex w-full max-w-md flex-col items-center gap-4">
+            <div className="flex w-full items-center gap-3">
+              <Skeleton variant="circle" className="h-12 w-12" />
+              <div className="flex-1 space-y-2">
+                <Skeleton variant="text" className="w-2/3" />
+                <Skeleton variant="text" className="w-full" />
+              </div>
+            </div>
+            <div className="grid w-full grid-cols-2 gap-3">
+              <Skeleton loader="stripe" className="h-10" />
+              <Skeleton loader="shimmer" className="h-10" />
+            </div>
+          </div>
+        )
       case 'sonner':
         return (
           <ToastProvider duration={0}>
@@ -871,6 +983,72 @@ export function ComponentDocPage() {
         return <div className="w-full max-w-md"><Slider label="Motion intensity" defaultValue={64} showValue /></div>
       case 'toggle-group':
         return <ToggleGroup variant="outline" defaultValue="grid" items={[{ value: 'grid', label: 'Grid' }, { value: 'list', label: 'List' }, { value: 'compact', label: 'Compact' }]} />
+      case 'kbd':
+        return (
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <Kbd>⌘</Kbd><Kbd>K</Kbd>
+            <span className="mx-1 text-xs font-bold text-black/50">+</span>
+            <Kbd size="lg">Ctrl</Kbd><Kbd size="lg">C</Kbd>
+            <span className="mx-1 text-xs font-bold text-black/50">+</span>
+            <Kbd size="sm">Esc</Kbd>
+          </div>
+        )
+      case 'sheet':
+        return (
+          <div className="text-center w-full">
+            <Button variant="primary" onClick={() => setIsSheetOpen(true)}>
+              Open Filters Sheet
+            </Button>
+            <Sheet
+              open={isSheetOpen}
+              onClose={() => setIsSheetOpen(false)}
+              title="Filters"
+              description="Narrow down the results"
+            >
+              <div className="space-y-3">
+                <p className="text-sm font-semibold">Sheet content goes here!</p>
+                <Button variant="black" size="sm" className="w-full" onClick={() => setIsSheetOpen(false)}>Apply Filters</Button>
+              </div>
+            </Sheet>
+          </div>
+        )
+      case 'popover':
+        return renderExamplePreview('popover-default')
+      case 'copy-button':
+        return (
+          <div className="flex flex-col items-center gap-3">
+            <CopyButton value="npx shadcn add @rawkitui/copy-button" />
+            <p className="font-mono text-[11px] font-bold text-black/50">Click to copy the CLI command</p>
+          </div>
+        )
+      case 'number-input':
+        return (
+          <div className="flex justify-center w-full">
+            <NumberInput defaultValue={3} min={1} max={10} label="Quantity" />
+          </div>
+        )
+      case 'otp-input':
+        return (
+          <div className="flex flex-col items-center gap-3 w-full">
+            <OTPInput length={6} onComplete={(code) => console.log('OTP complete:', code)} />
+            <p className="font-mono text-[11px] font-bold text-black/50">Paste or type a 6-digit code</p>
+          </div>
+        )
+      case 'rating':
+        return (
+          <div className="flex flex-col items-center gap-2 w-full">
+            <Rating defaultValue={3} count={5} onChange={(v) => console.log('Rated:', v)} />
+            <p className="font-mono text-[11px] font-bold text-black/50">Hover & click to rate</p>
+          </div>
+        )
+      case 'collapsible':
+        return (
+          <div className="w-full max-w-md mx-auto">
+            <Collapsible trigger="Show advanced options">
+              <p className="text-sm font-semibold">Hidden content revealed!</p>
+            </Collapsible>
+          </div>
+        )
       default:
         return <Button>Default Preview</Button>
     }

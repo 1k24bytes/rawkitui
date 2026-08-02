@@ -22,6 +22,8 @@ export function FloatingNav({
 }: FloatingNavProps) {
   return (
     <div
+      role="tablist"
+      aria-label="Floating navigation"
       className={cn(
         'inline-flex items-center gap-1.5 p-2 rounded-full bg-[#18181B] text-white rk-border rk-shadow-lg z-50 transition-all duration-200 relative',
         className
@@ -33,9 +35,14 @@ export function FloatingNav({
         return (
           <button
             key={tab.id}
+            type="button"
+            role="tab"
+            aria-selected={isActive}
+            aria-label={tab.label}
             onClick={() => onTabChange?.(tab.id)}
             className={cn(
               'relative flex items-center gap-2 px-5 py-2 rounded-full font-extrabold text-xs tracking-wide transition-colors cursor-pointer select-none z-10',
+              'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FDE047] focus-visible:ring-offset-2 focus-visible:ring-offset-[#18181B]',
               isActive ? 'text-[#18181B]' : 'text-white/80 hover:text-white'
             )}
           >

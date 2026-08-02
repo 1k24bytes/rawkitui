@@ -182,24 +182,6 @@
       ]
     },
     {
-      "name": "empty-state",
-      "type": "registry:ui",
-      "title": "Empty State",
-      "description": "Friendly, action-ready placeholder for empty lists and first-run screens.",
-      "dependencies": [
-        "clsx",
-        "tailwind-merge",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/empty-state.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/empty-state.tsx"
-        }
-      ]
-    },
-    {
       "name": "pagination",
       "type": "registry:ui",
       "title": "Pagination",
@@ -526,6 +508,150 @@
           "path": "src/components/ui/checkbox.tsx",
           "type": "registry:ui",
           "target": "components/ui/checkbox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Keyboard key primitive with thick border, hard shadow, and press animation.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/kbd.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/kbd.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "Slide-out side drawer panel with spring animation and ESC dismissal.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "lucide-react",
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/sheet.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sheet.tsx"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Floating panel anchored to a trigger button with click-outside dismissal.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/popover.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/popover.tsx"
+        }
+      ]
+    },
+    {
+      "name": "copy-button",
+      "type": "registry:ui",
+      "title": "Copy Button",
+      "description": "Clipboard utility button with pop checkmark feedback.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/copy-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/copy-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "number-input",
+      "type": "registry:ui",
+      "title": "Number Input",
+      "description": "Quantity stepper with plus/minus buttons around a numeric field.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/number-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/number-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "otp-input",
+      "type": "registry:ui",
+      "title": "OTP Input",
+      "description": "Verification code field with auto-focus movement and paste detection.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/otp-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/otp-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "rating",
+      "type": "registry:ui",
+      "title": "Rating",
+      "description": "Interactive star rating primitive with hover preview and keyboard support.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/rating.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/rating.tsx"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "Lightweight show/hide toggle wrapper with spring rotation.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "lucide-react",
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/collapsible.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/collapsible.tsx"
         }
       ]
     }

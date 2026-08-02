@@ -74,7 +74,7 @@ export function Home() {
           {[0, 1].map((i) => (
             <div key={i} className="flex items-center gap-8 shrink-0 px-4">
               <span>✦ POP-BRUTALISM UI</span>
-              <span>✦ 30 PRIMITIVES</span>
+              <span>✦ 37 PRIMITIVES</span>
               <span>✦ TAILWIND V4</span>
               <span>✦ RECHARTS</span>
               <span>✦ FRAMER MOTION</span>
