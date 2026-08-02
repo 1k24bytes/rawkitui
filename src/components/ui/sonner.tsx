@@ -25,10 +25,10 @@ interface ToastContextValue {
 const ToastContext = React.createContext<ToastContextValue | null>(null)
 
 const variantClasses: Record<ToastVariant, string> = {
-  default: 'bg-white',
-  success: 'bg-[#BBF7D0]',
-  error: 'bg-[#F87171]',
-  info: 'bg-[#BAE6FD]',
+  default: 'bg-rk-surface',
+  success: 'bg-rk-mint',
+  error: 'bg-rk-error',
+  info: 'bg-rk-sky',
 }
 
 export function ToastProvider({ children, duration = 4000 }: { children: React.ReactNode; duration?: number }) {
@@ -50,7 +50,7 @@ export function ToastProvider({ children, duration = 4000 }: { children: React.R
           <div key={item.id} role={item.variant === 'error' ? 'alert' : 'status'} className={cn('flex w-full items-start gap-3 rounded-2xl p-4 font-sans rk-border rk-shadow-lg', variantClasses[item.variant ?? 'default'])}>
             <ToastIcon variant={item.variant} />
             <div className="min-w-0 flex-1"><div className="font-display text-sm font-black">{item.title}</div>{item.description && <div className="mt-0.5 text-xs font-bold text-black/65">{item.description}</div>}</div>
-            <button type="button" aria-label="Dismiss notification" onClick={() => dismiss(item.id)} className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white rk-border-sm hover:bg-[#FDE047] focus:outline-none focus:ring-2 focus:ring-black"><X className="h-4 w-4 stroke-[3]" aria-hidden="true" /></button>
+            <button type="button" aria-label="Dismiss notification" onClick={() => dismiss(item.id)} className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-rk-surface rk-border-sm hover:bg-rk-primary focus:outline-none focus:ring-2 focus:ring-black"><X className="h-4 w-4 stroke-[3]" aria-hidden="true" /></button>
           </div>
         ))}
       </div>

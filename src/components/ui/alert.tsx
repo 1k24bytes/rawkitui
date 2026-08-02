@@ -19,10 +19,10 @@ export function Alert({
   ...props
 }: AlertProps) {
   const variantStyles = {
-    info: 'bg-[#BAE6FD] text-[#18181B]',
-    success: 'bg-[#BBF7D0] text-[#18181B]',
-    warning: 'bg-[#FDE047] text-[#18181B]',
-    error: 'bg-[#F87171] text-[#18181B]',
+    info: 'bg-rk-sky text-rk-ink',
+    success: 'bg-rk-mint text-rk-ink',
+    warning: 'bg-rk-primary text-rk-ink',
+    error: 'bg-rk-error text-rk-ink',
   }
 
   const icons = {

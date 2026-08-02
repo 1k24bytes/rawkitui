@@ -48,7 +48,7 @@ export function Tooltip({
             exit={animVariants[position].initial}
             transition={{ type: 'spring', stiffness: 500, damping: 25 }}
             className={cn(
-              'absolute z-50 whitespace-nowrap bg-[#18181B] text-[#FDE047] text-xs font-mono font-bold px-3.5 py-1.5 rounded-xl rk-border-sm rk-shadow-md pointer-events-none',
+              'absolute z-50 whitespace-nowrap bg-rk-ink text-rk-primary text-xs font-mono font-bold px-3.5 py-1.5 rounded-xl rk-border-sm rk-shadow-md pointer-events-none',
               positionStyles[position],
               className
             )}
