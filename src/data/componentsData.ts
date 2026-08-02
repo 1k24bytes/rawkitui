@@ -40,6 +40,18 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
 />`,
     examples: [
       {
+        id: 'accordion-default',
+        title: 'Default Accordion',
+        description: 'Standard pop-brutalist accordion with active yellow header highlight and rotating chevron icons.',
+        codeSnippet: `<Accordion
+  defaultValue="1"
+  items={[
+    { id: "1", title: "Why the thick borders?", content: "RawkitUI uses strong ink outlines to keep structure visible across every surface." },
+    { id: "2", title: "How does press physics work?", content: "Controls lift on hover and depress on press with a short mechanical transition." }
+  ]}
+/>`,
+      },
+      {
         id: 'accordion-numbered',
         title: 'Numbered FAQ Accordion',
         description: 'Accordion list with mono index numbers and Plus/Minus toggle icons.',

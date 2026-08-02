@@ -513,8 +513,46 @@ export function ComponentDocPage() {
           </Card>
         )
 
+      case 'accordion-default':
+        return (
+          <div className="w-full max-w-xl">
+            <Accordion
+              defaultValue="1"
+              items={[
+                { id: "1", title: "Why the thick borders?", content: "RawkitUI uses strong ink outlines to keep structure visible across every surface." },
+                { id: "2", title: "How does press physics work?", content: "Controls lift on hover and depress on press with a short mechanical transition." }
+              ]}
+            />
+          </div>
+        )
+
+      case 'accordion-numbered':
+        return (
+          <div className="w-full max-w-xl">
+            <Accordion
+              variant="numbered"
+              defaultValue="1"
+              items={[
+                { id: "1", title: "How do I install RawkitUI?", content: "Run npx shadcn add @rawkitui/accordion in your Terminal." },
+                { id: "2", title: "Is it free and open-source?", content: "Yes, RawkitUI is completely MIT-licensed and free forever." },
+                { id: "3", title: "Does it support Server Components?", content: "Yes, fully compatible with Next.js App Router and RSC." }
+              ]}
+            />
+          </div>
+        )
+
       default:
-        return <Button>Preview</Button>
+        return (
+          <div className="w-full max-w-xl">
+            <Accordion
+              defaultValue="1"
+              items={[
+                { id: "1", title: "Why the thick borders?", content: "RawkitUI uses strong ink outlines to keep structure visible across every surface." },
+                { id: "2", title: "How does press physics work?", content: "Controls lift on hover and depress on press with a short mechanical transition." }
+              ]}
+            />
+          </div>
+        )
     }
   }
 
