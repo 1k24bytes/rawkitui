@@ -49,11 +49,11 @@ export function Stepper({ steps, currentStep, onStepClick, className }: StepperP
                     className={cn(
                       'w-9 h-9 rounded-full rk-border-sm flex items-center justify-center font-mono font-black text-sm rk-shadow-sm transition-colors duration-200 select-none shrink-0 aspect-square p-0',
                       isCompleted
-                        ? 'bg-[#4ADE80] text-[#18181B]'
+                        ? 'bg-rk-success text-rk-ink'
                         : isCurrent
-                        ? 'bg-[#FDE047] text-[#18181B]'
-                        : 'bg-white text-[#18181B]/50',
-                      isClickable && !isCurrent && !isCompleted && 'group-hover:bg-[#FDE047]/60'
+                        ? 'bg-rk-primary text-rk-ink'
+                        : 'bg-rk-surface text-rk-ink/50',
+                      isClickable && !isCurrent && !isCompleted && 'group-hover:bg-rk-primary/60'
                     )}
                   >
                     {isCompleted ? <Check className="w-5 h-5 stroke-[3.5]" aria-hidden="true" /> : stepNumber}
@@ -62,24 +62,24 @@ export function Stepper({ steps, currentStep, onStepClick, className }: StepperP
                     <div
                       className={cn(
                         'font-extrabold text-xs leading-tight',
-                        isCurrent ? 'text-[#18181B]' : 'text-[#18181B]/60'
+                        isCurrent ? 'text-rk-ink' : 'text-rk-ink/60'
                       )}
                     >
                       {step.label}
                     </div>
                     {step.description && (
-                      <div className="text-[10px] font-bold text-[#18181B]/40">{step.description}</div>
+                      <div className="text-[10px] font-bold text-rk-ink/40">{step.description}</div>
                     )}
                   </div>
                 </motion.button>
               </div>
               {index < steps.length - 1 && (
-                <div className="flex-1 h-2 bg-white rounded-full rk-border-sm relative overflow-hidden" aria-hidden="true">
+                <div className="flex-1 h-2 bg-rk-surface rounded-full rk-border-sm relative overflow-hidden" aria-hidden="true">
                   <motion.div
                     initial={{ width: '0%' }}
                     animate={{ width: isCompleted ? '100%' : '0%' }}
                     transition={{ duration: 0.3, ease: 'easeOut' }}
-                    className="h-full bg-[#4ADE80]"
+                    className="h-full bg-rk-success"
                   />
                 </div>
               )}
