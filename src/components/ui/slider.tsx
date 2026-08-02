@@ -16,16 +16,16 @@ export interface SliderProps extends Omit<React.InputHTMLAttributes<HTMLInputEle
 }
 
 const variantFills = {
-  yellow: 'bg-[#FDE047] text-[#18181B]',
-  orange: 'bg-[#FB923C] text-[#18181B]',
-  mint: 'bg-[#4ADE80] text-[#18181B]',
-  violet: 'bg-[#A78BFA] text-[#18181B]',
-  pink: 'bg-[#F472B6] text-[#18181B]',
-  sky: 'bg-[#38BDF8] text-[#18181B]',
-  lime: 'bg-[#A3E635] text-[#18181B]',
+  yellow: 'bg-rk-primary text-rk-ink',
+  orange: 'bg-rk-secondary text-rk-ink',
+  mint: 'bg-rk-success text-rk-ink',
+  violet: 'bg-rk-accent text-rk-ink',
+  pink: 'bg-rk-pink text-rk-ink',
+  sky: 'bg-rk-sky text-rk-ink',
+  lime: 'bg-[#A3E635] text-rk-ink',
   gradient: 'bg-gradient-to-r from-[#FB923C] via-[#F87171] to-[#DC2626] text-white',
-  sunset: 'bg-gradient-to-r from-[#FDE047] via-[#FB923C] to-[#F87171] text-[#18181B]',
-  neon: 'bg-gradient-to-r from-[#A3E635] via-[#34D399] to-[#38BDF8] text-[#18181B]',
+  sunset: 'bg-gradient-to-r from-rk-primary via-rk-secondary to-[#F87171] text-rk-ink',
+  neon: 'bg-gradient-to-r from-[#A3E635] via-[#34D399] to-[#38BDF8] text-rk-ink',
 }
 
 const trackSizeClasses = {
@@ -91,18 +91,18 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
           <div className="flex items-center justify-between gap-3">
             <div>
               {label && (
-                <span className="font-display text-sm font-extrabold text-[#18181B] tracking-tight">
+                <span className="font-display text-sm font-extrabold text-rk-ink tracking-tight">
                   {label}
                 </span>
               )}
               {description && (
-                <p className="text-xs font-semibold text-[#52525B] leading-none mt-0.5">
+                <p className="text-xs font-semibold text-rk-ink/60 leading-none mt-0.5">
                   {description}
                 </p>
               )}
             </div>
             {showValue && (
-              <span className="inline-flex items-center justify-center rounded-full border-2 border-[#18181B] bg-[#FDE047] px-2.5 py-0.5 font-mono text-xs font-black text-[#18181B] rk-shadow-xs">
+              <span className="inline-flex items-center justify-center rounded-full border-2 border-rk-ink bg-rk-primary px-2.5 py-0.5 font-mono text-xs font-black text-rk-ink rk-shadow-xs">
                 {currentValue}
               </span>
             )}
@@ -146,7 +146,7 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
               {showTicks && ticks.length > 0 && (
                 <div className="absolute inset-0 flex items-center justify-between px-2 pointer-events-none z-10">
                   {ticks.map((_, i) => (
-                    <div key={i} className="h-1.5 w-1.5 rounded-full bg-[#18181B]/40" />
+                    <div key={i} className="h-1.5 w-1.5 rounded-full bg-rk-ink/40" />
                   ))}
                 </div>
               )}
@@ -155,8 +155,8 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
             {/* Custom Thumb Handle (Vertically centered over track) */}
             <div
               className={cn(
-                'absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex items-center justify-center font-mono font-black border-3 border-[#18181B] rk-shadow-sm pointer-events-none z-20',
-                isFocused && 'ring-4 ring-[#18181B]/25',
+                'absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex items-center justify-center font-mono font-black border-3 border-rk-ink rk-shadow-sm pointer-events-none z-20',
+                isFocused && 'ring-4 ring-rk-ink/25',
                 thumbShape === 'circle' ? 'rounded-full' : 'rounded-xl',
                 thumbSizeClasses[size],
                 variantFills[variant]
@@ -165,9 +165,9 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
             >
               {/* Floating Tooltip Pin */}
               {showPin && (
-                <div className="absolute -top-9 left-1/2 -translate-x-1/2 rounded-md border-2 border-[#18181B] bg-[#18181B] px-2 py-0.5 font-mono text-[11px] font-black text-[#FDE047] rk-shadow-xs whitespace-nowrap">
+                <div className="absolute -top-9 left-1/2 -translate-x-1/2 rounded-md border-2 border-rk-ink bg-rk-ink px-2 py-0.5 font-mono text-[11px] font-black text-rk-primary rk-shadow-xs whitespace-nowrap">
                   {currentValue}
-                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-2 w-2 rotate-45 border-b-2 border-r-2 border-[#18181B] bg-[#18181B]" />
+                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-2 w-2 rotate-45 border-b-2 border-r-2 border-rk-ink bg-rk-ink" />
                 </div>
               )}
             </div>

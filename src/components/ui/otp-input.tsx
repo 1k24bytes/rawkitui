@@ -98,10 +98,10 @@ export function OTPInput({
           onKeyDown={(event) => handleKeyDown(index, event)}
           onPaste={handlePaste}
           className={cn(
-            'h-12 w-11 rounded-xl bg-white text-center font-mono text-lg font-black text-[#18181B] rk-border-sm rk-shadow-sm transition-all outline-none',
-            'focus:bg-[#FDE047]/40 focus:ring-4 focus:ring-black/15',
+            'h-12 w-11 rounded-xl bg-rk-surface text-center font-mono text-lg font-black text-rk-ink rk-border-sm rk-shadow-sm transition-all outline-none',
+            'focus:bg-rk-primary/40 focus:ring-4 focus:ring-black/15',
             'disabled:opacity-50',
-            current[index] && 'bg-[#FDE047]/25'
+            current[index] && 'bg-rk-primary/25'
           )}
         />
       ))}

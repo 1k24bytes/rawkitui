@@ -57,8 +57,8 @@ export function NumberInput({
 
   const stepButtonClass = (side: 'left' | 'right') =>
     cn(
-      'flex h-9 w-9 shrink-0 items-center justify-center bg-white font-black text-[#18181B] rk-border-sm transition-all cursor-pointer select-none',
-      'hover:bg-[#FDE047] active:translate-y-[2px] active:shadow-none',
+      'flex h-9 w-9 shrink-0 items-center justify-center bg-rk-surface font-black text-rk-ink rk-border-sm transition-all cursor-pointer select-none',
+      'hover:bg-rk-primary active:translate-y-[2px] active:shadow-none',
       'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2',
       side === 'left' ? 'rounded-l-full' : 'rounded-r-full',
       (disabled || (side === 'left' && current <= min) || (side === 'right' && current >= max)) &&
@@ -68,7 +68,7 @@ export function NumberInput({
   return (
     <div className={cn('inline-flex flex-col gap-1.5 font-sans', className)}>
       {label && (
-        <label className="text-xs font-extrabold text-[#18181B]/80">{label}</label>
+        <label className="text-xs font-extrabold text-rk-ink/80">{label}</label>
       )}
       <div className="inline-flex items-stretch">
         <button
@@ -87,7 +87,7 @@ export function NumberInput({
           value={current}
           disabled={disabled}
           onChange={handleChange}
-          className="h-9 w-16 border-x-0 border-y-0 bg-white text-center font-mono text-sm font-black text-[#18181B] outline-none focus-visible:bg-[#FDE047]/40 disabled:opacity-50"
+          className="h-9 w-16 border-x-0 border-y-0 bg-rk-surface text-center font-mono text-sm font-black text-rk-ink outline-none focus-visible:bg-rk-primary/40 disabled:opacity-50"
         />
         <button
           type="button"

@@ -73,7 +73,7 @@ export function Rating({
               className={cn(
                 sizeClass,
                 'transition-colors',
-                filled ? 'fill-[#FDE047] stroke-[#18181B] stroke-2' : 'fill-white stroke-[#18181B] stroke-2'
+                filled ? 'fill-rk-primary stroke-rk-ink stroke-2' : 'fill-rk-surface stroke-rk-ink stroke-2'
               )}
               aria-hidden="true"
             />

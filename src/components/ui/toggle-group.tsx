@@ -36,7 +36,7 @@ export function ToggleGroup({ items, type = 'single', value: controlledValue, de
     <div role="group" className={cn('inline-flex flex-wrap items-center gap-2 font-sans', className)} {...props}>
       {items.map((item) => {
         const selected = selectedValues.includes(item.value)
-        return <button key={item.value} type="button" aria-pressed={selected} disabled={item.disabled} onClick={() => toggle(item)} className={cn('flex min-h-10 items-center gap-2 rounded-full px-4 text-xs font-black transition-colors focus:outline-none focus:ring-4 focus:ring-black focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-40', selected ? 'bg-[#FDE047] text-[#18181B] rk-border-sm rk-shadow-sm' : variant === 'outline' ? 'bg-white text-[#18181B] rk-border-sm hover:bg-[#BBF7D0]' : 'bg-[#F4F4F0] text-[#18181B] hover:bg-white')}>{item.icon}<span>{item.label}</span></button>
+        return <button key={item.value} type="button" aria-pressed={selected} disabled={item.disabled} onClick={() => toggle(item)} className={cn('flex min-h-10 items-center gap-2 rounded-full px-4 text-xs font-black transition-colors focus:outline-none focus:ring-4 focus:ring-black focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-40', selected ? 'bg-rk-primary text-rk-ink rk-border-sm rk-shadow-sm' : variant === 'outline' ? 'bg-rk-surface text-rk-ink rk-border-sm hover:bg-rk-mint' : 'bg-rk-canvas text-rk-ink hover:bg-rk-surface')}>{item.icon}<span>{item.label}</span></button>
       })}
     </div>
   )
