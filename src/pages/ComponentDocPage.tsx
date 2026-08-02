@@ -50,6 +50,7 @@ import { ToastProvider, useToast } from '@/components/ui/sonner'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Slider } from '@/components/ui/slider'
 import { ToggleGroup } from '@/components/ui/toggle-group'
+import { Marquee } from '@/components/ui/marquee'
 
 function ExampleBlock({
   title,
@@ -520,6 +521,12 @@ export function ComponentDocPage() {
   // Fallback live preview per component when examples array isn't populated
   const renderFallbackLivePreview = () => {
     switch (component.id) {
+      case 'marquee':
+        return (
+          <div className="w-full max-w-xl mx-auto py-4">
+            <Marquee />
+          </div>
+        )
       case 'card':
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl mx-auto">

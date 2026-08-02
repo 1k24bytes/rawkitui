@@ -1006,4 +1006,31 @@ export default function FloatingNavDemo() {
       { name: 'tabs', type: 'Array<{id: string, label: string}>', default: '[]', description: 'Navigation items' },
     ],
   },
+  marquee: {
+    id: 'marquee',
+    name: 'Marquee Strip',
+    category: 'Primitives',
+    description: 'Seamless infinite scrolling ticker strip with edge gradient fades and hover pause.',
+    cliCommand: 'npx shadcn add @rawkitui/marquee',
+    codeSnippet: `import { Marquee } from "@/components/ui/marquee"
+
+export default function MarqueeDemo() {
+  return (
+    <Marquee
+      items={[
+        "POP-BRUTALISM",
+        "ZERO DEPENDENCIES",
+        "COPY & PASTE",
+        "FULLY CUSTOMIZABLE",
+      ]}
+    />
+  )
+}`,
+    props: [
+      { name: 'items', type: 'string[]', default: '[]', description: 'String labels to repeat in loop' },
+      { name: 'duration', type: 'number', default: '20', description: 'Seconds per full cycle' },
+      { name: 'reverse', type: 'boolean', default: 'false', description: 'Reverse scrolling direction' },
+    ],
+  },
 }
+
