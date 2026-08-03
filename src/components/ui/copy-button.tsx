@@ -49,8 +49,8 @@ export function CopyButton({
       aria-label={ariaLabel}
       onClick={handleClick}
       className={cn(
-        'inline-flex h-9 items-center justify-center gap-1.5 rounded-full bg-white px-3.5 font-sans text-xs font-extrabold text-[#18181B] rk-border-sm rk-shadow-sm transition-all cursor-pointer select-none',
-        'hover:bg-[#FDE047]/70 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none',
+        'inline-flex h-9 items-center justify-center gap-1.5 rounded-full bg-rk-surface px-3.5 font-sans text-xs font-extrabold text-rk-ink rk-border-sm rk-shadow-sm transition-all cursor-pointer select-none',
+        'hover:bg-rk-primary/70 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none',
         'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2',
         className
       )}

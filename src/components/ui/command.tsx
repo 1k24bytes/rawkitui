@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 import { Check, Command as CommandIcon, Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -21,6 +23,8 @@ export interface CommandProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
   emptyMessage?: React.ReactNode
 }
 
+const listboxId = 'rawkitui-command-list'
+
 export function Command({
   items,
   value: controlledValue,
@@ -35,6 +39,7 @@ export function Command({
   const [query, setQuery] = React.useState('')
   const [activeIndex, setActiveIndex] = React.useState(0)
   const [internalValue, setInternalValue] = React.useState(defaultValue ?? '')
+  const optionRefs = React.useRef<Array<HTMLButtonElement | null>>([])
   const currentValue = controlledValue ?? internalValue
   const normalizedQuery = query.trim().toLowerCase()
   const filteredItems = items.filter((item) => `${item.value} ${item.label} ${item.keywords ?? ''}`.toLowerCase().includes(normalizedQuery))
@@ -46,6 +51,14 @@ export function Command({
   }, {})
 
   React.useEffect(() => setActiveIndex(0), [query])
+
+  const activeItem = filteredItems[activeIndex]
+  const activeId = activeItem ? `rawkitui-command-option-${activeItem.value}` : undefined
+
+  // Keep the highlighted option in view inside the scrollable listbox.
+  React.useEffect(() => {
+    optionRefs.current[activeIndex]?.scrollIntoView({ block: 'nearest' })
+  }, [activeIndex, query])
 
   const selectItem = (item: CommandItem) => {
     if (item.disabled) return
@@ -63,15 +76,23 @@ export function Command({
       event.preventDefault()
       setActiveIndex((index) => Math.max(index - 1, 0))
     }
-    if (event.key === 'Enter' && filteredItems[activeIndex]) {
+    if (event.key === 'Home') {
       event.preventDefault()
-      selectItem(filteredItems[activeIndex])
+      setActiveIndex(0)
+    }
+    if (event.key === 'End') {
+      event.preventDefault()
+      setActiveIndex(filteredItems.length - 1)
+    }
+    if (event.key === 'Enter' && activeItem) {
+      event.preventDefault()
+      selectItem(activeItem)
     }
   }
 
   return (
-    <div className={cn('w-full max-w-lg overflow-hidden rounded-2xl bg-white font-sans rk-border rk-shadow-md', className)} {...props}>
-      <div className="flex items-center gap-3 border-b-2 border-black/15 px-4">
+    <div className={cn('w-full max-w-lg overflow-hidden rounded-2xl bg-rk-surface font-sans rk-border rk-shadow-md', className)} {...props}>
+      <div className="flex items-center gap-3 border-b-2 border-rk-ink/15 px-4">
         <Search className="h-4 w-4 shrink-0 text-black/50" aria-hidden="true" />
         <input
           value={query}
@@ -80,32 +101,37 @@ export function Command({
           placeholder={placeholder}
           role="combobox"
           aria-expanded="true"
-          aria-controls="command-list"
+          aria-controls={listboxId}
+          aria-activedescendant={activeId}
           aria-autocomplete="list"
           className="h-12 min-w-0 flex-1 bg-transparent text-sm font-bold outline-none placeholder:text-black/40"
         />
         <CommandIcon className="h-4 w-4 shrink-0 text-black/35" aria-hidden="true" />
       </div>
-      <div id="command-list" role="listbox" className="max-h-72 overflow-y-auto p-2">
+      <div id={listboxId} role="listbox" aria-label="Command options" className="max-h-72 overflow-y-auto p-2">
         {filteredItems.length === 0 ? (
           <div role="status" className="px-3 py-8 text-center text-sm font-bold text-black/55">{emptyMessage}</div>
         ) : (
           Object.entries(groups).map(([group, groupItems]) => (
-            <div key={group} className="mb-2 last:mb-0">
-              <div className="px-3 py-2 font-mono text-[10px] font-black uppercase tracking-wider text-[#FB923C]">{group}</div>
+            <div key={group} role="group" aria-label={group} className="mb-2 last:mb-0">
+              <div className="px-3 py-2 font-mono text-[10px] font-black uppercase tracking-wider text-rk-secondary">{group}</div>
               {groupItems.map((item) => {
                 const index = filteredItems.indexOf(item)
                 const isActive = index === activeIndex
                 return (
                   <button
                     key={item.value}
+                    ref={(el) => {
+                      optionRefs.current[index] = el
+                    }}
                     type="button"
                     role="option"
+                    id={`rawkitui-command-option-${item.value}`}
                     aria-selected={currentValue === item.value}
                     disabled={item.disabled}
                     onMouseEnter={() => setActiveIndex(index)}
                     onClick={() => selectItem(item)}
-                    className={cn('flex min-h-10 w-full items-center gap-3 rounded-xl px-3 text-left text-sm font-extrabold transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-40', isActive ? 'bg-[#FDE047]' : 'hover:bg-[#F4F4F0]')}
+                    className={cn('flex min-h-10 w-full items-center gap-3 rounded-xl px-3 text-left text-sm font-extrabold transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-40', isActive ? 'bg-rk-primary' : 'hover:bg-rk-canvas')}
                   >
                     <span className="flex h-6 w-6 shrink-0 items-center justify-center">{item.icon}</span>
                     <span className="min-w-0 flex-1 truncate">{item.label}</span>

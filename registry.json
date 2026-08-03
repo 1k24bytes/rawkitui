@@ -299,6 +299,14 @@
       "description": "Lightweight show/hide toggle wrapper with spring rotation.",
       "dependencies": ["clsx", "tailwind-merge", "lucide-react", "motion"],
       "files": [{ "path": "src/components/ui/collapsible.tsx", "type": "registry:ui", "target": "components/ui/collapsible.tsx" }]
+    },
+    {
+      "name": "form",
+      "type": "registry:ui",
+      "title": "Form",
+      "description": "Tactile Pop-Brutalist form item, label, description, and validation error message wrappers.",
+      "dependencies": ["@radix-ui/react-slot", "clsx", "tailwind-merge"],
+      "files": [{ "path": "src/components/ui/form.tsx", "type": "registry:ui", "target": "components/ui/form.tsx" }]
     }
   ]
 }

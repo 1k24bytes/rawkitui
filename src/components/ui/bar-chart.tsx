@@ -25,14 +25,17 @@ export interface BarChartProps {
   showValues?: boolean
 }
 
+// Pop-Brutalist ink color for chart strokes/ticks (matches --color-rk-ink)
+const INK = 'var(--color-rk-ink, #18181b)'
+
 // Custom Pop-Brutalist Tooltip for Recharts
 function CustomTooltip({ active, payload, label }: any) {
   if (active && payload && payload.length) {
     const data = payload[0]
     return (
-      <div className="bg-white rk-border-sm rounded-xl p-3 rk-shadow-sm font-mono">
-        <p className="text-xs font-black uppercase text-[#18181B]">{label}</p>
-        <p className="text-sm font-black text-[#FB923C] mt-0.5">
+      <div className="bg-rk-surface rk-border-sm rounded-xl p-3 rk-shadow-sm font-mono">
+        <p className="text-xs font-black uppercase text-rk-ink">{label}</p>
+        <p className="text-sm font-black text-rk-secondary mt-0.5">
           {data.value.toLocaleString()}
         </p>
       </div>
@@ -61,7 +64,7 @@ export function BarChart({
       role="img"
       aria-label="Bar chart"
       className={cn(
-        'w-full bg-white rounded-2xl rk-border p-4 rk-shadow-sm font-sans',
+        'w-full bg-rk-surface rounded-2xl rk-border p-4 rk-shadow-sm font-sans',
         className
       )}
     >
@@ -74,7 +77,7 @@ export function BarChart({
             {showGrid && (
               <CartesianGrid
                 strokeDasharray="3 3"
-                stroke="#18181b"
+                stroke={INK}
                 strokeOpacity={0.15}
                 vertical={false}
               />
@@ -82,16 +85,16 @@ export function BarChart({
             <XAxis
               dataKey="label"
               tickLine={false}
-              axisLine={{ stroke: '#18181b', strokeWidth: 2 }}
-              tick={{ fill: '#18181b', fontSize: 11, fontWeight: 700, fontFamily: 'monospace' }}
+              axisLine={{ stroke: INK, strokeWidth: 2 }}
+              tick={{ fill: INK, fontSize: 11, fontWeight: 700, fontFamily: 'monospace' }}
             />
             <YAxis
               tickLine={false}
-              axisLine={{ stroke: '#18181b', strokeWidth: 2 }}
-              tick={{ fill: '#18181b', fontSize: 10, fontWeight: 700, fontFamily: 'monospace' }}
+              axisLine={{ stroke: INK, strokeWidth: 2 }}
+              tick={{ fill: INK, fontSize: 10, fontWeight: 700, fontFamily: 'monospace' }}
             />
             <RechartsTooltip content={<CustomTooltip />} />
-            <Bar dataKey="value" radius={[8, 8, 0, 0]} stroke="#18181b" strokeWidth={2}>
+            <Bar dataKey="value" radius={[8, 8, 0, 0]} stroke={INK} strokeWidth={2}>
               {data.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}

@@ -35,9 +35,9 @@ export function Marquee({
   const doubledItems = [...items, ...items]
 
   return (
-    <div className={cn('group relative overflow-hidden rounded-2xl rk-border bg-[#18181B] py-4 text-white rk-shadow-md', className)} {...props}>
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#18181B] to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#18181B] to-transparent" />
+    <div className={cn('group relative overflow-hidden rounded-2xl rk-border bg-rk-ink py-4 text-rk-canvas rk-shadow-md', className)} {...props}>
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-rk-ink to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-rk-ink to-transparent" />
       <motion.div
         animate={{ x: reverse ? ['-50%', '0%'] : ['0%', '-50%'] }}
         transition={{ repeat: Infinity, ease: 'linear', duration }}
@@ -48,7 +48,7 @@ export function Marquee({
           : doubledItems.map((item, i) => (
               <span
                 key={i}
-                className="flex items-center gap-8 whitespace-nowrap font-mono text-xs font-black uppercase tracking-widest text-[#FDE047]"
+                className="flex items-center gap-8 whitespace-nowrap font-mono text-xs font-black uppercase tracking-widest text-rk-primary"
               >
                 <span>{item}</span>
                 <span className="text-white/40">✦</span>

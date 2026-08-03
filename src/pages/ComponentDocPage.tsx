@@ -150,6 +150,143 @@ function ToastPreview() {
   )
 }
 
+function FloatingNavPreview() {
+  const [activeTab, setActiveTab] = useState('home')
+  const [variant, setVariant] = useState<'yellow' | 'orange' | 'mint' | 'violet' | 'sky' | 'pink'>('yellow')
+  const [isScreenPinned, setIsScreenPinned] = useState(false)
+
+  return (
+    <div className="w-full flex flex-col items-center gap-6 py-2">
+      {/* Modern Control Header */}
+      <div className="w-full max-w-2xl flex flex-col sm:flex-row items-center justify-between gap-4 p-3.5 bg-[#FAF9F6] rounded-2xl border-2 border-black rk-shadow-xs">
+        {/* Color Palette Selector */}
+        <div className="flex items-center gap-2">
+          <span className="text-[11px] font-black uppercase text-black/60 tracking-wider">Active Fill:</span>
+          <div className="flex items-center gap-1.5 bg-white p-1.5 rounded-full border border-black/20">
+            {(['yellow', 'orange', 'mint', 'violet', 'sky', 'pink'] as const).map((v) => (
+              <button
+                key={v}
+                onClick={() => setVariant(v)}
+                title={`Variant: ${v}`}
+                className={`h-5 w-5 rounded-full border-2 border-black transition-all cursor-pointer ${
+                  variant === v ? 'scale-125 ring-2 ring-black ring-offset-1 z-10' : 'hover:scale-110 opacity-70'
+                }`}
+                style={{
+                  backgroundColor:
+                    v === 'yellow' ? '#FDE047' :
+                    v === 'orange' ? '#FB923C' :
+                    v === 'mint' ? '#4ADE80' :
+                    v === 'violet' ? '#A78BFA' :
+                    v === 'sky' ? '#38BDF8' : '#F472B6'
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Viewport Floating Mode Switcher */}
+        <button
+          onClick={() => setIsScreenPinned(!isScreenPinned)}
+          className={`px-4 py-2 rounded-full font-display font-black text-xs transition-all cursor-pointer border-2 border-black flex items-center gap-2 ${
+            isScreenPinned
+              ? 'bg-[#18181B] text-[#FDE047] rk-shadow-xs'
+              : 'bg-white text-[#18181B] hover:bg-[#FDE047]'
+          }`}
+        >
+          <Flame className="w-3.5 h-3.5" />
+          {isScreenPinned ? 'Pin to Screen Bottom (Active)' : 'Pin to Screen Bottom'}
+        </button>
+      </div>
+
+      {/* Browser Viewport Window Mockup */}
+      <div className="relative w-full max-w-2xl min-h-[320px] rounded-2xl border-2 border-black bg-white overflow-hidden rk-shadow-md flex flex-col justify-between">
+        {/* Mock Browser Header Bar */}
+        <div className="flex items-center justify-between px-4 py-2.5 bg-slate-100 border-b-2 border-black/10">
+          <div className="flex items-center gap-1.5">
+            <div className="h-3 w-3 rounded-full bg-red-400 border border-black/20" />
+            <div className="h-3 w-3 rounded-full bg-amber-400 border border-black/20" />
+            <div className="h-3 w-3 rounded-full bg-emerald-400 border border-black/20" />
+          </div>
+          <div className="px-3 py-0.5 rounded-full bg-white border border-black/10 text-[11px] font-mono font-bold text-black/50 tracking-tight">
+            app.rawkitui.com/dashboard
+          </div>
+          <div className="flex items-center gap-1 text-[10px] font-extrabold uppercase text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> Live
+          </div>
+        </div>
+
+        {/* Mock Page Content Body */}
+        <div className="p-6 sm:p-8 space-y-4 my-auto">
+          <div className="space-y-1 text-center sm:text-left">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FDE047] border border-black font-mono text-[10px] font-black uppercase text-black">
+              Section: {activeTab}
+            </div>
+            <h4 className="font-display font-black text-2xl text-[#18181B]">
+              {activeTab === 'home' && 'Welcome to Dashboard'}
+              {activeTab === 'components' && 'UI Component Library'}
+              {activeTab === 'docs' && 'Documentation & Setup'}
+              {activeTab === 'settings' && 'Account Settings'}
+            </h4>
+            <p className="text-xs font-bold text-black/60 max-w-md">
+              {activeTab === 'home' && 'Overview of system metrics, active components, and recent deployment activity.'}
+              {activeTab === 'components' && 'Explore 40+ pop-brutalist components built with TailwindCSS and Motion.'}
+              {activeTab === 'docs' && 'Quick start guides, installation steps, and customization tokens.'}
+              {activeTab === 'settings' && 'Manage your workspace, API keys, and notification preferences.'}
+            </p>
+          </div>
+
+          {/* Skeleton Cards Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="p-3 rounded-xl border border-black/10 bg-slate-50 space-y-2">
+                <div className="h-3 w-12 bg-slate-200 rounded animate-pulse" />
+                <div className="h-5 w-20 bg-slate-300 rounded font-mono text-xs font-black" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Container Floating Nav (when not pinned to main screen) */}
+        {!isScreenPinned ? (
+          <div className="pb-6 pt-2 flex justify-center z-10 bg-gradient-to-t from-white via-white/80 to-transparent">
+            <FloatingNav
+              activeTab={activeTab}
+              onTabChange={setActiveTab}
+              variant={variant}
+              tabs={[
+                { id: 'home', label: 'Home', icon: <Sparkles className="w-3.5 h-3.5" /> },
+                { id: 'components', label: 'Components', icon: <Layers className="w-3.5 h-3.5" /> },
+                { id: 'docs', label: 'Docs', icon: <Code className="w-3.5 h-3.5" /> },
+                { id: 'settings', label: 'Settings', icon: <Settings className="w-3.5 h-3.5" /> },
+              ]}
+            />
+          </div>
+        ) : (
+          <div className="p-3 bg-amber-50 border-t-2 border-amber-200 text-center font-mono text-xs font-bold text-amber-800">
+            Floating bar is currently pinned to the bottom of your screen!
+          </div>
+        )}
+      </div>
+
+      {/* Screen-level Fixed Floating Bar */}
+      {isScreenPinned && (
+        <FloatingNav
+          position="bottom"
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          variant={variant}
+          tabs={[
+            { id: 'home', label: 'Home', icon: <Sparkles className="w-3.5 h-3.5" /> },
+            { id: 'components', label: 'Components', icon: <Layers className="w-3.5 h-3.5" /> },
+            { id: 'docs', label: 'Docs', icon: <Code className="w-3.5 h-3.5" /> },
+            { id: 'settings', label: 'Settings', icon: <Settings className="w-3.5 h-3.5" /> },
+          ]}
+        />
+      )}
+    </div>
+  )
+}
+
 export function ComponentDocPage() {
   const { id } = useParams<{ id: string }>()
   const [copiedCli, setCopiedCli] = useState(false)
@@ -179,7 +316,7 @@ export function ComponentDocPage() {
   }
 
   // Render specific live preview for structured example items
-  const renderExamplePreview = (exampleId: string) => {
+  const renderExamplePreview = (exampleId: string): React.ReactNode => {
     switch (exampleId) {
       case 'primary':
         return <Button variant="primary">Primary CTA</Button>
@@ -656,7 +793,7 @@ export function ComponentDocPage() {
   }
 
   // Fallback live preview per component when examples array isn't populated
-  const renderFallbackLivePreview = () => {
+  const renderFallbackLivePreview = (): React.ReactNode => {
     switch (component.id) {
       case 'marquee':
         return (
@@ -830,18 +967,7 @@ export function ComponentDocPage() {
           </div>
         )
       case 'floating-nav':
-        return (
-          <div className="flex justify-center">
-            <FloatingNav
-              activeTab="home"
-              tabs={[
-                { id: 'home', label: 'Home' },
-                { id: 'components', label: 'Components' },
-                { id: 'docs', label: 'Docs' },
-              ]}
-            />
-          </div>
-          )
+        return <FloatingNavPreview />
       case 'accordion':
         return (
           <div className="w-full max-w-xl">
