@@ -3,15 +3,15 @@ import { motion, type HTMLMotionProps } from 'motion/react'
 import { cn } from '@/lib/utils'
 
 const cardVariants = {
-  white: 'bg-white text-[#18181B]',
-  mint: 'bg-[#BBF7D0] text-[#18181B]',
-  peach: 'bg-[#FED7AA] text-[#18181B]',
-  lavender: 'bg-[#E9D5FF] text-[#18181B]',
-  sky: 'bg-[#BAE6FD] text-[#18181B]',
-  pink: 'bg-[#FBCFE8] text-[#18181B]',
-  yellow: 'bg-[#FDE047] text-[#18181B]',
-  orange: 'bg-[#FB923C] text-[#18181B]',
-  dark: 'bg-[#18181B] text-white',
+  white: 'bg-rk-surface text-rk-ink',
+  mint: 'bg-rk-mint text-rk-ink',
+  peach: 'bg-rk-peach text-rk-ink',
+  lavender: 'bg-rk-lavender text-rk-ink',
+  sky: 'bg-rk-sky text-rk-ink',
+  pink: 'bg-rk-pink text-rk-ink',
+  yellow: 'bg-rk-primary text-rk-ink',
+  orange: 'bg-rk-secondary text-rk-ink',
+  dark: 'bg-rk-ink text-rk-canvas',
 }
 
 const shadowColorMap = {
@@ -97,7 +97,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         {badge && (
           <div className="absolute top-5 right-5 z-10">
             {typeof badge === 'string' ? (
-              <span className="inline-flex items-center rounded-full border-2 border-[#18181B] bg-[#FDE047] px-3 py-1 font-mono text-xs font-black text-[#18181B] rk-shadow-xs">
+              <span className="inline-flex items-center rounded-full border-2 border-rk-ink bg-rk-primary px-3 py-1 font-mono text-xs font-black text-rk-ink rk-shadow-xs">
                 {badge}
               </span>
             ) : (

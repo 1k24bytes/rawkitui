@@ -35,21 +35,21 @@ const iconSizeClasses = {
 }
 
 const variantClasses = {
-  purple: 'bg-[#E9D5FF] text-[#18181B]',
-  yellow: 'bg-[#FDE047] text-[#18181B]',
-  pink: 'bg-[#F472B6] text-[#18181B]',
-  orange: 'bg-[#FB923C] text-[#18181B]',
-  cyan: 'bg-[#38BDF8] text-[#18181B]',
-  lime: 'bg-[#A3E635] text-[#18181B]',
-  mint: 'bg-[#34D399] text-[#18181B]',
-  zinc: 'bg-[#F4F4F5] text-[#18181B]',
+  purple: 'bg-rk-lavender text-rk-ink',
+  yellow: 'bg-rk-primary text-rk-ink',
+  pink: 'bg-rk-pink text-rk-ink',
+  orange: 'bg-rk-secondary text-rk-ink',
+  cyan: 'bg-rk-sky text-rk-ink',
+  lime: 'bg-[#A3E635] text-rk-ink',
+  mint: 'bg-rk-success text-rk-ink',
+  zinc: 'bg-rk-canvas text-rk-ink',
 }
 
 const statusClasses = {
-  online: 'bg-[#4ADE80]',
-  busy: 'bg-[#F87171]',
+  online: 'bg-rk-success',
+  busy: 'bg-rk-error',
   offline: 'bg-[#9CA3AF]',
-  away: 'bg-[#FACC15]',
+  away: 'bg-rk-primary-hover',
 }
 
 export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
@@ -121,7 +121,7 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
           <span
             aria-label={status}
             className={cn(
-              'absolute bottom-0 right-0 rounded-full border-2 border-[#18181B] rk-shadow-xs',
+              'absolute bottom-0 right-0 rounded-full border-2 border-rk-ink rk-shadow-xs',
               size === 'xs' || size === 'sm' ? 'h-2.5 w-2.5' : 'h-3.5 w-3.5',
               statusClasses[status]
             )}
@@ -129,7 +129,7 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
         )}
 
         {badge !== undefined && (
-          <span className="absolute -top-1.5 -right-1.5 flex h-5 min-w-[20px] items-center justify-center rounded-full border-2 border-[#18181B] bg-[#F472B6] px-1 font-mono text-[10px] font-black text-[#18181B] rk-shadow-xs">
+          <span className="absolute -top-1.5 -right-1.5 flex h-5 min-w-[20px] items-center justify-center rounded-full border-2 border-rk-ink bg-rk-pink px-1 font-mono text-[10px] font-black text-rk-ink rk-shadow-xs">
             {badge}
           </span>
         )}
@@ -141,8 +141,8 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
         <div ref={ref} className={cn('inline-flex items-center gap-3', className)} {...props}>
           {avatarBox}
           <div className="flex flex-col text-left">
-            {name && <span className="font-display text-sm font-extrabold text-[#18181B] leading-snug">{name}</span>}
-            {description && <span className="font-sans text-xs font-semibold text-[#52525B]">{description}</span>}
+            {name && <span className="font-display text-sm font-extrabold text-rk-ink leading-snug">{name}</span>}
+            {description && <span className="font-sans text-xs font-semibold text-rk-ink/60">{description}</span>}
           </div>
         </div>
       )
@@ -175,7 +175,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({ children, max, classNa
         </div>
       ))}
       {overflowCount > 0 && (
-        <div className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full bg-[#FDE047] font-mono text-xs font-black text-[#18181B] rk-border rk-shadow-sm">
+        <div className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full bg-rk-primary font-mono text-xs font-black text-rk-ink rk-border rk-shadow-sm">
           +{overflowCount}
         </div>
       )}

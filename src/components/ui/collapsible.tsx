@@ -41,17 +41,17 @@ export function Collapsible({
         aria-controls={panelId}
         onClick={toggle}
         className={cn(
-          'flex w-full items-center justify-between gap-3 rounded-2xl bg-white px-4 py-3 text-left rk-border rk-shadow-sm transition-all cursor-pointer select-none',
-          'hover:bg-[#FDE047]/40 active:translate-y-[2px] active:shadow-none',
+          'flex w-full items-center justify-between gap-3 rounded-2xl bg-rk-surface px-4 py-3 text-left rk-border rk-shadow-sm transition-all cursor-pointer select-none',
+          'hover:bg-rk-primary/40 active:translate-y-[2px] active:shadow-none',
           'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2',
           isOpen && 'rounded-b-none'
         )}
       >
-        <span className="text-sm font-extrabold text-[#18181B]">{trigger}</span>
+        <span className="text-sm font-extrabold text-rk-ink">{trigger}</span>
         <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white rk-border-sm"
+          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rk-surface rk-border-sm"
         >
           <ChevronDown className="h-3.5 w-3.5 stroke-[3]" aria-hidden="true" />
         </motion.span>
@@ -68,7 +68,7 @@ export function Collapsible({
       >
         <div
           className={cn(
-            'rounded-b-2xl border-t-0 bg-white px-4 pb-4 pt-3 rk-border',
+            'rounded-b-2xl border-t-0 bg-rk-surface px-4 pb-4 pt-3 rk-border',
             contentClassName
           )}
         >

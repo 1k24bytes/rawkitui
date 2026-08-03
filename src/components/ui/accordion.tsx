@@ -1,8 +1,111 @@
+'use client'
+
 import * as React from 'react'
 import { ChevronDown, Plus, Minus } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-export interface AccordionItem {
+/* ------------------------------------------------------------------ */
+/* Compound API                                                        */
+/* ------------------------------------------------------------------ */
+
+export interface AccordionItemProps {
+  id: string
+  title: React.ReactNode
+  content: React.ReactNode
+  disabled?: boolean
+  open?: boolean
+  onToggle?: (id: string) => void
+  variant?: 'default' | 'yellow' | 'numbered' | 'plus-minus'
+  showNumbers?: boolean
+  number?: string
+}
+
+export function AccordionItem({
+  id,
+  title,
+  content,
+  disabled,
+  open = false,
+  onToggle,
+  variant = 'default',
+  showNumbers = false,
+  number,
+}: AccordionItemProps) {
+  const isNumbered = showNumbers || variant === 'numbered'
+  const isPlusMinus = variant === 'plus-minus' || variant === 'numbered'
+  const contentId = `accordion-content-${id}`
+  const titleId = `accordion-title-${id}`
+  const heightRef = React.useRef<HTMLDivElement>(null)
+
+  return (
+    <div
+      className={cn(
+        'overflow-hidden rounded-[20px] border-3 border-rk-ink transition-all',
+        open ? 'bg-rk-primary rk-shadow-md' : 'bg-rk-surface rk-shadow-sm hover:rk-shadow-md'
+      )}
+    >
+      <h3>
+        <button
+          type="button"
+          aria-expanded={open}
+          aria-controls={contentId}
+          id={titleId}
+          disabled={disabled}
+          onClick={() => onToggle?.(id)}
+          className={cn(
+            'flex min-h-14 w-full items-center justify-between gap-4 px-5 py-4 text-left font-display text-base font-black text-rk-ink transition-colors focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer'
+          )}
+        >
+          <span className="flex items-center gap-3">
+            {isNumbered && (
+              <span className="font-mono text-xs font-black opacity-60">
+                {number}
+              </span>
+            )}
+            <span>{title}</span>
+          </span>
+
+          {isPlusMinus ? (
+            open ? (
+              <Minus className="h-5 w-5 shrink-0 stroke-[3] text-rk-ink" aria-hidden="true" />
+            ) : (
+              <Plus className="h-5 w-5 shrink-0 stroke-[3] text-rk-ink" aria-hidden="true" />
+            )
+          ) : (
+            <ChevronDown
+              className={cn(
+                'h-5 w-5 shrink-0 stroke-[3] text-rk-ink transition-transform duration-200',
+                open && 'rotate-180'
+              )}
+              aria-hidden="true"
+            />
+          )}
+        </button>
+      </h3>
+      <div
+        id={contentId}
+        role="region"
+        aria-labelledby={titleId}
+        className={cn(
+          'grid transition-[grid-template-rows] duration-300 ease-out',
+          open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+        )}
+      >
+        <div ref={heightRef} className="overflow-hidden">
+          <div className="border-t-2 border-rk-ink/15 px-5 py-4 text-sm font-extrabold leading-relaxed text-rk-ink/80">
+            {content}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* Legacy API                                                          */
+/* ------------------------------------------------------------------ */
+
+export interface AccordionItemConfig {
   id: string
   title: React.ReactNode
   content: React.ReactNode
@@ -10,7 +113,7 @@ export interface AccordionItem {
 }
 
 export interface AccordionProps {
-  items: AccordionItem[]
+  items: AccordionItemConfig[]
   type?: 'single' | 'multiple'
   value?: string | string[]
   defaultValue?: string | string[]
@@ -51,74 +154,22 @@ export function Accordion({
     onValueChange?.(nextValue)
   }
 
-  const isNumbered = showNumbers || variant === 'numbered'
-  const isPlusMinus = variant === 'plus-minus' || variant === 'numbered'
-
   return (
     <div className={cn('w-full space-y-3 font-sans', className)}>
-      {items.map((item, index) => {
-        const isOpen = openItems.includes(item.id)
-        const contentId = `accordion-content-${item.id}`
-        const numStr = String(index + 1).padStart(2, '0')
-
-        return (
-          <div
-            key={item.id}
-            className={cn(
-              'overflow-hidden rounded-[20px] border-3 border-[#18181B] transition-all',
-              isOpen
-                ? 'bg-[#FDE047] rk-shadow-md'
-                : 'bg-white rk-shadow-sm hover:rk-shadow-md'
-            )}
-          >
-            <h3>
-              <button
-                type="button"
-                aria-expanded={isOpen}
-                aria-controls={contentId}
-                disabled={item.disabled}
-                onClick={() => toggleItem(item.id)}
-                className={cn(
-                  'flex min-h-14 w-full items-center justify-between gap-4 px-5 py-4 text-left font-display text-base font-black text-[#18181B] transition-colors focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer'
-                )}
-              >
-                <span className="flex items-center gap-3">
-                  {isNumbered && (
-                    <span className="font-mono text-xs font-black opacity-60">
-                      {numStr}
-                    </span>
-                  )}
-                  <span>{item.title}</span>
-                </span>
-
-                {isPlusMinus ? (
-                  isOpen ? (
-                    <Minus className="h-5 w-5 shrink-0 stroke-[3] text-[#18181B]" aria-hidden="true" />
-                  ) : (
-                    <Plus className="h-5 w-5 shrink-0 stroke-[3] text-[#18181B]" aria-hidden="true" />
-                  )
-                ) : (
-                  <ChevronDown
-                    className={cn(
-                      'h-5 w-5 shrink-0 stroke-[3] text-[#18181B] transition-transform duration-200',
-                      isOpen && 'rotate-180'
-                    )}
-                    aria-hidden="true"
-                  />
-                )}
-              </button>
-            </h3>
-            <div
-              id={contentId}
-              role="region"
-              hidden={!isOpen}
-              className="border-t-2 border-[#18181B]/15 px-5 py-4 text-sm font-extrabold leading-relaxed text-[#18181B]/80"
-            >
-              {item.content}
-            </div>
-          </div>
-        )
-      })}
+      {items.map((item, index) => (
+        <AccordionItem
+          key={item.id}
+          id={item.id}
+          title={item.title}
+          content={item.content}
+          disabled={item.disabled}
+          open={openItems.includes(item.id)}
+          onToggle={toggleItem}
+          variant={variant}
+          showNumbers={showNumbers}
+          number={String(index + 1).padStart(2, '0')}
+        />
+      ))}
     </div>
   )
 }

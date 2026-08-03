@@ -8,16 +8,16 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        yellow: 'bg-[#FDE047] text-[#18181B]',
-        orange: 'bg-[#FB923C] text-[#18181B]',
-        violet: 'bg-[#A78BFA] text-[#18181B]',
-        mint: 'bg-[#BBF7D0] text-[#18181B]',
-        peach: 'bg-[#FED7AA] text-[#18181B]',
-        sky: 'bg-[#BAE6FD] text-[#18181B]',
-        pink: 'bg-[#FBCFE8] text-[#18181B]',
-        lavender: 'bg-[#E9D5FF] text-[#18181B]',
-        black: 'bg-[#18181B] text-white',
-        white: 'bg-white text-[#18181B]',
+        yellow: 'bg-rk-primary text-rk-ink',
+        orange: 'bg-rk-secondary text-rk-ink',
+        violet: 'bg-rk-accent text-rk-ink',
+        mint: 'bg-rk-mint text-rk-ink',
+        peach: 'bg-rk-peach text-rk-ink',
+        sky: 'bg-rk-sky text-rk-ink',
+        pink: 'bg-rk-pink text-rk-ink',
+        lavender: 'bg-rk-lavender text-rk-ink',
+        black: 'bg-rk-ink text-rk-canvas',
+        white: 'bg-rk-surface text-rk-ink',
       },
       shape: {
         pill: 'rounded-full px-3 py-1',
